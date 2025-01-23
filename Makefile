@@ -1,5 +1,5 @@
 # Nombre del ejecutable
-TARGET = calc
+TARGET = compiler
 
 # Archivos de origen
 LEX_FILE = calc.l
