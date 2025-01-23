@@ -18,13 +18,18 @@ void yyerror(const char *s);
 DIGIT [0-9]
 /* IDENTIFIER [a-zA-Z_-][a-zA-Z0-9_-]* */
 
+%x COMMENT
 %%
 
+
+ /* Data types */
 {DIGIT}+ {
   /* printf("Encountered digit: %s\n", yytext); */
   yylval.number = atoi(yytext);
   return INTEGER; 
 }
+
+ /* Arithmetic expressions */
 "+" {
   /* printf("Encountered operator %s\n", yytext); */
   return PLUS;
@@ -41,6 +46,21 @@ DIGIT [0-9]
   /* printf("Encountered operator %s\n", yytext); */
   return DIVIDE;
 }
+
+
+ /* Singleline comment */
+"//".* { /* Skip comment content */ }
+"#".* { /* Skip comment content */ }
+
+ /* Multiline comment */
+"/*" { BEGIN(COMMENT); }
+<COMMENT>"*/" { BEGIN(INITIAL); }
+<COMMENT>. { /* Skip comment content*/ }
+<COMMENT>\n { /* Skip comment lines */}
+
+ /* Empty Spaces */
 [ \t\n] { /* Skip whitespace sequences */ }
+
+ /* Undefined Sequence */
 . { printf("Undefined sequence: %s", yytext); }
 

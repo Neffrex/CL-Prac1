@@ -350,8 +350,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 8
-#define YY_END_OF_BUFFER 9
+#define YY_NUM_RULES 14
+#define YY_END_OF_BUFFER 15
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -359,10 +359,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[14] =
+static const flex_int16_t yy_accept[25] =
     {   0,
-        0,    0,    9,    7,    6,    6,    4,    2,    3,    5,
-        1,    1,    0
+        0,    0,    0,    0,   15,   13,   12,   12,    7,    4,
+        2,    3,    5,    1,   10,   11,   10,    7,    8,    6,
+        1,    9,    6,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -370,9 +371,9 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    4,    5,    1,    6,    1,    7,    8,    8,    8,
-        8,    8,    8,    8,    8,    8,    8,    1,    1,    1,
+        1,    2,    1,    1,    4,    1,    1,    1,    1,    1,
+        1,    5,    6,    1,    7,    1,    8,    9,    9,    9,
+        9,    9,    9,    9,    9,    9,    9,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -397,33 +398,39 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[9] =
+static const YY_CHAR yy_meta[10] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1
+        1,    1,    2,    1,    1,    1,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[14] =
+static const flex_int16_t yy_base[28] =
     {   0,
-        0,    0,   11,   12,   12,   12,   12,   12,   12,   12,
-        2,    1,   12
+        0,    0,    7,   10,   23,   24,   24,   24,    0,   24,
+       24,   24,   11,   13,   24,   24,   10,    0,   24,    0,
+        8,   24,    0,   24,   19,   13,   10
     } ;
 
-static const flex_int16_t yy_def[14] =
+static const flex_int16_t yy_def[28] =
     {   0,
-       13,    1,   13,   13,   13,   13,   13,   13,   13,   13,
-       13,   13,    0
+       24,    1,   25,   25,   24,   24,   24,   24,   26,   24,
+       24,   24,   24,   24,   24,   24,   24,   26,   24,   27,
+       24,   24,   27,    0,   24,   24,   24
     } ;
 
-static const flex_int16_t yy_nxt[21] =
+static const flex_int16_t yy_nxt[34] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   11,   12,   12,
-       13,    3,   13,   13,   13,   13,   13,   13,   13,   13
+        6,    7,    8,    9,   10,   11,   12,   13,   14,   16,
+       23,   17,   16,   18,   17,   19,   21,   22,   20,   15,
+       15,   21,   24,    5,   24,   24,   24,   24,   24,   24,
+       24,   24,   24
     } ;
 
-static const flex_int16_t yy_chk[21] =
+static const flex_int16_t yy_chk[34] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,   12,   11,
-        3,   13,   13,   13,   13,   13,   13,   13,   13,   13
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
+       27,    3,    4,   26,    4,   13,   21,   17,   13,   25,
+       25,   14,    5,   24,   24,   24,   24,   24,   24,   24,
+       24,   24,   24
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -454,12 +461,14 @@ char *yytext;
 #include "calc.tab.h"
 
 void yyerror(const char *s);
-#line 458 "lex.yy.c"
+#line 465 "lex.yy.c"
 /* DEFINITIONS */
 /* IDENTIFIER [a-zA-Z_-][a-zA-Z0-9_-]* */
-#line 461 "lex.yy.c"
+
+#line 469 "lex.yy.c"
 
 #define INITIAL 0
+#define COMMENT 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -674,10 +683,13 @@ YY_DECL
 		}
 
 	{
-#line 21 "calc.l"
+#line 22 "calc.l"
 
 
-#line 681 "lex.yy.c"
+
+#line 26 "calc.l"
+ /* Data types */
+#line 693 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -704,13 +716,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 14 )
+				if ( yy_current_state >= 25 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 12 );
+		while ( yy_base[yy_current_state] != 24 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -736,16 +748,17 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 23 "calc.l"
+#line 27 "calc.l"
 {
   /* printf("Encountered digit: %s\n", yytext); */
   yylval.number = atoi(yytext);
   return INTEGER; 
 }
 	YY_BREAK
+/* Arithmetic expressions */
 case 2:
 YY_RULE_SETUP
-#line 28 "calc.l"
+#line 34 "calc.l"
 {
   /* printf("Encountered operator %s\n", yytext); */
   return PLUS;
@@ -753,7 +766,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 32 "calc.l"
+#line 38 "calc.l"
 {
   /* printf("Encountered operator %s\n", yytext); */
   return MINUS;
@@ -761,7 +774,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 36 "calc.l"
+#line 42 "calc.l"
 {
   /* printf("Encountered operator %s\n", yytext); */
   return MULTIPLY;
@@ -769,30 +782,66 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 40 "calc.l"
+#line 46 "calc.l"
 {
   /* printf("Encountered operator %s\n", yytext); */
   return DIVIDE;
 }
 	YY_BREAK
+/* Singleline comment */
 case 6:
-/* rule 6 can match eol */
 YY_RULE_SETUP
-#line 44 "calc.l"
-{ /* Skip whitespace sequences */ }
+#line 53 "calc.l"
+{ /* Skip comment content */ }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 45 "calc.l"
-{ printf("Undefined sequence: %s", yytext); }
+#line 54 "calc.l"
+{ /* Skip comment content */ }
 	YY_BREAK
+/* Multiline comment */
 case 8:
 YY_RULE_SETUP
-#line 47 "calc.l"
+#line 57 "calc.l"
+{ BEGIN(COMMENT); }
+	YY_BREAK
+case 9:
+YY_RULE_SETUP
+#line 58 "calc.l"
+{ BEGIN(INITIAL); }
+	YY_BREAK
+case 10:
+YY_RULE_SETUP
+#line 59 "calc.l"
+{ /* Skip comment content*/ }
+	YY_BREAK
+case 11:
+/* rule 11 can match eol */
+YY_RULE_SETUP
+#line 60 "calc.l"
+{ /* Skip comment lines */}
+	YY_BREAK
+/* Empty Spaces */
+case 12:
+/* rule 12 can match eol */
+YY_RULE_SETUP
+#line 63 "calc.l"
+{ /* Skip whitespace sequences */ }
+	YY_BREAK
+/* Undefined Sequence */
+case 13:
+YY_RULE_SETUP
+#line 66 "calc.l"
+{ printf("Undefined sequence: %s", yytext); }
+	YY_BREAK
+case 14:
+YY_RULE_SETUP
+#line 68 "calc.l"
 ECHO;
 	YY_BREAK
-#line 795 "lex.yy.c"
+#line 843 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(COMMENT):
 	yyterminate();
 
 	case YY_END_OF_BUFFER:
@@ -1088,7 +1137,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 14 )
+			if ( yy_current_state >= 25 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1116,11 +1165,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 14 )
+		if ( yy_current_state >= 25 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 13);
+	yy_is_jam = (yy_current_state == 24);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1796,4 +1845,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 47 "calc.l"
+#line 68 "calc.l"
