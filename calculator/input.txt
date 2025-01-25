@@ -1,12 +1,29 @@
-3 + 1
+
+/* Pruebas de números enteros */
+# Números sueltos
 1
-/*
- Hola buenas
-*/
+35123
+54523 123123 21312
+554673 
 
-// A
+# Suma
+3 + 1
+16 + 153
+10 + 3
+111111111111111111 + 22222222222222
+99999999999999999 + 1
 
-2 - 3 //    RESTA
-2 * 1
- // JIJI
-6 / 6 // JOJO
+# Resta
+10 - 3 // Resta
+1 - 5  // Resta resultando en negativo
+
+# Multiplicación
+87 * 33  // Multiplicación normal
+3213 * 0 // Multiplicación por 0
+789 * 1  // Multiplicación por 1
+
+# División
+33 / 3  // División de enteros resultando en número natural
+7 / 8   // División de enteros resultando en número decimal
+123 / 0 // División por 0
+345 / 1 // División por 1

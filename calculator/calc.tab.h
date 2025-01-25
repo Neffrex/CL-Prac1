@@ -44,6 +44,12 @@
 #if YYDEBUG
 extern int yydebug;
 #endif
+/* "%code requires" blocks.  */
+#line 13 "calc.y"
+
+  #include "compiler.h"
+
+#line 53 "calc.tab.h"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -54,11 +60,9 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    INTEGER = 258,                 /* INTEGER  */
-    PLUS = 259,                    /* PLUS  */
-    MINUS = 260,                   /* MINUS  */
-    MULTIPLY = 261,                /* MULTIPLY  */
-    DIVIDE = 262                   /* DIVIDE  */
+    NUMBER = 258,                  /* NUMBER  */
+    BINARY_OPERATOR = 259,         /* BINARY_OPERATOR  */
+    UNARY_OPERATOR = 260           /* UNARY_OPERATOR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -67,12 +71,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 10 "calc.y"
+#line 17 "calc.y"
 
-  int number;
-  void* operator;
+  value_info literal;
+  operator_t operator;
 
-#line 76 "calc.tab.h"
+#line 80 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

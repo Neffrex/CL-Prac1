@@ -9,44 +9,44 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "calc.tab.h"
+#include "compiler.h"
 
 void yyerror(const char *s);
 %}
+
+%option yylineno
+%option noyywrap
+%x COMMENT
 
 /* DEFINITIONS */
 DIGIT [0-9]
 /* IDENTIFIER [a-zA-Z_-][a-zA-Z0-9_-]* */
 
-%x COMMENT
 %%
-
 
  /* Data types */
 {DIGIT}+ {
   /* printf("Encountered digit: %s\n", yytext); */
-  yylval.number = atoi(yytext);
-  return INTEGER; 
+  yylval.literal.type = INTEGER;
+  yylval.literal.ivalue = atoi(yytext);
+  return NUMBER; 
 }
+{DIGIT}+"."{DIGIT}+ {
+  /* printf("Encountered float: %s", yytext); */
+  yylval.literal.type = FLOAT;
+  yylval.literal.fvalue = atof(yytext);
+  return NUMBER;
+}
+
 
  /* Arithmetic expressions */
-"+" {
+"+"|"-"|"*"|"/" {
   /* printf("Encountered operator %s\n", yytext); */
-  return PLUS;
+  yylval.operator.type = operation_type(yytext);
+  return BINARY_OPERATOR;
 }
-"-" {
-  /* printf("Encountered operator %s\n", yytext); */
-  return MINUS;
-}
-"*" {
-  /* printf("Encountered operator %s\n", yytext); */
-  return MULTIPLY;
-}
-"/" {
-  /* printf("Encountered operator %s\n", yytext); */
-  return DIVIDE;
-}
-
 
  /* Singleline comment */
 "//".* { /* Skip comment content */ }

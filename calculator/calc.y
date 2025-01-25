@@ -1,21 +1,28 @@
 %{
 /* Dependencies */
 #include <stdio.h>
+#include "compiler.h"
 
-void yyerror(const char *s);
-int yylex(void);
+extern FILE *yyout;
+extern int yylineno;
+extern int yylex(void);
+extern void yyerror(const char *s);
 
 %}
 
-%union {
-  int number;
-  void* operator;
+%code requires {
+  #include "compiler.h"
 }
 
-%token <number> INTEGER
-%token <operator> PLUS MINUS MULTIPLY DIVIDE
+%union {
+  value_info literal;
+  operator_t operator;
+}
 
-%type <number> statement
+%token <literal> NUMBER
+%token <operator> BINARY_OPERATOR UNARY_OPERATOR
+
+%type <literal> statement
 
 %start program
 
@@ -29,26 +36,11 @@ statement_list:
   ;
 
 statement:
-  INTEGER
-  | INTEGER PLUS INTEGER {
-    printf("[BISON] Encountered %d + %d.\n", $1, $3);
-    $$ = $1 + $3;
-    printf("%d\n", $$);
-  }
-  | INTEGER MINUS INTEGER {
-    printf("[BISON] Encountered %d - %d.\n", $1, $3);
-    $$ = $1 - $3;
-    printf("%d\n", $$);
-  }
-  | INTEGER MULTIPLY INTEGER {
-    printf("[BISON] Encountered %d * %d.\n", $1, $3);
-    $$ = $$ * $3;
-    printf("%d\n", $$);
-  }
-  | INTEGER DIVIDE INTEGER {
-    printf("[BISON] Encountered %d / %d.\n", $1, $3);
-    $$ = $1 / $3;
-    printf("%d\n", $$);
+  NUMBER { 
+    cprint(yyout, "%v\n", &$1);
+  } | NUMBER BINARY_OPERATOR NUMBER {
+    $$ = arithmetic($1, $2, $3);
+    cprint(yyout, "%v\n", &$$);
   }
 
 %%

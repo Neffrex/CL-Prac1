@@ -9,6 +9,8 @@ BISON_FILE = calc.y
 BISON_C = calc.tab.c
 BISON_H = calc.tab.h
 LEX_C = lex.yy.c
+COMPILER_C = compiler.c
+COMPILER_H = compiler.h
 SYMTAB_C = symtab.c
 SYMTAB_H = symtab.h
 
@@ -23,8 +25,8 @@ INPUT_FILE = input.txt
 all: $(TARGET)
 
 # Regla para compilar el ejecutable
-$(TARGET): $(BISON_C) $(LEX_C) $(SYMTAB_C)
-	$(CC) -o $(TARGET) $(BISON_C) $(LEX_C) $(CFLAGS)
+$(TARGET): $(BISON_C) $(LEX_C) $(SYMTAB_C) $(COMPILER_C)
+	$(CC) -o $(TARGET) $(BISON_C) $(LEX_C) $(COMPILER_C) $(CFLAGS)
 
 # Regla para generar el archivo .c y .h de Bison
 $(BISON_C) $(BISON_H): $(BISON_FILE)
