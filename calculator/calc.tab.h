@@ -60,9 +60,13 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    NUMBER = 258,                  /* NUMBER  */
-    BINARY_OPERATOR = 259,         /* BINARY_OPERATOR  */
-    UNARY_OPERATOR = 260           /* UNARY_OPERATOR  */
+    NUMBER_LITERAL = 258,          /* NUMBER_LITERAL  */
+    STRING_LITERAL = 259,          /* STRING_LITERAL  */
+    BOOLEAN_LITERAL = 260,         /* BOOLEAN_LITERAL  */
+    AUOP = 261,                    /* AUOP  */
+    ABOP = 262,                    /* ABOP  */
+    BUOP = 263,                    /* BUOP  */
+    BBOP = 264                     /* BBOP  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -74,9 +78,9 @@ union YYSTYPE
 #line 17 "calc.y"
 
   value_info literal;
-  operator_t operator;
+  op_type operator;
 
-#line 80 "calc.tab.h"
+#line 84 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

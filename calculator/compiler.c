@@ -3,7 +3,7 @@
 #include <string.h>
 #include "compiler.h"
 
-const char* op_map[] = { "+", "-", "*", "/", "==", ">", ">=", "<", "<=" };
+const char* op_map[] = { "+", "-", "*", "/", "=", ">", ">=", "<", "<=", "<>" };
 
 void print_value_info(FILE* stream, value_info* value) {
     if (value == NULL) {
@@ -16,16 +16,32 @@ void print_value_info(FILE* stream, value_info* value) {
             fprintf(stream, "%s", value->svalue ? value->svalue : "(null)");
             break;
         case INTEGER:
-            fprintf(stream, "%d", value->ivalue);
+            switch (value->mode) {
+                case OCT:
+                    fprintf(stream, "%o", value->ivalue);
+                    break;
+                case HEX:
+                    fprintf(stream, "%x", value->ivalue);
+                    break;
+                case BIN:
+                    // TODO: Fix Binary Representation
+                    fprintf(stream, "%x", value->ivalue);
+                    break;
+                case DEC:
+                    fprintf(stream, "%d", value->ivalue);
+                    break;
+                default:
+                    fprintf(stream, "%d", value->ivalue);
+            }
             break;
         case FLOAT:
-            fprintf(stream, "%f", value->fvalue);
+            fprintf(stream, "%.3f", value->fvalue);
             break;
         case BOOLEAN:
-            fprintf(stream, "%s", value->bvalue ? "true" : "false");
+            fprintf(stream, "%s", (value->bvalue) ? "true" : "false");
             break;
         default:
-            fprintf(stream, "(undefined)");
+            fprintf(stream, "(undefined:%d)", value->type);
             break;
     }
 }
@@ -119,17 +135,19 @@ op_type operation_type(const char* op) {
     return TIMES;
   } else if(!strcmp(op, "/")) {
     return DIVIDE;
-  } else if(!strcmp(op, "==")) {
-     return COMPARE;
+  } else if(!strcmp(op, "=")) {
+     return EQUALS;
   } else if(!strcmp(op, ">")) {
     return GREATER_THAN;
   } else if(!strcmp(op, ">=")) {
-     return GREATER_EQUAL;
+     return GREATER_EQUALS;
   } else if(!strcmp(op, "<")) {
-    return LESS_THAN;
+    return LOWER_THAN;
   } else if(!strcmp(op, "<=")) {
-     return LESS_EQUAL;
-  } else {
+    return LOWER_EQUALS;
+  } else if(!strcmp(op, "<>")) {
+    return NOT_EQUALS;
+  } else{
     return UNDEFINED_OP;
   }
 }
@@ -202,21 +220,21 @@ value_info handle_string_concatenation(const value_info loperand, const value_in
     return result;
 }
 
-value_info arithmetic(const value_info loperand, const operator_t operation, const value_info roperand) {
+value_info arithmetic(const value_info loperand, const op_type op, const value_info roperand) {
     // Result object initialization
     value_info result;
     result.type = UNDEFINED_DATA;
     result.svalue = NULL;
     result.ivalue = 0;
     result.fvalue = 0.0f;
-    result.bvalue = 0;
+    result.bvalue = false;
 
     if (loperand.type == INTEGER && roperand.type == INTEGER) {
-        result = handle_integer_arithmetic(loperand, operation.type, roperand);
+        result = handle_integer_arithmetic(loperand, op, roperand);
     } else if ((loperand.type == FLOAT || loperand.type == INTEGER) &&
                (roperand.type == FLOAT || roperand.type == INTEGER)) {
-        result = handle_float_arithmetic(loperand, operation.type, roperand);
-    } else if (loperand.type == STRING && roperand.type == STRING && operation.type == PLUS) {
+        result = handle_float_arithmetic(loperand, op, roperand);
+    } else if (loperand.type == STRING && roperand.type == STRING && op == PLUS) {
         result = handle_string_concatenation(loperand, roperand);
     } else {
         fprintf(stderr, "Error: Unsupported operation or mismatched types\n");
@@ -224,3 +242,57 @@ value_info arithmetic(const value_info loperand, const operator_t operation, con
 
     return result;
 }
+
+value_info boolean_logic(value_info loperand, op_type op, value_info roperand) {
+  value_info result;
+  result.type = BOOLEAN;
+  result.svalue = NULL;
+  result.ivalue = 0;
+  result.fvalue = 0.0f;
+  result.bvalue = false;
+  
+  if (loperand.type == INTEGER && roperand.type == INTEGER) {
+    switch (op) {
+      case EQUALS: result.bvalue = loperand.ivalue == roperand.ivalue; break;
+      case GREATER_THAN: result.bvalue = loperand.ivalue > roperand.ivalue; break;
+      case GREATER_EQUALS: result.bvalue = loperand.ivalue >= roperand.ivalue; break;
+      case LOWER_THAN: result.bvalue = loperand.ivalue < roperand.ivalue; break;
+      case LOWER_EQUALS: result.bvalue = loperand.ivalue <= roperand.ivalue; break;
+      case NOT_EQUALS: result.bvalue = loperand.ivalue != roperand.ivalue; break;
+      default: result.type = UNDEFINED_DATA;
+    }
+  } else if (loperand.type == FLOAT && loperand.type == INTEGER) {
+    switch (op) {
+      case EQUALS: result.bvalue = loperand.fvalue == roperand.ivalue; break;
+      case GREATER_THAN: result.bvalue = loperand.fvalue > roperand.ivalue; break;
+      case GREATER_EQUALS: result.bvalue = loperand.fvalue >= roperand.ivalue; break;
+      case LOWER_THAN: result.bvalue = loperand.fvalue < roperand.ivalue; break;
+      case LOWER_EQUALS: result.bvalue = loperand.fvalue <= roperand.ivalue; break;
+      case NOT_EQUALS: result.bvalue = loperand.fvalue != roperand.ivalue; break;
+      default: result.type = UNDEFINED_DATA;
+    }
+  } else if (loperand.type == INTEGER && roperand.type == FLOAT) {
+    switch (op) {
+      case EQUALS: result.bvalue = loperand.ivalue == roperand.fvalue; break;
+      case GREATER_THAN: result.bvalue = loperand.ivalue > roperand.fvalue; break;
+      case GREATER_EQUALS: result.bvalue = loperand.ivalue >= roperand.fvalue; break;
+      case LOWER_THAN: result.bvalue = loperand.ivalue < roperand.fvalue; break;
+      case LOWER_EQUALS: result.bvalue = loperand.ivalue <= roperand.fvalue; break;
+      case NOT_EQUALS: result.bvalue = loperand.ivalue != roperand.fvalue; break;
+      default: result.type = UNDEFINED_DATA;
+    }
+  } else if (loperand.type == FLOAT && roperand.type == FLOAT) {
+    switch (op) {
+      case EQUALS: result.bvalue = loperand.fvalue == roperand.fvalue; break;
+      case GREATER_THAN: result.bvalue = loperand.fvalue > roperand.fvalue; break;
+      case GREATER_EQUALS: result.bvalue = loperand.fvalue >= roperand.fvalue; break;
+      case LOWER_THAN: result.bvalue = loperand.fvalue < roperand.fvalue; break;
+      case LOWER_EQUALS: result.bvalue = loperand.fvalue <= roperand.fvalue; break;
+      case NOT_EQUALS: result.bvalue = loperand.fvalue != roperand.fvalue; break;
+      default: result.type = UNDEFINED_DATA;
+    }
+  }
+
+  return result;
+}
+

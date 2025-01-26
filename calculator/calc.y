@@ -16,13 +16,13 @@ extern void yyerror(const char *s);
 
 %union {
   value_info literal;
-  operator_t operator;
+  op_type operator;
 }
 
-%token <literal> NUMBER
-%token <operator> BINARY_OPERATOR UNARY_OPERATOR
+%token <literal> NUMBER_LITERAL STRING_LITERAL BOOLEAN_LITERAL
+%token <operator> AUOP ABOP BUOP BBOP
 
-%type <literal> statement
+%type <literal> statement arith_expr bool_expr 
 
 %start program
 
@@ -36,12 +36,20 @@ statement_list:
   ;
 
 statement:
-  NUMBER { 
-    cprint(yyout, "%v\n", &$1);
-  } | NUMBER BINARY_OPERATOR NUMBER {
-    $$ = arithmetic($1, $2, $3);
-    cprint(yyout, "%v\n", &$$);
-  }
+  arith_expr { cprint(yyout, "%v\n", &$1);} 
+  | bool_expr { cprint(yyout, "%v\n", &$1); }
+  ;
+
+arith_expr:
+  NUMBER_LITERAL { $$ = $1; }
+  | STRING_LITERAL { $$ = $1; }
+  | arith_expr ABOP arith_expr { $$ = arithmetic($1, $2, $3); }
+  ;
+
+bool_expr:
+  BOOLEAN_LITERAL
+  | arith_expr BBOP arith_expr { $$ = boolean_logic($1, $2, $3); }
+  ;
 
 %%
 

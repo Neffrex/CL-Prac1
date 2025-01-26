@@ -1,5 +1,6 @@
 
 /* Pruebas de números enteros */
+
 # Números sueltos
 1
 35123
@@ -27,3 +28,55 @@
 7 / 8   // División de enteros resultando en número decimal
 123 / 0 // División por 0
 345 / 1 // División por 1
+
+/* Pruebas de números decimales */
+
+# Números sueltos
+0.0
+1.0
+3.005
+2.500
+13.007890
+
+# Suma
+1.0 + 2.0
+3.2 + 1.9
+0.0 + 7.5
+
+# Resta
+5.0 - 3.0
+2.0 - 7.0
+1234 - 4321
+
+# Multiplicación
+1.0 * 5.1234
+0.0 * 4.05
+1.5 * 2.5
+
+#División
+1.0 / 2.0
+7.0 / 8.0
+3.0 / 1.5
+
+/* Booleanos */
+true
+false
+
+1 + 2 = 3
+3 + 5 = 1
+3 > 2
+
+/* Strings */
+"Hola"
+"Hola" + " " + "Mundo"
+
+
+/* Constantes */
+PI
+E
+PI + E
+2 * PI
+
+/* Arithmetic expression */
+"Hola Mundo " + 2.0
+

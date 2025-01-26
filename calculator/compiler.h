@@ -3,28 +3,29 @@
 
 #include <stdbool.h>
 #include <stdarg.h>
+#include <math.h>
 
 #define STR_MAX_LENGTH 200
 
 extern const char* op_map[];
 
 typedef enum {
-  PLUS,          // "+"
-  MINUS,         // "-"
-  TIMES,         // "*"
-  DIVIDE,        // "/"
-  COMPARE,       // "=="
-  GREATER_THAN,  // ">"
-  GREATER_EQUAL, // ">="
-  LESS_THAN,     // "<"
-  LESS_EQUAL,    // "<="
+  // ARITHMETIC OPERATORS
+  PLUS,           // "+"
+  MINUS,          // "-"
+  TIMES,          // "*"
+  DIVIDE,         // "/"
+  MOD,            // "%"
+  POW,            // "**"
+  // BOOLEAN OPERATORS
+  EQUALS,         // "="
+  GREATER_THAN,   // ">"
+  GREATER_EQUALS, // ">="
+  LOWER_THAN,      // "<"
+  LOWER_EQUALS,    // "<="
+  NOT_EQUALS,     // "<>"
   UNDEFINED_OP
 } op_type;
-
-typedef struct {
-  op_type type;
-  char* value;
-} operator_t;
 
 typedef enum {
   STRING,
@@ -34,12 +35,20 @@ typedef enum {
   UNDEFINED_DATA
 } data_type;
 
+typedef enum {
+  OCT,
+  HEX,
+  BIN,
+  DEC
+} mode;
+
 typedef struct {
   data_type type;
   char* svalue;
   int ivalue;
   float fvalue;
   bool bvalue;
+  mode mode;
 } value_info;
 
 typedef struct {
@@ -60,7 +69,8 @@ op_type operation_type(const char*);
 /* Syntax Analysis */
 bool init_syntax_analysis(char *);
 bool end_syntax_analysis(void);
-value_info arithmetic(const value_info, const operator_t, const value_info);
+value_info arithmetic(const value_info, const op_type, const value_info);
+value_info boolean_logic(const value_info, const op_type, const value_info);
 
 /* Semantic Analysis */
 bool semantic_analysis(void);
