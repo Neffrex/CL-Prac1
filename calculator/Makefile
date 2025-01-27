@@ -16,7 +16,7 @@ SYMTAB_H = symtab.h
 
 # Compilador y opciones de compilación
 CC = gcc
-CFLAGS = -Wall -lm -lfl
+CFLAGS = -Wall -lm -lfl -g
 
 # Archivo de entrada para pruebas
 INPUT_FILE = input.txt

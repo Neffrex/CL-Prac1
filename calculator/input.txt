@@ -59,16 +59,22 @@
 3.0 / 1.5
 
 /* Booleanos */
+"--------------------------"
+"# Booleanos"
+"--------------------------"
 true
 false
 
+"# Boolean Expressions"
 1 + 2 = 3
 3 + 5 = 1
 3 > 2
+7 * 8 >= 8 * 8
+
 
 /* Strings */
 "Hola"
-"Hola" + " " + "Mundo"
+"Hola" + " " + "Mundo" + 1.0
 
 
 /* Constantes */
@@ -78,5 +84,4 @@ PI + E
 2 * PI
 
 /* Arithmetic expression */
-"Hola Mundo " + 2.0
 

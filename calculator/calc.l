@@ -35,14 +35,14 @@ WHITESPACE [ \t\n]
   /* printf("Encountered digit: %s\n", yytext); */
   yylval.literal.type = INTEGER;
   yylval.literal.ivalue = atoi(yytext);
-	sprintf(yylval.literal.svalue, "%s", yytext);
+	yylval.literal.svalue = strdup(yytext);
   return NUMBER_LITERAL; 
 }
 {REAL} {
   /* printf("Encountered float: %s", yytext); */
   yylval.literal.type = FLOAT;
   yylval.literal.fvalue = atof(yytext);
-	sprintf(yylval.literal.svalue, "%s", yytext);
+	yylval.literal.svalue = strdup(yytext);
   return NUMBER_LITERAL;
 }
 {STRING} {
@@ -56,58 +56,93 @@ WHITESPACE [ \t\n]
   return BOOLEAN_LITERAL;
 }
 
+"(" {
+	return LPAREN;
+}
+")" {
+	return RPAREN;
+}
+
  /* Arithmetic Binary Operators ABOP */
 "+" {
 	yylval.operator = PLUS;
-	return ABOP;
+	return PLUS_OP;
 }
 "-" {
 	yylval.operator = MINUS;
-	return ABOP;
+	return MINUS_OP;
 }
 "*" {
 	yylval.operator = TIMES;
-	return ABOP;
+	return TIMES_OP;
 }
 "/" {
   yylval.operator = DIVIDE;
-  return ABOP;
+  return DIVIDE_OP;
 }
 "%" {
 	yylval.operator = MOD;
-	return ABOP;
+	return MOD_OP;
 }
 "**" {
 	yylval.operator = POW;
-	return ABOP;
+	return POW_OP;
 }
 
 
  /* Boolean Binary Operators BBOP */
 "=" {
 	yylval.operator = EQUALS;
-	return BBOP;
+	return EQUALS_OP;
 }
 ">" {
 	yylval.operator = GREATER_THAN;
-	return BBOP;
+	return GREATER_THAN_OP;
 }
 ">=" {
 	yylval.operator = GREATER_EQUALS;
-	return BBOP;
+	return GREATER_EQUALS_OP;
 }
 "<" {
 	yylval.operator = LOWER_THAN;
-	return BBOP;
+	return LOWER_THAN_OP;
 }
 "<=" {
 	yylval.operator = LOWER_EQUALS;
-	return BBOP;
+	return LOWER_EQUALS_OP;
 }
 "<>" {
 	yylval.operator = NOT_EQUALS;
-	return BBOP;
+	return NOT_EQUALS_OP;
 }
+
+"not" {
+	yylval.operator = NOT;
+	return NOT_OP;
+}
+"or" {
+	yylval.operator = OR;
+	return OR_OP;
+}
+"and" {
+	yylval.operator = AND;
+	return AND_OP;
+}
+
+ /* Constants */
+"PI" {
+	yylval.literal.type = FLOAT;
+	yylval.literal.fvalue = M_PI;
+	return NUMBER_LITERAL;
+}
+"E" {
+	yylval.literal.type = FLOAT;
+	yylval.literal.fvalue = M_E;
+	return NUMBER_LITERAL;
+}
+
+ /* Single Line Comment */
+"#".*|"//".* { /* Skip comment content */ }
 
  /* Multiline comment */
 "/*" { BEGIN(COMMENT); }
@@ -117,7 +152,7 @@ WHITESPACE [ \t\n]
 
  /* Empty Spaces */
 [ \t\n] { /* Skip whitespace sequences */ }
-
+'\n' { return EOL; }
  /* Undefined Sequence */
 . { printf("Undefined sequence: %s", yytext); }
 

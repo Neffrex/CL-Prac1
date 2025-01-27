@@ -17,12 +17,18 @@ extern void yyerror(const char *s);
 %union {
   value_info literal;
   op_type operator;
+  void* no_type;
 }
 
 %token <literal> NUMBER_LITERAL STRING_LITERAL BOOLEAN_LITERAL
-%token <operator> AUOP ABOP BUOP BBOP
+%token <operator> PLUS_OP MINUS_OP TIMES_OP DIVIDE_OP MOD_OP POW_OP
+%token <operator> EQUALS_OP GREATER_THAN_OP GREATER_EQUALS_OP LOWER_THAN_OP LOWER_EQUALS_OP NOT_EQUALS_OP
+%token <operator> NOT_OP OR_OP AND_OP
+%token <no_type> EOL LPAREN RPAREN
 
-%type <literal> statement arith_expr bool_expr 
+%type <literal> statement 
+%type <literal> arith_expr arith_plus_minus arith_mod_times_div arith_pow arith_literal 
+%type <literal> bool_expr bool_expr_or bool_expr_and bool_expr_literal
 
 %start program
 
@@ -32,24 +38,70 @@ program: %empty | statement_list ;
 
 statement_list: 
   statement
-  | statement_list statement
-  ;
+| statement_list statement
+;
 
 statement:
   arith_expr { cprint(yyout, "%v\n", &$1);} 
-  | bool_expr { cprint(yyout, "%v\n", &$1); }
-  ;
+| bool_expr { cprint(yyout, "%v\n", &$1); }
+;
 
-arith_expr:
+arith_expr: arith_plus_minus { $$ = $1; } ;
+
+ /* Precedence Level 1: '+' AND '-' */
+arith_plus_minus:
+  arith_plus_minus PLUS_OP arith_mod_times_div { $$ = arithmetic($1, $2, $3); }
+| arith_plus_minus MINUS_OP arith_mod_times_div { $$ = arithmetic($1, $2, $3); }
+| arith_mod_times_div 
+;
+
+ /* Precedence Level 2: '%', '*' and '/' */
+arith_mod_times_div:
+  arith_mod_times_div MOD_OP arith_pow { $$ = arithmetic($1, $2, $3); }
+| arith_mod_times_div TIMES_OP arith_pow { $$ = arithmetic($1, $2, $3); }
+| arith_mod_times_div DIVIDE_OP arith_pow { $$ = arithmetic($1, $2, $3); }
+| arith_pow 
+;
+
+ /* Precedence Level 3: '**' */
+arith_pow:
+  arith_pow POW_OP arith_literal { $$ = arithmetic($1, $2, $3); }
+| arith_literal
+;
+
+ /* Precedence Level 4: FLOAT INTEGER STRING */
+arith_literal:
   NUMBER_LITERAL { $$ = $1; }
-  | STRING_LITERAL { $$ = $1; }
-  | arith_expr ABOP arith_expr { $$ = arithmetic($1, $2, $3); }
-  ;
+| STRING_LITERAL { $$ = $1; }
+| LPAREN arith_plus_minus RPAREN { $$ = $2; }
+;
 
-bool_expr:
+bool_expr: bool_expr_or { $$ = $1; } ;
+
+ /* Precedence Level 1: 'or' */
+bool_expr_or: 
+  bool_expr_or OR_OP bool_expr_and { $$ = boolean_logic($1, $2, $3); }
+| bool_expr_and 
+;
+
+ /* Precedence Level 2: 'and' */
+bool_expr_and:
+  bool_expr_and AND_OP bool_expr_literal { $$ = boolean_logic($1, $2, $3); }
+| NOT_OP bool_expr_literal { $$ = boolean_logic_unary($1, $2); }
+| bool_expr_literal { $$ = $1; }
+;
+
+ /* Precedence Level 3: BOOLEAN and Boolean Arithmetic Operations */
+bool_expr_literal:
   BOOLEAN_LITERAL
-  | arith_expr BBOP arith_expr { $$ = boolean_logic($1, $2, $3); }
-  ;
+| LPAREN bool_expr_or RPAREN { $$ = $2; }
+| arith_plus_minus EQUALS_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
+| arith_plus_minus GREATER_THAN_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
+| arith_plus_minus GREATER_EQUALS_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
+| arith_plus_minus LOWER_THAN_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
+| arith_plus_minus LOWER_EQUALS_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
+| arith_plus_minus NOT_EQUALS_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
+;
 
 %%
 

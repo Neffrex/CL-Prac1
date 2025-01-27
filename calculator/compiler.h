@@ -6,6 +6,7 @@
 #include <math.h>
 
 #define STR_MAX_LENGTH 200
+#define SVALUE_MAX_LENGTH 64
 
 extern const char* op_map[];
 
@@ -17,13 +18,17 @@ typedef enum {
   DIVIDE,         // "/"
   MOD,            // "%"
   POW,            // "**"
-  // BOOLEAN OPERATORS
+  // BOOLEAN ARITHMETIC OPERATORS
   EQUALS,         // "="
   GREATER_THAN,   // ">"
   GREATER_EQUALS, // ">="
   LOWER_THAN,      // "<"
   LOWER_EQUALS,    // "<="
   NOT_EQUALS,     // "<>"
+  // BOOLEAN OPERATORS
+  NOT,
+  OR,
+  AND,
   UNDEFINED_OP
 } op_type;
 
@@ -71,6 +76,7 @@ bool init_syntax_analysis(char *);
 bool end_syntax_analysis(void);
 value_info arithmetic(const value_info, const op_type, const value_info);
 value_info boolean_logic(const value_info, const op_type, const value_info);
+value_info boolean_logic_unary(const op_type, const value_info);
 
 /* Semantic Analysis */
 bool semantic_analysis(void);

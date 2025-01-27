@@ -243,6 +243,25 @@ value_info arithmetic(const value_info loperand, const op_type op, const value_i
     return result;
 }
 
+value_info boolean_logic_unary(op_type op, value_info operand) {
+  value_info result;
+  result.type = BOOLEAN;
+  result.svalue = NULL;
+  result.ivalue = 0;
+  result.fvalue = 0.0f;
+  result.bvalue = false;
+
+  // UNARY OPERATIONS
+  if(operand.type == BOOLEAN) {
+    switch (op) {
+      case NOT: result.bvalue = !operand.bvalue; break;
+      default: result.type = UNDEFINED_DATA;
+    }
+  }
+  
+  return result;
+}
+
 value_info boolean_logic(value_info loperand, op_type op, value_info roperand) {
   value_info result;
   result.type = BOOLEAN;
@@ -260,7 +279,7 @@ value_info boolean_logic(value_info loperand, op_type op, value_info roperand) {
       case LOWER_EQUALS: result.bvalue = loperand.ivalue <= roperand.ivalue; break;
       case NOT_EQUALS: result.bvalue = loperand.ivalue != roperand.ivalue; break;
       default: result.type = UNDEFINED_DATA;
-    }
+      }
   } else if (loperand.type == FLOAT && loperand.type == INTEGER) {
     switch (op) {
       case EQUALS: result.bvalue = loperand.fvalue == roperand.ivalue; break;
@@ -291,7 +310,14 @@ value_info boolean_logic(value_info loperand, op_type op, value_info roperand) {
       case NOT_EQUALS: result.bvalue = loperand.fvalue != roperand.fvalue; break;
       default: result.type = UNDEFINED_DATA;
     }
+  } else if (loperand.type == BOOLEAN && roperand.type == BOOLEAN) {
+    switch (op) {
+      case OR: result.bvalue = loperand.bvalue || roperand.bvalue; break;
+      case AND: result.bvalue = loperand.bvalue && roperand.bvalue; break;
+      default: result.type = UNDEFINED_DATA;
+    }
   }
+
 
   return result;
 }
