@@ -20,7 +20,7 @@ extern void yyerror(const char *s);
   void* no_type;
 }
 
-%token <literal> NUMBER_LITERAL STRING_LITERAL BOOLEAN_LITERAL
+%token <literal> INTEGER_LITERAL FLOAT_LITERAL STRING_LITERAL BOOLEAN_LITERAL
 %token <operator> PLUS_OP MINUS_OP TIMES_OP DIVIDE_OP MOD_OP POW_OP
 %token <operator> EQUALS_OP GREATER_THAN_OP GREATER_EQUALS_OP LOWER_THAN_OP LOWER_EQUALS_OP NOT_EQUALS_OP
 %token <operator> NOT_OP OR_OP AND_OP
@@ -71,7 +71,8 @@ arith_pow:
 
  /* Precedence Level 4: FLOAT INTEGER STRING */
 arith_literal:
-  NUMBER_LITERAL { $$ = $1; }
+  FLOAT_LITERAL { $$ = $1; }
+| INTEGER_LITERAL { $$ = $1; }
 | STRING_LITERAL { $$ = $1; }
 | LPAREN arith_plus_minus RPAREN { $$ = $2; }
 ;

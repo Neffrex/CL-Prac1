@@ -60,27 +60,28 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    NUMBER_LITERAL = 258,          /* NUMBER_LITERAL  */
-    STRING_LITERAL = 259,          /* STRING_LITERAL  */
-    BOOLEAN_LITERAL = 260,         /* BOOLEAN_LITERAL  */
-    PLUS_OP = 261,                 /* PLUS_OP  */
-    MINUS_OP = 262,                /* MINUS_OP  */
-    TIMES_OP = 263,                /* TIMES_OP  */
-    DIVIDE_OP = 264,               /* DIVIDE_OP  */
-    MOD_OP = 265,                  /* MOD_OP  */
-    POW_OP = 266,                  /* POW_OP  */
-    EQUALS_OP = 267,               /* EQUALS_OP  */
-    GREATER_THAN_OP = 268,         /* GREATER_THAN_OP  */
-    GREATER_EQUALS_OP = 269,       /* GREATER_EQUALS_OP  */
-    LOWER_THAN_OP = 270,           /* LOWER_THAN_OP  */
-    LOWER_EQUALS_OP = 271,         /* LOWER_EQUALS_OP  */
-    NOT_EQUALS_OP = 272,           /* NOT_EQUALS_OP  */
-    NOT_OP = 273,                  /* NOT_OP  */
-    OR_OP = 274,                   /* OR_OP  */
-    AND_OP = 275,                  /* AND_OP  */
-    EOL = 276,                     /* EOL  */
-    LPAREN = 277,                  /* LPAREN  */
-    RPAREN = 278                   /* RPAREN  */
+    INTEGER_LITERAL = 258,         /* INTEGER_LITERAL  */
+    FLOAT_LITERAL = 259,           /* FLOAT_LITERAL  */
+    STRING_LITERAL = 260,          /* STRING_LITERAL  */
+    BOOLEAN_LITERAL = 261,         /* BOOLEAN_LITERAL  */
+    PLUS_OP = 262,                 /* PLUS_OP  */
+    MINUS_OP = 263,                /* MINUS_OP  */
+    TIMES_OP = 264,                /* TIMES_OP  */
+    DIVIDE_OP = 265,               /* DIVIDE_OP  */
+    MOD_OP = 266,                  /* MOD_OP  */
+    POW_OP = 267,                  /* POW_OP  */
+    EQUALS_OP = 268,               /* EQUALS_OP  */
+    GREATER_THAN_OP = 269,         /* GREATER_THAN_OP  */
+    GREATER_EQUALS_OP = 270,       /* GREATER_EQUALS_OP  */
+    LOWER_THAN_OP = 271,           /* LOWER_THAN_OP  */
+    LOWER_EQUALS_OP = 272,         /* LOWER_EQUALS_OP  */
+    NOT_EQUALS_OP = 273,           /* NOT_EQUALS_OP  */
+    NOT_OP = 274,                  /* NOT_OP  */
+    OR_OP = 275,                   /* OR_OP  */
+    AND_OP = 276,                  /* AND_OP  */
+    EOL = 277,                     /* EOL  */
+    LPAREN = 278,                  /* LPAREN  */
+    RPAREN = 279                   /* RPAREN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -95,7 +96,7 @@ union YYSTYPE
   op_type operator;
   void* no_type;
 
-#line 99 "calc.tab.h"
+#line 100 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

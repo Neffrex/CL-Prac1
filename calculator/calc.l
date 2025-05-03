@@ -32,18 +32,16 @@ WHITESPACE [ \t\n]
 
  /* Data types */
 {INTEGER} {
-  printf("Encountered digit: %s\n", yytext);
+  // printf("Encountered digit: %s\n", yytext);
   yylval.literal.type = INTEGER;
   yylval.literal.ivalue = atoi(yytext);
-	yylval.literal.svalue = strdup(yytext);
-  return NUMBER_LITERAL; 
+  return INTEGER_LITERAL; 
 }
 {REAL} {
-  /* printf("Encountered float: %s", yytext); */
+  // printf("Encountered float: %s", yytext);
   yylval.literal.type = FLOAT;
   yylval.literal.fvalue = atof(yytext);
-	yylval.literal.svalue = strdup(yytext);
-  return NUMBER_LITERAL;
+  return FLOAT_LITERAL;
 }
 {STRING} {
 	yylval.literal.type = STRING;
@@ -133,12 +131,12 @@ WHITESPACE [ \t\n]
 "PI" {
 	yylval.literal.type = FLOAT;
 	yylval.literal.fvalue = M_PI;
-	return NUMBER_LITERAL;
+	return FLOAT_LITERAL;
 }
 "E" {
 	yylval.literal.type = FLOAT;
 	yylval.literal.fvalue = M_E;
-	return NUMBER_LITERAL;
+	return FLOAT_LITERAL;
 }
 
  /* Single Line Comment */

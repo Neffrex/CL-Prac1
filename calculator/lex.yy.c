@@ -818,28 +818,26 @@ case 1:
 YY_RULE_SETUP
 #line 35 "calc.l"
 {
-  printf("Encountered digit: %s\n", yytext);
+  // printf("Encountered digit: %s\n", yytext);
   yylval.literal.type = INTEGER;
   yylval.literal.ivalue = atoi(yytext);
-	yylval.literal.svalue = strdup(yytext);
-  return NUMBER_LITERAL; 
+  return INTEGER_LITERAL; 
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 42 "calc.l"
+#line 41 "calc.l"
 {
-  /* printf("Encountered float: %s", yytext); */
+  // printf("Encountered float: %s", yytext);
   yylval.literal.type = FLOAT;
   yylval.literal.fvalue = atof(yytext);
-	yylval.literal.svalue = strdup(yytext);
-  return NUMBER_LITERAL;
+  return FLOAT_LITERAL;
 }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 49 "calc.l"
+#line 47 "calc.l"
 {
 	yylval.literal.type = STRING;
   yylval.literal.svalue = strndup(yytext + 1, yyleng - 2);
@@ -848,7 +846,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 54 "calc.l"
+#line 52 "calc.l"
 {
   yylval.literal.type = BOOLEAN;
   yylval.literal.bvalue = !strcmp(yytext, "true");
@@ -857,14 +855,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 60 "calc.l"
+#line 58 "calc.l"
 {
 	return LPAREN;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 63 "calc.l"
+#line 61 "calc.l"
 {
 	return RPAREN;
 }
@@ -872,7 +870,7 @@ YY_RULE_SETUP
 /* Arithmetic Binary Operators ABOP */
 case 7:
 YY_RULE_SETUP
-#line 68 "calc.l"
+#line 66 "calc.l"
 {
 	yylval.operator = PLUS;
 	return PLUS_OP;
@@ -880,7 +878,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 72 "calc.l"
+#line 70 "calc.l"
 {
 	yylval.operator = MINUS;
 	return MINUS_OP;
@@ -888,7 +886,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 76 "calc.l"
+#line 74 "calc.l"
 {
 	yylval.operator = TIMES;
 	return TIMES_OP;
@@ -896,7 +894,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 80 "calc.l"
+#line 78 "calc.l"
 {
   yylval.operator = DIVIDE;
   return DIVIDE_OP;
@@ -904,7 +902,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 84 "calc.l"
+#line 82 "calc.l"
 {
 	yylval.operator = MOD;
 	return MOD_OP;
@@ -912,7 +910,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 88 "calc.l"
+#line 86 "calc.l"
 {
 	yylval.operator = POW;
 	return POW_OP;
@@ -921,7 +919,7 @@ YY_RULE_SETUP
 /* Boolean Binary Operators BBOP */
 case 13:
 YY_RULE_SETUP
-#line 95 "calc.l"
+#line 93 "calc.l"
 {
 	yylval.operator = EQUALS;
 	return EQUALS_OP;
@@ -929,7 +927,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 99 "calc.l"
+#line 97 "calc.l"
 {
 	yylval.operator = GREATER_THAN;
 	return GREATER_THAN_OP;
@@ -937,7 +935,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 103 "calc.l"
+#line 101 "calc.l"
 {
 	yylval.operator = GREATER_EQUALS;
 	return GREATER_EQUALS_OP;
@@ -945,7 +943,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 107 "calc.l"
+#line 105 "calc.l"
 {
 	yylval.operator = LOWER_THAN;
 	return LOWER_THAN_OP;
@@ -953,7 +951,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 111 "calc.l"
+#line 109 "calc.l"
 {
 	yylval.operator = LOWER_EQUALS;
 	return LOWER_EQUALS_OP;
@@ -961,7 +959,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 115 "calc.l"
+#line 113 "calc.l"
 {
 	yylval.operator = NOT_EQUALS;
 	return NOT_EQUALS_OP;
@@ -969,7 +967,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 120 "calc.l"
+#line 118 "calc.l"
 {
 	yylval.operator = NOT;
 	return NOT_OP;
@@ -977,7 +975,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 124 "calc.l"
+#line 122 "calc.l"
 {
 	yylval.operator = OR;
 	return OR_OP;
@@ -985,7 +983,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 128 "calc.l"
+#line 126 "calc.l"
 {
 	yylval.operator = AND;
 	return AND_OP;
@@ -994,75 +992,75 @@ YY_RULE_SETUP
 /* Constants */
 case 22:
 YY_RULE_SETUP
-#line 134 "calc.l"
+#line 132 "calc.l"
 {
 	yylval.literal.type = FLOAT;
 	yylval.literal.fvalue = M_PI;
-	return NUMBER_LITERAL;
+	return FLOAT_LITERAL;
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 139 "calc.l"
+#line 137 "calc.l"
 {
 	yylval.literal.type = FLOAT;
 	yylval.literal.fvalue = M_E;
-	return NUMBER_LITERAL;
+	return FLOAT_LITERAL;
 }
 	YY_BREAK
 /* Single Line Comment */
 case 24:
 YY_RULE_SETUP
-#line 146 "calc.l"
+#line 144 "calc.l"
 { /* Skip comment content */ }
 	YY_BREAK
 /* Multiline comment */
 case 25:
 YY_RULE_SETUP
-#line 149 "calc.l"
+#line 147 "calc.l"
 { BEGIN(COMMENT); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 150 "calc.l"
+#line 148 "calc.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 151 "calc.l"
+#line 149 "calc.l"
 { /* Skip comment content*/ }
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 152 "calc.l"
+#line 150 "calc.l"
 { /* Skip comment lines */}
 	YY_BREAK
 /* Empty Spaces */
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 155 "calc.l"
+#line 153 "calc.l"
 { /* Skip whitespace sequences */ }
 	YY_BREAK
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 156 "calc.l"
+#line 154 "calc.l"
 { return EOL; }
 	YY_BREAK
 /* Undefined Sequence */
 case 31:
 YY_RULE_SETUP
-#line 158 "calc.l"
+#line 156 "calc.l"
 { printf("Undefined sequence: %s", yytext); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 160 "calc.l"
+#line 158 "calc.l"
 ECHO;
 	YY_BREAK
-#line 1066 "lex.yy.c"
+#line 1064 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT):
 	yyterminate();
@@ -2080,4 +2078,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 160 "calc.l"
+#line 158 "calc.l"

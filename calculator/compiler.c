@@ -18,14 +18,14 @@ void print_value_info(FILE* stream, value_info* value) {
         case INTEGER:
             switch (value->mode) {
                 case OCT:
-                    fprintf(stream, "%o", value->ivalue);
+                    fprintf(stream, "0c%o", value->ivalue);
                     break;
                 case HEX:
-                    fprintf(stream, "%x", value->ivalue);
+                    fprintf(stream, "0x%x", value->ivalue);
                     break;
                 case BIN:
                     // TODO: Fix Binary Representation
-                    fprintf(stream, "%x", value->ivalue);
+                    fprintf(stream, "0b%x", value->ivalue);
                     break;
                 case DEC:
                     fprintf(stream, "%d", value->ivalue);
@@ -106,7 +106,6 @@ int cprint(FILE* stream, const char* format, ...) {
     return written;
 }
 
-
 bool value_format(char* format_out, data_type type, int pos) {
   format_out[pos++] = '%';
   switch (type) {
@@ -126,205 +125,36 @@ bool value_format(char* format_out, data_type type, int pos) {
   }
 }
 
-op_type operation_type(const char* op) {
-  if(!strcmp(op, "+")) {
-    return PLUS;
-  } else if(!strcmp(op, "-")) {
-    return MINUS;
-  } else if(!strcmp(op, "*")) {
-    return TIMES;
-  } else if(!strcmp(op, "/")) {
-    return DIVIDE;
-  } else if(!strcmp(op, "=")) {
-     return EQUALS;
-  } else if(!strcmp(op, ">")) {
-    return GREATER_THAN;
-  } else if(!strcmp(op, ">=")) {
-     return GREATER_EQUALS;
-  } else if(!strcmp(op, "<")) {
-    return LOWER_THAN;
-  } else if(!strcmp(op, "<=")) {
-    return LOWER_EQUALS;
-  } else if(!strcmp(op, "<>")) {
-    return NOT_EQUALS;
-  } else{
-    return UNDEFINED_OP;
-  }
-}
-
-value_info handle_integer_arithmetic(const value_info loperand, const op_type op, const value_info roperand) {
-    value_info result;
-    result.type = INTEGER;
-    result.svalue = NULL;
-
-    switch (op) {
-        case PLUS: result.ivalue = loperand.ivalue + roperand.ivalue; break;
-        case MINUS: result.ivalue = loperand.ivalue - roperand.ivalue; break;
-        case TIMES: result.ivalue = loperand.ivalue * roperand.ivalue; break;
-        case DIVIDE:
-            if (roperand.ivalue != 0) {
-                result.ivalue = loperand.ivalue / roperand.ivalue;
-            } else {
-                fprintf(stderr, "Error: Division by zero `%d/%d`\n", loperand.ivalue, roperand.ivalue);
-                result.type = UNDEFINED_DATA;
-            }
-            break;
-        default:
-            fprintf(stderr, "Error: Unsupported operation `%d` for integers\n", op);
-            result.type = UNDEFINED_DATA;
-    }
-    return result;
-}
-
-value_info handle_float_arithmetic(const value_info loperand, const op_type op, const value_info roperand) {
-    value_info result;
-    result.type = FLOAT;
-    result.svalue = NULL;
-
-    float left = (loperand.type == INTEGER) ? loperand.ivalue : loperand.fvalue;
-    float right = (roperand.type == INTEGER) ? roperand.ivalue : roperand.fvalue;
-
-    switch (op) {
-        case PLUS: result.fvalue = left + right; break;
-        case MINUS: result.fvalue = left - right; break;
-        case TIMES: result.fvalue = left * right; break;
-        case DIVIDE:
-            if (right != 0) {
-                result.fvalue = left / right;
-            } else {
-                fprintf(stderr, "Error: Division by zero `%f/%f`\n", left, right);
-                result.type = UNDEFINED_DATA;
-            }
-            break;
-        default:
-            fprintf(stderr, "Error: Unsupported operation for floats\n");
-            result.type = UNDEFINED_DATA;
-    }
-    return result;
-}
-
-
-value_info cast(value_info value, data_type type) {
+value_info arithmetic(value_info loperand, const op_type op, value_info roperand) {
+  // Result object initialization
   value_info result;
-  result.svalue = "";
+  result.type = UNDEFINED_DATA;
+  result.svalue = NULL;
   result.ivalue = 0;
   result.fvalue = 0.0f;
   result.bvalue = false;
-  result.type = type;
 
-  if(value.type == STRING) {
-    switch (type) {
-      case STRING: result.svalue = strdup(value.svalue); break;
-      case INTEGER: {
-        result.svalue = malloc(16 * sizeof(value.ivalue));
-				if (result.svalue != NULL) {
-        	sprintf(result.svalue, "%i", value.ivalue);
-				} else {
-    			fprintf(stderr, "Error: Memory allocation failed for string concatenation\n");
-			    result.type = UNDEFINED_DATA;		
-				}
-        break;
-      }
-      case FLOAT: {
-				int flen = snprintf(NULL, 0, "%g", value.fvalue);
-        result.svalue = malloc(flen + 1);
-  			if (result.svalue != NULL) {
-	        sprintf(result.svalue, "%g", value.fvalue);
-				} else {
-    			fprintf(stderr, "Error: Memory allocation failed for string concatenation\n");
-			    result.type = UNDEFINED_DATA;		
-				}
-        break;
-      }
-      case BOOLEAN: result.svalue = (value.bvalue) ? "true" : "false"; break;
-      default: result.type = UNDEFINED_DATA;
-    }
-  } else if(value.type == INTEGER) {
-    switch (type) {
-      case STRING: result.ivalue = atoi(value.svalue); break;
-      case INTEGER: result.ivalue = value.ivalue; break;
-      case FLOAT: result.ivalue = (int)value.fvalue; break;
-      case BOOLEAN: result.ivalue = result.bvalue; break;
-      default: result.type = UNDEFINED_DATA;
-    }
-  } else if (value.type == FLOAT) {
-    switch (type) {
-      case STRING: result.fvalue = atof(value.svalue); break;
-      case INTEGER: result.fvalue = (float)value.ivalue; break;
-      case FLOAT: result.fvalue = value.fvalue; break;
-      case BOOLEAN: result.fvalue = (float)result.bvalue; break;
-      default: result.type = UNDEFINED_DATA;
-    }
-  } else if (value.type == BOOLEAN) {
-    switch (type) {
-      case STRING: result.bvalue = value.svalue == "true" ? true : false; break;
-      case INTEGER: result.bvalue = !!value.ivalue; break;
-      case FLOAT: result.bvalue = !!((int)value.fvalue); break;
-      case BOOLEAN: result.bvalue = result.bvalue; break;
-      default: result.type = UNDEFINED_DATA;
-    }
+  bool is_integer_arithmetic = (loperand.type == INTEGER && roperand.type == INTEGER);
+  bool is_float_arithmetic =
+    (loperand.type == FLOAT || loperand.type == INTEGER)
+    && (roperand.type == FLOAT || roperand.type == INTEGER);
+  bool is_string_concat = (op == PLUS)
+    && (loperand.type == STRING || loperand.type == INTEGER || loperand.type == FLOAT)
+    && (roperand.type == STRING || roperand.type == INTEGER || roperand.type == FLOAT);
+
+  if (is_integer_arithmetic) {
+    result = integer_arithmetic(loperand.ivalue, op, roperand.ivalue);
+  } else if (is_float_arithmetic) {
+    if(loperand.type == INTEGER) loperand.fvalue = (float)loperand.ivalue;
+    if(roperand.type == INTEGER) roperand.fvalue = (float)roperand.ivalue;
+    result = float_arithmetic(loperand.fvalue, op, roperand.fvalue);
+  } else if (is_string_concat) {
+    result = concat(loperand, roperand);
   } else {
-    result.type = UNDEFINED_DATA;
-  };
-
-  return result;
-}
-
-value_info handle_string_concatenation(const value_info loperand, const value_info roperand) {
-  value_info result;
-  result.svalue = "";
-  result.ivalue = 0;
-  result.fvalue = 0.0f;
-  result.bvalue = false;
-  result.type = STRING;
-
-
-	if(loperand.type == BOOLEAN || roperand.type == BOOLEAN) {
-		result.type = UNDEFINED_DATA;
-		return result;
-	}
-
-	value_info loper = cast(loperand, STRING);
-	value_info roper = cast(roperand, STRING);
-	if(loper.type == UNDEFINED_DATA || roper.type == UNDEFINED_DATA) {
-		result.type = UNDEFINED_DATA;
-		return result;
-	}
-
-  size_t len = strlen(loper.svalue) + strlen(roper.svalue) + 1;
-  result.svalue = (char*)malloc(len);
-  if (result.svalue != NULL) {
-    strcpy(result.svalue, loper.svalue);
-    strcat(result.svalue, roper.svalue);
-  } else {
-    fprintf(stderr, "Error: Memory allocation failed for string concatenation\n");
-    result.type = UNDEFINED_DATA;
+    fprintf(stderr, "Error: Unsupported operation or mismatched types\n");
   }
 
   return result;
-}
-
-value_info arithmetic(const value_info loperand, const op_type op, const value_info roperand) {
-    // Result object initialization
-    value_info result;
-    result.type = UNDEFINED_DATA;
-    result.svalue = NULL;
-    result.ivalue = 0;
-    result.fvalue = 0.0f;
-    result.bvalue = false;
-
-    if (loperand.type == INTEGER && roperand.type == INTEGER) {
-        result = handle_integer_arithmetic(loperand, op, roperand);
-    } else if ((loperand.type == FLOAT || loperand.type == INTEGER) &&
-               (roperand.type == FLOAT || roperand.type == INTEGER)) {
-        result = handle_float_arithmetic(loperand, op, roperand);
-    } else if ((loperand.type == STRING || roperand.type == STRING) && op == PLUS) {
-        result = handle_string_concatenation(loperand, roperand);
-    } else {
-        fprintf(stderr, "Error: Unsupported operation or mismatched types\n");
-    }
-
-    return result;
 }
 
 value_info boolean_logic_unary(op_type op, value_info operand) {
@@ -406,3 +236,91 @@ value_info boolean_logic(value_info loperand, op_type op, value_info roperand) {
   return result;
 }
 
+
+value_info integer_arithmetic(int lvalue, op_type op, int rvalue) {
+  value_info result;
+  result.type = INTEGER;
+  result.ivalue = UNDEFINED_DATA;
+
+  switch(op) {
+    case PLUS: result.ivalue = lvalue + rvalue; break;
+    case MINUS: result.ivalue = lvalue - rvalue; break;
+    case TIMES: result.ivalue = lvalue * rvalue; break;
+    case DIVIDE: 
+      if(rvalue != 0) {
+        result.ivalue = lvalue / rvalue;
+      } else {
+        fprintf(stderr, "Error: Division by 0 (%d/%d)\n", lvalue, rvalue);
+      }
+      break;
+    case MOD: result.ivalue = lvalue % rvalue; break;
+    case POW: result.ivalue = pow(lvalue, rvalue); break;
+    default:
+      fprintf(stderr, "Error: Invalid operation `%d` for integer arithmetic\n", op);
+  }
+
+  return result;
+}
+
+value_info float_arithmetic(float lvalue, op_type op, float rvalue) {
+  value_info result;
+  result.type = FLOAT;
+  result.fvalue = UNDEFINED_DATA;
+
+  switch(op) {
+    case PLUS: result.fvalue = lvalue + rvalue; break;
+    case MINUS: result.fvalue = lvalue - rvalue; break;
+    case TIMES: result.fvalue = lvalue * rvalue; break;
+    case DIVIDE: 
+      if(rvalue != 0) {
+        result.fvalue = lvalue / rvalue;
+      } else {
+        fprintf(stderr, "Error: Division by 0 (%f/%f)\n", lvalue, rvalue);
+      }
+      break;
+    case MOD: result.fvalue = fmod(lvalue, rvalue); break;
+    case POW: result.fvalue = pow(lvalue, rvalue); break;
+    default:
+      fprintf(stderr, "Error: Invalid operation `%d` for float arithmetic\n", op);
+  }
+
+  return result;
+}
+
+value_info concat(value_info loperand, value_info roperand) {
+  value_info result;
+  result.type = STRING;
+
+  char *lstr = val2str(loperand);
+  char *rstr = val2str(roperand);
+
+  size_t len = strlen(lstr) + strlen(rstr) + 1;
+  result.svalue = malloc(len);
+  if(result.svalue != NULL) {
+    strcpy(result.svalue, lstr);
+    strcat(result.svalue, rstr);
+  }
+
+  free(lstr);
+  free(rstr);
+
+  return result;
+}
+
+char* val2str(value_info value) {
+  char buffer[64];
+
+  switch (value.type) {
+    case INTEGER:
+      snprintf(buffer, sizeof(buffer), "%d", value.ivalue);
+      return strdup(buffer);
+    case FLOAT:
+      snprintf(buffer, sizeof(buffer), "%f", value.fvalue);
+      return strdup(buffer);
+    case STRING:
+      if(value.svalue == NULL) return strdup("");
+      return strdup(value.svalue);
+    default:
+      return strdup("");
+  }
+}

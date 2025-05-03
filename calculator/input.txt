@@ -1,87 +1,97 @@
 
 /* Pruebas de números enteros */
 
-# Números sueltos
+"# Números sueltos"
 1
 35123
-54523 123123 21312
+54523 
+123123
+21312
 554673 
+""
 
-# Suma
-3 + 1
-16 + 153
-10 + 3
-111111111111111111 + 22222222222222
-99999999999999999 + 1
+"# Suma"
+3 + 1           // 4
+16 + 153        // 169
+10 + 3          // 13
+111111 + 222222 // 333333
+999999 + 1      // 1000000
+""
 
-# Resta
+"# Resta"
 10 - 3 // Resta
 1 - 5  // Resta resultando en negativo
+""
 
-# Multiplicación
+"# Multiplicación"
 87 * 33  // Multiplicación normal
 3213 * 0 // Multiplicación por 0
 789 * 1  // Multiplicación por 1
+""
 
-# División
+"# División"
 33 / 3  // División de enteros resultando en número natural
 7 / 8   // División de enteros resultando en número decimal
 123 / 0 // División por 0
 345 / 1 // División por 1
+""
 
-/* Pruebas de números decimales */
+// Pruebas de números decimales
 
-# Números sueltos
+"# Números sueltos"
 0.0
 1.0
 3.005
 2.500
 13.007890
+""
 
-# Suma
+"# Suma"
 1.0 + 2.0
 3.2 + 1.9
 0.0 + 7.5
+""
 
-# Resta
+"# Resta"
 5.0 - 3.0
 2.0 - 7.0
 1234 - 4321
+""
 
-# Multiplicación
+"# Multiplicación"
 1.0 * 5.1234
 0.0 * 4.05
 1.5 * 2.5
+""
 
-#División
+"# División"
 1.0 / 2.0
 7.0 / 8.0
 3.0 / 1.5
+""
 
-/* Booleanos */
-"--------------------------"
+
 "# Booleanos"
-"--------------------------"
 true
 false
+""
 
-"# Boolean Expressions"
+"# Expresiones booleanas"
 1 + 2 = 3
 3 + 5 = 1
 3 > 2
 7 * 8 >= 8 * 8
+""
 
-
-/* Strings */
+"# Strings"
 "Hola"
 "Hola" + " " + "Mundo" + 1.0
+""
 
-
-/* Constantes */
+"# Constantes"
 PI
 E
 PI + E
 2 * PI
-
-/* Arithmetic expression */
+""
 

@@ -28,8 +28,7 @@ typedef enum {
   // BOOLEAN OPERATORS
   NOT,
   OR,
-  AND,
-  UNDEFINED_OP
+  AND
 } op_type;
 
 typedef enum {
@@ -63,18 +62,22 @@ typedef struct {
   value_info id_value;
 } identifier;
 
+/* Auxiliary functions */
 bool value_format(char*, data_type, int);
 int cprint(FILE*, const char*, ...);
+char* val2str(value_info);
 
 /* Lexical Analysis */
 bool init_lexical_analysis(char *);
 bool finalize_lexical_analysis(void);
-op_type operation_type(const char*);
 
 /* Syntax Analysis */
 bool init_syntax_analysis(char *);
 bool end_syntax_analysis(void);
-value_info arithmetic(const value_info, const op_type, const value_info);
+value_info arithmetic(value_info, const op_type, value_info);
+value_info integer_arithmetic(int, const op_type, int);
+value_info float_arithmetic(float, const op_type, float);
+value_info concat(value_info, value_info);
 value_info boolean_logic(const value_info, const op_type, const value_info);
 value_info boolean_logic_unary(const op_type, const value_info);
 
