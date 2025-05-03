@@ -165,12 +165,12 @@ value_info handle_integer_arithmetic(const value_info loperand, const op_type op
             if (roperand.ivalue != 0) {
                 result.ivalue = loperand.ivalue / roperand.ivalue;
             } else {
-                fprintf(stderr, "Error: Division by zero\n");
+                fprintf(stderr, "Error: Division by zero `%d/%d`\n", loperand.ivalue, roperand.ivalue);
                 result.type = UNDEFINED_DATA;
             }
             break;
         default:
-            fprintf(stderr, "Error: Unsupported operation for integers\n");
+            fprintf(stderr, "Error: Unsupported operation `%d` for integers\n", op);
             result.type = UNDEFINED_DATA;
     }
     return result;
@@ -192,7 +192,7 @@ value_info handle_float_arithmetic(const value_info loperand, const op_type op, 
             if (right != 0) {
                 result.fvalue = left / right;
             } else {
-                fprintf(stderr, "Error: Division by zero\n");
+                fprintf(stderr, "Error: Division by zero `%f/%f`\n", left, right);
                 result.type = UNDEFINED_DATA;
             }
             break;

@@ -32,7 +32,7 @@ WHITESPACE [ \t\n]
 
  /* Data types */
 {INTEGER} {
-  /* printf("Encountered digit: %s\n", yytext); */
+  printf("Encountered digit: %s\n", yytext);
   yylval.literal.type = INTEGER;
   yylval.literal.ivalue = atoi(yytext);
 	yylval.literal.svalue = strdup(yytext);
