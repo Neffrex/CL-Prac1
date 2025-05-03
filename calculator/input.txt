@@ -19,21 +19,21 @@
 ""
 
 "# Resta"
-10 - 3 // Resta
-1 - 5  // Resta resultando en negativo
+10 - 3          // 7
+1 - 5           // -4
 ""
 
 "# Multiplicación"
-87 * 33  // Multiplicación normal
-3213 * 0 // Multiplicación por 0
-789 * 1  // Multiplicación por 1
+87 * 33         // 2871
+3213 * 0        // 0
+789 * 1         // 789
 ""
 
 "# División"
-33 / 3  // División de enteros resultando en número natural
-7 / 8   // División de enteros resultando en número decimal
-123 / 0 // División por 0
-345 / 1 // División por 1
+33 / 3          // 11
+7 / 8           // 0
+123 / 0         // Error "Division By 0"
+345 / 1         // 345
 ""
 
 // Pruebas de números decimales
@@ -84,8 +84,8 @@ false
 ""
 
 "# Strings"
-"Hola"
-"Hola" + " " + "Mundo" + 1.0
+"Cadena simple"
+"Hola" + " " + "Mundo" + " " + 2.0
 ""
 
 "# Constantes"

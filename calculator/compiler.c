@@ -315,7 +315,7 @@ char* val2str(value_info value) {
       snprintf(buffer, sizeof(buffer), "%d", value.ivalue);
       return strdup(buffer);
     case FLOAT:
-      snprintf(buffer, sizeof(buffer), "%f", value.fvalue);
+      snprintf(buffer, sizeof(buffer), "%.3f", value.fvalue);
       return strdup(buffer);
     case STRING:
       if(value.svalue == NULL) return strdup("");
