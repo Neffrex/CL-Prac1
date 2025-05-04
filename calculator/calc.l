@@ -26,39 +26,19 @@ INTEGER {DIGIT}+
 REAL {DIGIT}+"."{DIGIT}+
 STRING \"[^\"]*\"
 BOOLEAN "true"|"false"
-IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]* */
+IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]*
 WHITESPACE [ \t\n]
 %%
-
- /* Data types */
-{INTEGER} {
-  // printf("Encountered digit: %s\n", yytext);
-  yylval.literal.type = INTEGER;
-  yylval.literal.ivalue = atoi(yytext);
-  return INTEGER_LITERAL; 
-}
-{REAL} {
-  // printf("Encountered float: %s", yytext);
-  yylval.literal.type = FLOAT;
-  yylval.literal.fvalue = atof(yytext);
-  return FLOAT_LITERAL;
-}
-{STRING} {
-	yylval.literal.type = STRING;
-  yylval.literal.svalue = strndup(yytext + 1, yyleng - 2);
-  return STRING_LITERAL;
-}
-{BOOLEAN} {
-  yylval.literal.type = BOOLEAN;
-  yylval.literal.bvalue = !strcmp(yytext, "true");
-  return BOOLEAN_LITERAL;
-}
 
 "(" {
 	return LPAREN;
 }
 ")" {
 	return RPAREN;
+}
+
+":=" {
+  return ASSIGN;
 }
 
  /* Arithmetic Binary Operators ABOP */
@@ -137,6 +117,37 @@ WHITESPACE [ \t\n]
 	yylval.literal.type = FLOAT;
 	yylval.literal.fvalue = M_E;
 	return FLOAT_LITERAL;
+}
+
+ /* Data types */
+{INTEGER} {
+  // printf("Encountered digit: %s\n", yytext);
+  yylval.literal.type = INTEGER;
+  yylval.literal.ivalue = atoi(yytext);
+  return INTEGER_LITERAL; 
+}
+{REAL} {
+  // printf("Encountered float: %s\n", yytext);
+  yylval.literal.type = FLOAT;
+  yylval.literal.fvalue = atof(yytext);
+  return FLOAT_LITERAL;
+}
+{STRING} {
+	yylval.literal.type = STRING;
+  yylval.literal.svalue = strndup(yytext + 1, yyleng - 2);
+  return STRING_LITERAL;
+}
+{BOOLEAN} {
+  yylval.literal.type = BOOLEAN;
+  yylval.literal.bvalue = !strcmp(yytext, "true");
+  return BOOLEAN_LITERAL;
+}
+{IDENTIFIER} {
+  // printf("Encountered ID: %s\n", yytext);
+  yylval.identifier.name = strndup(yytext, yyleng);
+  yylval.identifier.line = yylineno;
+  yylval.identifier.type = UNDEFINED_DATA;
+  return IDENTIFIER;
 }
 
  /* Single Line Comment */

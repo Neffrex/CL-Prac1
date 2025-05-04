@@ -4,11 +4,14 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include <math.h>
+#include "symtab.h"
 
 #define STR_MAX_LENGTH 200
 #define SVALUE_MAX_LENGTH 64
 
 extern const char* op_map[];
+extern void yyerror(const char *explanation);
+
 
 typedef enum {
   // ARITHMETIC OPERATORS
@@ -31,37 +34,6 @@ typedef enum {
   AND
 } op_type;
 
-typedef enum {
-  STRING,
-  INTEGER,
-  FLOAT,
-  BOOLEAN,
-  UNDEFINED_DATA
-} data_type;
-
-typedef enum {
-  OCT,
-  HEX,
-  BIN,
-  DEC
-} mode;
-
-typedef struct {
-  data_type type;
-  char* svalue;
-  int ivalue;
-  float fvalue;
-  bool bvalue;
-  mode mode;
-} value_info;
-
-typedef struct {
-  char* name;
-  int length;
-  int line;
-  value_info id_value;
-} identifier;
-
 /* Auxiliary functions */
 bool value_format(char*, data_type, int);
 int cprint(FILE*, const char*, ...);
@@ -80,6 +52,9 @@ value_info float_arithmetic(float, const op_type, float);
 value_info concat(value_info, value_info);
 value_info boolean_logic(const value_info, const op_type, const value_info);
 value_info boolean_logic_unary(const op_type, const value_info);
+
+value_info assign(identifier_t, value_info);
+value_info identifier_value(identifier_t);
 
 /* Semantic Analysis */
 bool semantic_analysis(void);

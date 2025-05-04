@@ -95,3 +95,7 @@ PI + E
 2 * PI
 ""
 
+"# Asignaciones"
+x := "Test"
+x
+""

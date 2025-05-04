@@ -15,22 +15,35 @@ typedef enum {
 	FLOAT,
   STRING,
   BOOLEAN,
-  UNDEFINED
-} var_type;
+  UNDEFINED_DATA
+} data_type;
 
-typedef union {
-  int ival;
-  float fval;
-  char *sval;
-  int bval;
-} var_union_t;
+typedef enum {
+  OCT,
+  HEX,
+  BIN,
+  DEC
+} mode;
+
+typedef struct {
+  data_type type;
+  int ivalue;
+  float fvalue;
+  char *svalue;
+  int bvalue;
+  mode mode;
+} value_info;
 
 /* The type of the value field of symbol table entries                      */
-typedef struct Symbol {
+typedef struct {
 	char *name;
-	var_type type;
-  var_union_t value;
+  int length;
+  int line;
+	data_type type;
+  value_info value;
 } sym_value_type; 
+
+typedef sym_value_type identifier_t;
 
 /* #define SYM_POINTS_TO_VALUE */ 
 				/*Cada entrada sigui lexema i copia camp en */
@@ -156,7 +169,7 @@ typedef const char * sym_name_type;     /* If you are using something other */
 
 /****************************************************************************/
 /*                                                                          */
-/*                   end of #defines to configure symtab                    /
+/*                   end of #defines to configure symtab                    */
 /*    Most configuration can be accomplished by editing lines above this.   */
 /*                                                                          */
 /****************************************************************************/

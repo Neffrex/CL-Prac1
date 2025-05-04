@@ -16,6 +16,7 @@ extern void yyerror(const char *s);
 
 %union {
   value_info literal;
+  identifier_t identifier;
   op_type operator;
   void* no_type;
 }
@@ -24,7 +25,8 @@ extern void yyerror(const char *s);
 %token <operator> PLUS_OP MINUS_OP TIMES_OP DIVIDE_OP MOD_OP POW_OP
 %token <operator> EQUALS_OP GREATER_THAN_OP GREATER_EQUALS_OP LOWER_THAN_OP LOWER_EQUALS_OP NOT_EQUALS_OP
 %token <operator> NOT_OP OR_OP AND_OP
-%token <no_type> EOL LPAREN RPAREN
+%token <identifier> IDENTIFIER
+%token <no_type> EOL LPAREN RPAREN ASSIGN
 
 %type <literal> statement 
 %type <literal> arith_expr arith_plus_minus arith_mod_times_div arith_pow arith_literal 
@@ -46,7 +48,11 @@ statement:
 | bool_expr { cprint(yyout, "%v\n", &$1); }
 ;
 
-arith_expr: arith_plus_minus { $$ = $1; } ;
+arith_expr: 
+  IDENTIFIER ASSIGN arith_plus_minus { $$ = assign($1, $3); }
+| arith_plus_minus { $$ = $1; }
+;
+
 
  /* Precedence Level 1: '+' AND '-' */
 arith_plus_minus:
@@ -74,10 +80,14 @@ arith_literal:
   FLOAT_LITERAL { $$ = $1; }
 | INTEGER_LITERAL { $$ = $1; }
 | STRING_LITERAL { $$ = $1; }
+| IDENTIFIER { $$ = identifier_value($1); }
 | LPAREN arith_plus_minus RPAREN { $$ = $2; }
 ;
 
-bool_expr: bool_expr_or { $$ = $1; } ;
+bool_expr: 
+  bool_expr_or { $$ = $1; } 
+| IDENTIFIER ASSIGN bool_expr_or { $$ = assign($1, $3); }
+;
 
  /* Precedence Level 1: 'or' */
 bool_expr_or: 
