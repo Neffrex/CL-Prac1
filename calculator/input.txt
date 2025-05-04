@@ -96,6 +96,7 @@ PI + E
 ""
 
 "# Asignaciones"
+x
 x := "Test"
 x
 ""

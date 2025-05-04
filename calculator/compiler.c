@@ -40,7 +40,11 @@ void print_value_info(FILE* stream, value_info* value) {
         case BOOLEAN:
             fprintf(stream, "%s", (value->bvalue) ? "true" : "false");
             break;
+        case UNDEFINED_DATA:
+            // TODO: Log error
+            break;
         default:
+            // TODO: Change print to log error
             fprintf(stderr, "Error: Undefined type: %d", value->type);
             break;
     }
@@ -327,18 +331,19 @@ char* val2str(value_info value) {
 
 
 value_info assign(identifier_t id, value_info value) {
-  fprintf(stderr, "[!] LOG | assign()\n");
+  // fprintf(stderr, "[!] LOG | assign()\n");
   id.value = value;
   sym_enter(id.name, &id);
   return value;
 }
 
 value_info identifier_value(identifier_t id) {
-  fprintf(stderr, "[!] LOG | identifier_value()\n");
+  // fprintf(stderr, "[!] LOG | identifier_value()\n");
   identifier_t result;
+  result.value.type = UNDEFINED_DATA;
   if(sym_lookup(id.name, &result) == SYMTAB_NOT_FOUND) {
     char err_msg[128];
-    sprintf(err_msg, "Error: Cannot find `%s` declaration, first use in line: %d\n", id.name, id.line);
+    sprintf(err_msg, "Error: Cannot find `%s` declaration, first use in line: %d", id.name, id.line);
     yyerror(err_msg);
   }
   return result.value;
