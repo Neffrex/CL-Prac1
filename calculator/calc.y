@@ -31,6 +31,7 @@ extern void yyerror(const char *s);
 %type <literal> statement 
 %type <literal> arith_expr arith_plus_minus arith_mod_times_div arith_pow arith_literal 
 %type <literal> bool_expr bool_expr_or bool_expr_and bool_expr_literal
+%type <literal> assignment
 
 %start program
 
@@ -44,15 +45,16 @@ statement_list:
 ;
 
 statement:
-  arith_expr { cprint(yyout, "%v\n", &$1);} 
+  assignment
+| arith_expr { cprint(yyout, "%v\n", &$1); } 
 | bool_expr { cprint(yyout, "%v\n", &$1); }
 ;
 
-arith_expr: 
+assignment:
   IDENTIFIER ASSIGN arith_plus_minus { $$ = assign($1, $3); }
-| arith_plus_minus { $$ = $1; }
-;
+| IDENTIFIER ASSIGN bool_expr_or { $$ = assign($1, $3); }
 
+arith_expr: arith_plus_minus { $$ = $1; };
 
  /* Precedence Level 1: '+' AND '-' */
 arith_plus_minus:
@@ -84,10 +86,7 @@ arith_literal:
 | LPAREN arith_plus_minus RPAREN { $$ = $2; }
 ;
 
-bool_expr: 
-  bool_expr_or { $$ = $1; } 
-| IDENTIFIER ASSIGN bool_expr_or { $$ = assign($1, $3); }
-;
+bool_expr: bool_expr_or { $$ = $1; };
 
  /* Precedence Level 1: 'or' */
 bool_expr_or: 
