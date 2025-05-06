@@ -2,11 +2,14 @@
 /* Dependencies */
 #include <stdio.h>
 #include "compiler.h"
+#include "calc.tab.h"
 
 extern FILE *yyout;
+extern char *yytext;
 extern int yylineno;
 extern int yylex(void);
 extern void yyerror(const char *s);
+extern format_mode mode;
 
 %}
 
@@ -33,21 +36,24 @@ extern void yyerror(const char *s);
 %type <literal> bool_expr bool_expr_or bool_expr_and bool_expr_literal
 %type <literal> assignment
 
+%define parse.error verbose
+
 %start program
 
 %%
 
-program: %empty | statement_list ;
+program: statement_list;
 
-statement_list: 
-  statement
+statement_list:
+  %empty
 | statement_list statement
 ;
 
 statement:
-  assignment
-| arith_expr { cprint(yyout, "%v\n", &$1); } 
-| bool_expr { cprint(yyout, "%v\n", &$1); }
+  EOL
+| assignment EOL
+| arith_expr EOL { cprint(yyout, "%v\n", &$1); } 
+| bool_expr EOL { cprint(yyout, "%v\n", &$1); }
 ;
 
 assignment:
@@ -58,22 +64,22 @@ arith_expr: arith_plus_minus { $$ = $1; };
 
  /* Precedence Level 1: '+' AND '-' */
 arith_plus_minus:
-  arith_plus_minus PLUS_OP arith_mod_times_div { $$ = arithmetic($1, $2, $3); }
-| arith_plus_minus MINUS_OP arith_mod_times_div { $$ = arithmetic($1, $2, $3); }
+  arith_plus_minus PLUS_OP arith_mod_times_div { $$ = arithmetic(&$1, $2, &$3); }
+| arith_plus_minus MINUS_OP arith_mod_times_div { $$ = arithmetic(&$1, $2, &$3); }
 | arith_mod_times_div 
 ;
 
  /* Precedence Level 2: '%', '*' and '/' */
 arith_mod_times_div:
-  arith_mod_times_div MOD_OP arith_pow { $$ = arithmetic($1, $2, $3); }
-| arith_mod_times_div TIMES_OP arith_pow { $$ = arithmetic($1, $2, $3); }
-| arith_mod_times_div DIVIDE_OP arith_pow { $$ = arithmetic($1, $2, $3); }
+  arith_mod_times_div MOD_OP arith_pow { $$ = arithmetic(&$1, $2, &$3); }
+| arith_mod_times_div TIMES_OP arith_pow { $$ = arithmetic(&$1, $2, &$3); }
+| arith_mod_times_div DIVIDE_OP arith_pow { $$ = arithmetic(&$1, $2, &$3); }
 | arith_pow 
 ;
 
  /* Precedence Level 3: '**' */
 arith_pow:
-  arith_pow POW_OP arith_literal { $$ = arithmetic($1, $2, $3); }
+  arith_pow POW_OP arith_literal { $$ = arithmetic(&$1, $2, &$3); }
 | arith_literal
 ;
 
@@ -116,10 +122,11 @@ bool_expr_literal:
 %%
 
 int main(int argc, char** argv) {
+  init_log("debug.log");
+  mode = DEC;
   yyparse();
+  close_log();
+  return 0;
 }
 
-void yyerror(const char *s) {
-  fprintf(stderr, "%s\n", s);
-}
 

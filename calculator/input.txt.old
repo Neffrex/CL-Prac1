@@ -1,0 +1,104 @@
+
+/* Pruebas de números enteros */
+
+"# Números sueltos"
+1
+35123
+54523 
+123123
+21312
+554673 
+""
+
+"# Suma"
+3 + 1           // 4
+16 + 153        // 169
+10 + 3          // 13
+111111 + 222222 // 333333
+999999 + 1      // 1000000
+""
+
+"# Resta"
+10 - 3          // 7
+1 - 5           // -4
+""
+
+"# Multiplicación"
+87 * 33         // 2871
+3213 * 0        // 0
+789 * 1         // 789
+""
+
+"# División"
+33 / 3          // 11
+7 / 8           // 0
+123 / 0         // Error "Division By 0"
+345 / 1         // 345
+""
+
+// Pruebas de números decimales
+
+"# Números sueltos"
+0.0
+1.0
+3.005
+2.500
+13.007890
+""
+
+"# Suma"
+1.0 + 2.0
+3.2 + 1.9
+0.0 + 7.5
+""
+
+"# Resta"
+5.0 - 3.0
+2.0 - 7.0
+1234 - 4321
+""
+
+"# Multiplicación"
+1.0 * 5.1234
+0.0 * 4.05
+1.5 * 2.5
+""
+
+"# División"
+1.0 / 2.0
+7.0 / 8.0
+3.0 / 1.5
+""
+
+
+"# Booleanos"
+true
+false
+""
+
+"# Expresiones booleanas"
+1 + 2 = 3
+3 + 5 = 1
+3 > 2
+7 * 8 >= 8 * 8
+""
+
+"# Strings"
+"Cadena simple"
+"Hola" + " " + "Mundo" + " " + 2.0
+""
+
+"# Constantes"
+PI
+E
+PI + E
+2 * PI
+""
+
+"# Asignaciones"
+x
+x := "Test"
+x
+"Hola " + x
+
+""

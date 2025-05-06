@@ -5,6 +5,27 @@
 
 const char* op_map[] = { "+", "-", "*", "/", "=", ">", ">=", "<", "<=", "<>" };
 
+void val2str(const value_info *v, char* buffer, size_t size) {
+	switch (v->type) {
+  	case INTEGER:
+			snprintf(buffer, size, "%d", v->ivalue);
+      break;
+    case FLOAT:
+      snprintf(buffer, size, "%f", v->fvalue);
+      break;
+    case BOOLEAN:
+      snprintf(buffer, size, "%s", v->bvalue ? "true" : "false");
+      break;
+    case STRING:
+      snprintf(buffer, size, "%s", v->svalue ? v->svalue : "(null)");
+      break;
+    case UNDEFINED_DATA:
+    default:
+      snprintf(buffer, size, "<undefined>");
+      break;
+  }
+}
+
 void print_value_info(FILE* stream, value_info* value) {
     if (value == NULL) {
         fprintf(stream, "(null)");
@@ -16,7 +37,7 @@ void print_value_info(FILE* stream, value_info* value) {
             fprintf(stream, "%s", value->svalue ? value->svalue : "(null)");
             break;
         case INTEGER:
-            switch (value->mode) {
+            switch (mode) {
                 case OCT:
                     fprintf(stream, "0c%o", value->ivalue);
                     break;
@@ -50,6 +71,16 @@ void print_value_info(FILE* stream, value_info* value) {
     }
 }
 
+format_mode format2mode(char format) {
+  switch(format) {
+    case 'o': return OCT;
+    case 'x': return HEX;
+    case 'd': return DEC;
+    case 'b': return BIN;
+    default: return DEC;
+  }
+}
+
 // Custom fprintf wrapper
 int cprint(FILE* stream, const char* format, ...) {
   va_list args;
@@ -63,7 +94,7 @@ int cprint(FILE* stream, const char* format, ...) {
             // Handle %v
             value_info* value = va_arg(args, value_info*);
             print_value_info(stream, value);
-            ptr += 2; // Move past "%v"
+            ptr += 2;
         } else if (*ptr == '%') {
             // Handle other format specifiers
             ptr++; // Skip '%'
@@ -129,7 +160,7 @@ bool value_format(char* format_out, data_type type, int pos) {
   }
 }
 
-value_info arithmetic(value_info loperand, const op_type op, value_info roperand) {
+value_info arithmetic(value_info *loperand, const op_type op, value_info *roperand) {
   // Result object initialization
   value_info result;
   result.type = UNDEFINED_DATA;
@@ -138,20 +169,20 @@ value_info arithmetic(value_info loperand, const op_type op, value_info roperand
   result.fvalue = 0.0f;
   result.bvalue = false;
 
-  bool is_integer_arithmetic = (loperand.type == INTEGER && roperand.type == INTEGER);
+  bool is_integer_arithmetic = (loperand->type == INTEGER && roperand->type == INTEGER);
   bool is_float_arithmetic =
-    (loperand.type == FLOAT || loperand.type == INTEGER)
-    && (roperand.type == FLOAT || roperand.type == INTEGER);
+    (loperand->type == FLOAT || loperand->type == INTEGER)
+    && (roperand->type == FLOAT || roperand->type == INTEGER);
   bool is_string_concat = (op == PLUS)
-    && (loperand.type == STRING || loperand.type == INTEGER || loperand.type == FLOAT)
-    && (roperand.type == STRING || roperand.type == INTEGER || roperand.type == FLOAT);
+    && (loperand->type == STRING || loperand->type == INTEGER || loperand->type == FLOAT)
+    && (roperand->type == STRING || roperand->type == INTEGER || roperand->type == FLOAT);
 
   if (is_integer_arithmetic) {
-    result = integer_arithmetic(loperand.ivalue, op, roperand.ivalue);
+    result = integer_arithmetic(loperand->ivalue, op, roperand->ivalue);
   } else if (is_float_arithmetic) {
-    if(loperand.type == INTEGER) loperand.fvalue = (float)loperand.ivalue;
-    if(roperand.type == INTEGER) roperand.fvalue = (float)roperand.ivalue;
-    result = float_arithmetic(loperand.fvalue, op, roperand.fvalue);
+    if(loperand->type == INTEGER) loperand->fvalue = (float)loperand->ivalue;
+    if(roperand->type == INTEGER) roperand->fvalue = (float)roperand->ivalue;
+    result = float_arithmetic(loperand->fvalue, op, roperand->fvalue);
   } else if (is_string_concat) {
     result = concat(loperand, roperand);
   } else {
@@ -291,12 +322,14 @@ value_info float_arithmetic(float lvalue, op_type op, float rvalue) {
   return result;
 }
 
-value_info concat(value_info loperand, value_info roperand) {
+value_info concat(value_info *loperand, value_info *roperand) {
   value_info result;
   result.type = STRING;
 
-  char *lstr = val2str(loperand);
-  char *rstr = val2str(roperand);
+	char lstr[STR_MAX_LENGTH];
+	char rstr[STR_MAX_LENGTH];
+	val2str(loperand, lstr, sizeof(lstr));
+	val2str(roperand, rstr, sizeof(rstr));
 
   size_t len = strlen(lstr) + strlen(rstr) + 1;
   result.svalue = malloc(len);
@@ -305,46 +338,30 @@ value_info concat(value_info loperand, value_info roperand) {
     strcat(result.svalue, rstr);
   }
 
-  free(lstr);
-  free(rstr);
-
   return result;
 }
 
-char* val2str(value_info value) {
-  char buffer[64];
-
-  switch (value.type) {
-    case INTEGER:
-      snprintf(buffer, sizeof(buffer), "%d", value.ivalue);
-      return strdup(buffer);
-    case FLOAT:
-      snprintf(buffer, sizeof(buffer), "%.3f", value.fvalue);
-      return strdup(buffer);
-    case STRING:
-      if(value.svalue == NULL) return strdup("");
-      return strdup(value.svalue);
-    default:
-      return strdup("");
-  }
-}
-
-
 value_info assign(identifier_t id, value_info value) {
-  // fprintf(stderr, "[!] LOG | assign()\n");
+	char str_value[STR_MAX_LENGTH];
+	val2str(&value, str_value, sizeof(str_value));
+	// TODO: Log variable type
+  log_message(LOG_INFO, "Assigned value '%s' to identifier %s", str_value, id.name);
   id.value = value;
   sym_enter(id.name, &id);
   return value;
 }
 
 value_info identifier_value(identifier_t id) {
-  // fprintf(stderr, "[!] LOG | identifier_value()\n");
   identifier_t result;
   result.value.type = UNDEFINED_DATA;
   if(sym_lookup(id.name, &result) == SYMTAB_NOT_FOUND) {
-    char err_msg[128];
-    sprintf(err_msg, "Error: Cannot find `%s` declaration, first use in line: %d", id.name, id.line);
-    yyerror(err_msg);
+    char format[] = "semantic error, cannot find declaration of identifier '%s', first use in line: %d";
+    log_message(LOG_ERROR, format, id.name, id.line);
   }
+
+  char format[] = "Retrieved value of identifier '%s': '%s'";
+  char str_value[STR_MAX_LENGTH];
+  val2str(&result.value, str_value, sizeof(str_value));
+  log_message(LOG_INFO, format, id.name, str_value);
   return result.value;
 }

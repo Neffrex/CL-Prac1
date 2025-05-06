@@ -45,7 +45,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 13 "calc.y"
+#line 16 "calc.y"
 
   #include "compiler.h"
 
@@ -92,7 +92,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "calc.y"
+#line 20 "calc.y"
 
   value_info literal;
   identifier_t identifier;

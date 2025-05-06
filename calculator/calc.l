@@ -12,11 +12,13 @@
 #include <string.h>
 #include "calc.tab.h"
 #include "compiler.h"
+#include "log.h"
 
 void yyerror(const char *s);
+format_mode mode;
+
 %}
 
-%option yylineno
 %option noyywrap
 %x COMMENT
 
@@ -27,7 +29,9 @@ REAL {DIGIT}+"."{DIGIT}+
 STRING \"[^\"]*\"
 BOOLEAN "true"|"false"
 IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]*
-WHITESPACE [ \t\n]
+WHITESPACE [ \t]
+SINGLE_LINE_COMMENT "#".*[\n]|"//".*[\n]
+EOL [\n]
 %%
 
 "(" {
@@ -119,6 +123,11 @@ WHITESPACE [ \t\n]
 	return FLOAT_LITERAL;
 }
 
+"DEC" { mode = DEC; }
+"OCT" { mode = OCT; }
+"HEX" { mode = HEX; }
+"BIN" { mode = BIN; }
+
  /* Data types */
 {INTEGER} {
   // printf("Encountered digit: %s\n", yytext);
@@ -151,17 +160,31 @@ WHITESPACE [ \t\n]
 }
 
  /* Single Line Comment */
-"#".*|"//".* { /* Skip comment content */ }
+{SINGLE_LINE_COMMENT} { 
+  yylineno++;
+}
 
  /* Multiline comment */
 "/*" { BEGIN(COMMENT); }
 <COMMENT>"*/" { BEGIN(INITIAL); }
 <COMMENT>. { /* Skip comment content*/ }
-<COMMENT>\n { /* Skip comment lines */}
+<COMMENT>\n {
+  yylineno++;
+}
 
  /* Empty Spaces */
-[ \t\n] { /* Skip whitespace sequences */ }
-'\n' { return EOL; }
+{WHITESPACE} { /* Skip whitespace sequences */ }
+{EOL} {
+  yylineno++;
+  return EOL;
+}
  /* Undefined Sequence */
 . { printf("Undefined sequence: %s", yytext); }
+
+%% 
+
+void yyerror(const char *msg) {
+	fprintf(stderr, "\033[31mERROR:%d:\033[0m %s\n", yylineno, msg);
+  exit(EXIT_FAILURE);
+}
 

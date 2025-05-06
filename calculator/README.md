@@ -1,3 +1,8 @@
+# TODO:
+· Al dividir por cero imprime un numero (erroneo) cuando no deberia imprimir nada
+· Cambiar los fprintf(stderr, ...) por yyerror() cuando sea necesario
+· Hacer el log (Es un requisito funcional)
+
 # Requisitos funcionales
 Literales y comentarios:
 [+] Literales enteros

@@ -1,0 +1,17 @@
+[INFO] Assigned value '1.500000' to identifier x
+[INFO] Assigned value '5' to identifier i
+[INFO] Retrieved value of identifier 'i': '5'
+[INFO] Retrieved value of identifier 'x': '1.500000'
+[INFO] Retrieved value of identifier 'i': '5'
+[INFO] Retrieved value of identifier 'i': '5'
+[INFO] Assigned value '31.250000' to identifier z
+[INFO] Assigned value 'Hola' to identifier s
+[INFO] Retrieved value of identifier 'z': '31.250000'
+[INFO] Retrieved value of identifier 'i': '5'
+[INFO] Retrieved value of identifier 'i': '5'
+[INFO] Assigned value 'false' to identifier b
+[INFO] Retrieved value of identifier 'x': '1.500000'
+[INFO] Retrieved value of identifier 'i': '5'
+[INFO] Retrieved value of identifier 'z': '31.250000'
+[INFO] Retrieved value of identifier 's': 'Hola'
+[INFO] Retrieved value of identifier 'b': 'false'

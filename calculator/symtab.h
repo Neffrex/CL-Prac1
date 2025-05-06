@@ -19,11 +19,11 @@ typedef enum {
 } data_type;
 
 typedef enum {
+  DEC,
   OCT,
   HEX,
-  BIN,
-  DEC
-} mode;
+  BIN
+} format_mode;
 
 typedef struct {
   data_type type;
@@ -31,7 +31,6 @@ typedef struct {
   float fvalue;
   char *svalue;
   int bvalue;
-  mode mode;
 } value_info;
 
 /* The type of the value field of symbol table entries                      */

@@ -14,6 +14,8 @@ COMPILER_H = compiler.h
 SYMTAB = symtab.o
 SYMTAB_C = symtab.c
 SYMTAB_H = symtab.h
+LOG_C = log.c
+LOG_H = log.h
 
 # Compilador y opciones de compilación
 CC = gcc
@@ -26,8 +28,8 @@ INPUT_FILE = input.txt
 all: $(TARGET)
 
 # Regla para compilar el ejecutable
-$(TARGET): $(BISON_C) $(LEX_C) $(SYMTAB) $(COMPILER_C)
-	$(CC) -o $(TARGET) $(BISON_C) $(LEX_C) $(COMPILER_C) $(SYMTAB) $(CFLAGS)
+$(TARGET): $(BISON_C) $(LEX_C) $(SYMTAB_C) $(COMPILER_C) $(LOG_C)
+	$(CC) -o $(TARGET) $(BISON_C) $(LEX_C) $(COMPILER_C) $(LOG_C) $(SYMTAB_C) $(CFLAGS)
 
 # Regla para generar el archivo .c y .h de Bison
 $(BISON_C) $(BISON_H): $(BISON_FILE)
@@ -36,9 +38,6 @@ $(BISON_C) $(BISON_H): $(BISON_FILE)
 # Regla para generar el archivo .c de Flex
 $(LEX_C): $(LEX_FILE) $(BISON_H)
 	flex $(LEX_FILE)
-
-$(SYMTAB): $(SYMTAB_C) $(SYMTAB_H)
-	$(CC) -c $(SYMTAB_C)
 
 # Regla para ejecutar el programa con el archivo de entrada
 run: $(TARGET)
