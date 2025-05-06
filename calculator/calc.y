@@ -46,19 +46,29 @@ program: statement_list;
 
 statement_list:
   %empty
-| statement_list statement
+| statement_list EOL
+| statement_list statement EOL
 ;
 
 statement:
-  EOL
-| assignment EOL
-| arith_expr EOL { cprint(yyout, "%v\n", &$1); } 
-| bool_expr EOL { cprint(yyout, "%v\n", &$1); }
+  assignment { /* cprint(yyout, "%v\n", &$1); */ }
+| arith_expr {
+    cprint(yyout, "[type:%s] %v\n", type2str($1.type), &$1);
+  } 
+| bool_expr {
+    cprint(yyout, "[type:%s] %v\n", type2str($1.type), &$1);
+  }
 ;
 
 assignment:
-  IDENTIFIER ASSIGN arith_plus_minus { $$ = assign($1, $3); }
-| IDENTIFIER ASSIGN bool_expr_or { $$ = assign($1, $3); }
+  IDENTIFIER ASSIGN arith_plus_minus { 
+    $$ = assign(&$1, $3); 
+    cprint(yyout, "[type:%s] %s = %v\n", type2str($1.type), $1.name, &$3);
+  }
+| IDENTIFIER ASSIGN bool_expr_or {
+    $$ = assign(&$1, $3);
+    cprint(yyout, "[type:%s] %s = %v\n", type2str($1.type), $1.name, &$3);
+  }
 
 arith_expr: arith_plus_minus { $$ = $1; };
 
@@ -66,6 +76,12 @@ arith_expr: arith_plus_minus { $$ = $1; };
 arith_plus_minus:
   arith_plus_minus PLUS_OP arith_mod_times_div { $$ = arithmetic(&$1, $2, &$3); }
 | arith_plus_minus MINUS_OP arith_mod_times_div { $$ = arithmetic(&$1, $2, &$3); }
+| MINUS_OP arith_mod_times_div { 
+    value_info zero;
+    zero.ivalue = 0;
+    zero.type = INTEGER;
+    $$ = arithmetic(&zero, $1, &$2);
+  }
 | arith_mod_times_div 
 ;
 

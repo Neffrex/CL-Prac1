@@ -11,7 +11,7 @@ void val2str(const value_info *v, char* buffer, size_t size) {
 			snprintf(buffer, size, "%d", v->ivalue);
       break;
     case FLOAT:
-      snprintf(buffer, size, "%f", v->fvalue);
+      snprintf(buffer, size, "%.3f", v->fvalue);
       break;
     case BOOLEAN:
       snprintf(buffer, size, "%s", v->bvalue ? "true" : "false");
@@ -26,8 +26,39 @@ void val2str(const value_info *v, char* buffer, size_t size) {
   }
 }
 
+const char* type2str(data_type type) {
+    switch (type) {
+        case INTEGER: return "integer";
+        case FLOAT:   return "float";
+        case STRING:  return "string";
+        case BOOLEAN: return "boolean";
+        default:      return "<no_type>";
+    }
+}
+
+const char* op2str(op_type op) {
+  switch(op) {
+    case PLUS: return "+";
+		case MINUS: return "-";
+		case TIMES: return "*";
+		case DIVIDE: return "/";
+		case MOD: return "%";
+		case POW: return "**";
+		case EQUALS: return "=";
+		case GREATER_THAN: return ">";
+		case GREATER_EQUALS: return ">=";
+		case LOWER_THAN: return "<";
+		case LOWER_EQUALS: return "<=";
+		case NOT_EQUALS: return "<>";
+		case NOT: return "not";
+		case OR: return "or";
+		case AND: return "and";
+		default: return "<no_op>";
+  }
+}
+
 void print_value_info(FILE* stream, value_info* value) {
-    if (value == NULL) {
+   if (value == NULL) {
         fprintf(stream, "(null)");
         return;
     }
@@ -62,12 +93,8 @@ void print_value_info(FILE* stream, value_info* value) {
             fprintf(stream, "%s", (value->bvalue) ? "true" : "false");
             break;
         case UNDEFINED_DATA:
-            // TODO: Log error
-            break;
         default:
-            // TODO: Change print to log error
-            fprintf(stderr, "Error: Undefined type: %d", value->type);
-            break;
+						log_message(LOG_ERROR, "cannot print invalid typed value (type:%d)", value->type);
     }
 }
 
@@ -186,11 +213,21 @@ value_info arithmetic(value_info *loperand, const op_type op, value_info *ropera
   } else if (is_string_concat) {
     result = concat(loperand, roperand);
   } else {
-    fprintf(stderr, "Error: Unsupported operation or mismatched types\n");
+		char lval_str[STR_MAX_LENGTH];
+		char rval_str[STR_MAX_LENGTH];
+		val2str(loperand, lval_str, sizeof(lval_str));
+		val2str(roperand, rval_str, sizeof(rval_str));
+    const char* ltype_str = type2str(loperand->type);
+    const char* rtype_str = type2str(roperand->type);
+    const char* op_str = op2str(op);
+    log_message(LOG_ERROR, "syntax error, unsupported operation or mismatched types %s %s %s:\n\t'%s' %s '%s'\n",
+      ltype_str, op_str, rtype_str, lval_str, op_str, rval_str);
   }
 
   return result;
 }
+
+
 
 value_info boolean_logic_unary(op_type op, value_info operand) {
   value_info result;
@@ -341,13 +378,13 @@ value_info concat(value_info *loperand, value_info *roperand) {
   return result;
 }
 
-value_info assign(identifier_t id, value_info value) {
+value_info assign(identifier_t* id, value_info value) {
 	char str_value[STR_MAX_LENGTH];
 	val2str(&value, str_value, sizeof(str_value));
-	// TODO: Log variable type
-  log_message(LOG_INFO, "Assigned value '%s' to identifier %s", str_value, id.name);
-  id.value = value;
-  sym_enter(id.name, &id);
+  log_message(LOG_INFO, "Assigned value '%s' to identifier %s", str_value, id->name);
+  id->value = value;
+	id->type = value.type;
+  sym_enter(id->name, id);
   return value;
 }
 

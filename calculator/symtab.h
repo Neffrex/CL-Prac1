@@ -20,8 +20,8 @@ typedef enum {
 
 typedef enum {
   DEC,
-  OCT,
   HEX,
+  OCT,
   BIN
 } format_mode;
 

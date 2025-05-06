@@ -71,7 +71,6 @@ EOL [\n]
 	return POW_OP;
 }
 
-
  /* Boolean Binary Operators BBOP */
 "=" {
 	yylval.operator = EQUALS;
@@ -174,12 +173,13 @@ EOL [\n]
 
  /* Empty Spaces */
 {WHITESPACE} { /* Skip whitespace sequences */ }
+^{EOL} { yylineno++; }
 {EOL} {
   yylineno++;
   return EOL;
 }
  /* Undefined Sequence */
-. { printf("Undefined sequence: %s", yytext); }
+. { log_message(LOG_ERROR, "lexical error, undefined sequence: %s", yytext); }
 
 %% 
 

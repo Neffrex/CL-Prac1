@@ -40,7 +40,10 @@ typedef enum {
 bool value_format(char*, data_type, int);
 int cprint(FILE*, const char*, ...);
 void val2str(const value_info*, char*, size_t);
+const char* op2str(op_type);
+const char* type2str(data_type);
 format_mode format2mode(char);
+
 
 /* Lexical Analysis */
 bool init_lexical_analysis(char *);
@@ -56,7 +59,7 @@ value_info concat(value_info*, value_info*);
 value_info boolean_logic(const value_info, const op_type, const value_info);
 value_info boolean_logic_unary(const op_type, const value_info);
 
-value_info assign(identifier_t, value_info);
+value_info assign(identifier_t*, value_info);
 value_info identifier_value(identifier_t);
 
 /* Semantic Analysis */
