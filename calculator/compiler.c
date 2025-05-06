@@ -57,6 +57,14 @@ const char* op2str(op_type op) {
   }
 }
 
+void fprint_binary(FILE *stream, unsigned int n) {
+    int started = 0;
+    for (int i = 31; i >= 0; i--)
+        if (started |= (n >> i) & 1)
+            fputc('0' + ((n >> i) & 1), stream);
+    if (!started) fputc('0', stream);
+}
+
 void print_value_info(FILE* stream, value_info* value) {
    if (value == NULL) {
         fprintf(stream, "(null)");
@@ -76,8 +84,7 @@ void print_value_info(FILE* stream, value_info* value) {
                     fprintf(stream, "0x%x", value->ivalue);
                     break;
                 case BIN:
-                    // TODO: Fix Binary Representation
-                    fprintf(stream, "0b%x", value->ivalue);
+										fprint_binary(stream, value->ivalue);
                     break;
                 case DEC:
                     fprintf(stream, "%d", value->ivalue);
