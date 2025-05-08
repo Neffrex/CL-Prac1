@@ -29,6 +29,9 @@ REAL {DIGIT}+"."{DIGIT}+
 STRING \"[^\"]*\"
 BOOLEAN "true"|"false"
 IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]*
+SIN "SIN"|"sin"
+COS "COS"|"cos"
+TAN "TAN"|"tan"
 WHITESPACE [ \t]
 SINGLE_LINE_COMMENT "#".*[\n]|"//".*[\n]
 EOL [\n]
@@ -127,6 +130,19 @@ EOL [\n]
 "HEX" { mode = HEX; }
 "BIN" { mode = BIN; }
 
+{SIN} {
+  yylval.native_function = E_SIN;
+  return TRIG;
+}
+{COS} {
+  yylval.native_function = E_COS;
+  return TRIG;
+}
+{TAN} {
+  yylval.native_function = E_TAN;
+  return TRIG;
+}
+
  /* Data types */
 {INTEGER} {
   // printf("Encountered digit: %s\n", yytext);
@@ -173,7 +189,6 @@ EOL [\n]
 
  /* Empty Spaces */
 {WHITESPACE} { /* Skip whitespace sequences */ }
-^{EOL} { yylineno++; }
 {EOL} {
   yylineno++;
   return EOL;

@@ -20,6 +20,7 @@ extern format_mode mode;
 %union {
   value_info literal;
   identifier_t identifier;
+  native_function_enum native_function;
   op_type operator;
   void* no_type;
 }
@@ -29,6 +30,7 @@ extern format_mode mode;
 %token <operator> EQUALS_OP GREATER_THAN_OP GREATER_EQUALS_OP LOWER_THAN_OP LOWER_EQUALS_OP NOT_EQUALS_OP
 %token <operator> NOT_OP OR_OP AND_OP
 %token <identifier> IDENTIFIER
+%token <native_function> TRIG
 %token <no_type> EOL LPAREN RPAREN ASSIGN
 
 %type <literal> statement 
@@ -52,12 +54,8 @@ statement_list:
 
 statement:
   assignment { /* cprint(yyout, "%v\n", &$1); */ }
-| arith_expr {
-    cprint(yyout, "[type:%s] %v\n", type2str($1.type), &$1);
-  } 
-| bool_expr {
-    cprint(yyout, "[type:%s] %v\n", type2str($1.type), &$1);
-  }
+| arith_expr { cprint(yyout, "[type:%s] %v\n", type2str($1.type), &$1); }
+| bool_expr { cprint(yyout, "[type:%s] %v\n", type2str($1.type), &$1); }
 ;
 
 assignment:
@@ -105,7 +103,8 @@ arith_literal:
 | INTEGER_LITERAL { $$ = $1; }
 | STRING_LITERAL { $$ = $1; }
 | IDENTIFIER { $$ = identifier_value($1); }
-| LPAREN arith_plus_minus RPAREN { $$ = $2; }
+| TRIG LPAREN arith_expr RPAREN { $$ = trigonometry($1, &$3); }
+| LPAREN arith_expr RPAREN { $$ = $2; }
 ;
 
 bool_expr: bool_expr_or { $$ = $1; };
@@ -126,6 +125,7 @@ bool_expr_and:
  /* Precedence Level 3: BOOLEAN and Boolean Arithmetic Operations */
 bool_expr_literal:
   BOOLEAN_LITERAL
+| IDENTIFIER { /* TODO: Distinguish between boolean identifer and normal identifier */ }
 | LPAREN bool_expr_or RPAREN { $$ = $2; }
 | arith_plus_minus EQUALS_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }
 | arith_plus_minus GREATER_THAN_OP arith_plus_minus { $$ = boolean_logic($1, $2, $3); }

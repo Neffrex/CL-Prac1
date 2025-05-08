@@ -32,8 +32,18 @@ const char* type2str(data_type type) {
         case FLOAT:   return "float";
         case STRING:  return "string";
         case BOOLEAN: return "boolean";
-        default:      return "<no_type>";
+        case UNDEFINED_DATA: return "<undefined_type>";
+        default:      return "<type_err>";
     }
+}
+
+const char* nativefunct2str(native_function_enum native_function) {
+  switch(native_function) {
+    case E_SIN: return "sin";
+    case E_COS: return "cos";
+    case E_TAN: return "tan";
+    default: return "<undefined_native_function>";
+  }
 }
 
 const char* op2str(op_type op) {
@@ -101,7 +111,7 @@ void print_value_info(FILE* stream, value_info* value) {
             break;
         case UNDEFINED_DATA:
         default:
-						log_message(LOG_ERROR, "cannot print invalid typed value (type:%d)", value->type);
+						log_message(LOG_ERROR, "cannot print invalid typed value (type:%s)", type2str(value->type));
     }
 }
 
@@ -252,6 +262,27 @@ value_info boolean_logic_unary(op_type op, value_info operand) {
     }
   }
   
+  return result;
+}
+
+value_info trigonometry(native_function_enum trig_funct, value_info* operand) {
+  value_info result;
+  result.type = UNDEFINED_DATA;
+  
+  float fvalue;
+  if(operand->type == FLOAT || operand->type == INTEGER) {
+    result.type = FLOAT;
+    fvalue = operand->type == INTEGER ? (float) operand->ivalue : operand->fvalue;
+
+    switch(trig_funct) {
+      case E_SIN: result.fvalue = sinf(fvalue); break;
+      case E_COS: result.fvalue = cosf(fvalue); break;
+      case E_TAN: result.fvalue = tanf(fvalue); break;
+    }
+  } else {
+    log_message(LOG_ERROR, "invalid parameter type for native function `%s`: %s, expected %s or %s", nativefunct2str(trig_funct), type2str(operand->type), type2str(INTEGER), type2str(FLOAT));
+  }
+
   return result;
 }
 

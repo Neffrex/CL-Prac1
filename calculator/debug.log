@@ -15,6 +15,10 @@
 [INFO] Retrieved value of identifier 'z': '31.250'
 [INFO] Retrieved value of identifier 's': 'Hola'
 [INFO] Retrieved value of identifier 'b': 'false'
+[INFO] Assigned value '1.571' to identifier y
+[INFO] Retrieved value of identifier 'y': '1.571'
+[INFO] Retrieved value of identifier 'y': '1.571'
+[INFO] Retrieved value of identifier 'y': '1.571'
 [INFO] Retrieved value of identifier 'i': '5'
 [INFO] Retrieved value of identifier 'i': '5'
 [INFO] Retrieved value of identifier 'i': '5'
@@ -23,4 +27,3 @@
 [INFO] Retrieved value of identifier 's': 'Hola'
 [INFO] Retrieved value of identifier 'i': '5'
 [INFO] Retrieved value of identifier 'x': '1.500'
-[INFO] Retrieved value of identifier 'b': 'false'

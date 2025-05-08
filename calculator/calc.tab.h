@@ -80,10 +80,11 @@ extern int yydebug;
     OR_OP = 275,                   /* OR_OP  */
     AND_OP = 276,                  /* AND_OP  */
     IDENTIFIER = 277,              /* IDENTIFIER  */
-    EOL = 278,                     /* EOL  */
-    LPAREN = 279,                  /* LPAREN  */
-    RPAREN = 280,                  /* RPAREN  */
-    ASSIGN = 281                   /* ASSIGN  */
+    TRIG = 278,                    /* TRIG  */
+    EOL = 279,                     /* EOL  */
+    LPAREN = 280,                  /* LPAREN  */
+    RPAREN = 281,                  /* RPAREN  */
+    ASSIGN = 282                   /* ASSIGN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -96,10 +97,11 @@ union YYSTYPE
 
   value_info literal;
   identifier_t identifier;
+  native_function_enum native_function;
   op_type operator;
   void* no_type;
 
-#line 103 "calc.tab.h"
+#line 105 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

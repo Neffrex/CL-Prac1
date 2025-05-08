@@ -12,12 +12,16 @@ z
 s
 b
 
+y := 1.5708
+sin(y)
+cos(y)
+tan(y)
 
 /*
 * expressions
 */
 i + i * 2
 -i + x
-s + (s + i) + "--" + x + b
+s + (s + i) + "--" + x
 b or not b
 

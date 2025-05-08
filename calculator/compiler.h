@@ -36,12 +36,19 @@ typedef enum {
   AND
 } op_type;
 
+typedef enum {
+  E_SIN,
+  E_COS,
+  E_TAN
+} native_function_enum;
+
 /* Auxiliary functions */
 bool value_format(char*, data_type, int);
 int cprint(FILE*, const char*, ...);
 void val2str(const value_info*, char*, size_t);
 const char* op2str(op_type);
 const char* type2str(data_type);
+const char* nativefunct2str(native_function_enum);
 format_mode format2mode(char);
 
 
@@ -55,6 +62,7 @@ bool end_syntax_analysis(void);
 value_info arithmetic(value_info*, const op_type, value_info*);
 value_info integer_arithmetic(int, const op_type, int);
 value_info float_arithmetic(float, const op_type, float);
+value_info trigonometry(native_function_enum, value_info*);
 value_info concat(value_info*, value_info*);
 value_info boolean_logic(const value_info, const op_type, const value_info);
 value_info boolean_logic_unary(const op_type, const value_info);
