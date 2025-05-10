@@ -1,6 +1,8 @@
 # Nombre del ejecutable
 TARGET = compiler
 
+SOURCES := $(wildcard *.c)
+
 # Archivos de origen
 LEX_FILE = calc.l
 BISON_FILE = calc.y
@@ -22,14 +24,15 @@ CC = gcc
 CFLAGS = -Wall -lm -lfl -g
 
 # Archivo de entrada para pruebas
-INPUT_FILE = input.txt
+INPUT_FILE = ../input.txt
+ERROR_FILE = ../error.txt
 
 # Regla principal
 all: $(TARGET)
 
 # Regla para compilar el ejecutable
-$(TARGET): $(BISON_C) $(LEX_C) $(SYMTAB_C) $(COMPILER_C) $(LOG_C)
-	$(CC) -o $(TARGET) $(BISON_C) $(LEX_C) $(COMPILER_C) $(LOG_C) $(SYMTAB_C) $(CFLAGS)
+$(TARGET): $(SOURCES) $(BISON_C) $(LEX_C)
+	$(CC) -o $(TARGET) $(SOURCES) $(BISON_C) $(LEX_C) $(CFLAGS)
 
 # Regla para generar el archivo .c y .h de Bison
 $(BISON_C) $(BISON_H): $(BISON_FILE)
@@ -41,7 +44,7 @@ $(LEX_C): $(LEX_FILE) $(BISON_H)
 
 # Regla para ejecutar el programa con el archivo de entrada
 run: $(TARGET)
-	./$(TARGET) < $(INPUT_FILE)
+	./$(TARGET) < $(INPUT_FILE) 2>$(ERROR_FILE)
 
 # Regla para limpiar archivos generados
 clean:

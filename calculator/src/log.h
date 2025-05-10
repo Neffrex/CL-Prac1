@@ -2,6 +2,11 @@
 #define LOG_H
 
 #include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
+
+extern void yyerror(const char* msg);
 
 typedef enum {
     LOG_INFO,

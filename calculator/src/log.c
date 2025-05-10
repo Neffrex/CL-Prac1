@@ -1,7 +1,4 @@
 #include "log.h"
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 
 static FILE *log_file = NULL;
 extern void yyerror(const char*);
@@ -22,7 +19,7 @@ void close_log() {
 }
 
 void log_message(LogLevel level, const char *format, ...) {
-    if (!log_file) return; // Protección por si no se inicializó
+    if (!log_file) return;
     va_list args;
     va_start(args, format);
 
@@ -47,6 +44,6 @@ void log_message(LogLevel level, const char *format, ...) {
     va_end(args);
 
     fprintf(log_file, "\n");
-    fflush(log_file); // Asegura que se escriba inmediatamente
+    fflush(log_file);
 }
 

@@ -1,0 +1,144 @@
+calc.y: warning: 2 shift/reduce conflicts [-Wconflicts-sr]
+calc.y: warning: 29 reduce/reduce conflicts [-Wconflicts-rr]
+calc.y: warning: reduce/reduce conflict on tokens $end, LPAREN, SIN, COS, TAN, TRUE, FALSE, INTEGER, FLOAT, STRING, PLUS, MINUS, NOT, IDENTIFIER [-Wcounterexamples]
+  Example: IDENTIFIER •
+  First reduce derivation
+    statement
+    ↳ 5: arithmeticExpression
+         ↳ 9: arithmeticExpressionA
+              ↳ 10: arithmeticExpressionM
+                    ↳ 15: arithmeticExpressionP
+                          ↳ 19: arithmeticExpressionX
+                                ↳ 24: IDENTIFIER •
+  Second reduce derivation
+    statement
+    ↳ 6: booleanExpression
+         ↳ 29: booleanExpressionO
+               ↳ 30: booleanExpressionA
+                     ↳ 32: booleanExpressionX
+                           ↳ 38: IDENTIFIER •
+calc.y: warning: shift/reduce conflict on token PLUS [-Wcounterexamples]
+  Example: statementList arithmeticExpressionA • PLUS arithmeticExpressionM
+  Shift derivation
+    statementList
+    ↳ 3: statementList statement
+                       ↳ 5: arithmeticExpression
+                            ↳ 9: arithmeticExpressionA
+                                 ↳ 11: arithmeticExpressionA • PLUS arithmeticExpressionM
+  Reduce derivation
+    statementList
+    ↳ 3: statementList                                        statement
+         ↳ 3: statementList statement                         ↳ 5: arithmeticExpression
+                            ↳ 5: arithmeticExpression              ↳ 9: arithmeticExpressionA
+                                 ↳ 9: arithmeticExpressionA •           ↳ 14: PLUS arithmeticExpressionM
+calc.y: warning: shift/reduce conflict on token MINUS [-Wcounterexamples]
+  Example: statementList arithmeticExpressionA • MINUS arithmeticExpressionM
+  Shift derivation
+    statementList
+    ↳ 3: statementList statement
+                       ↳ 5: arithmeticExpression
+                            ↳ 9: arithmeticExpressionA
+                                 ↳ 12: arithmeticExpressionA • MINUS arithmeticExpressionM
+  Reduce derivation
+    statementList
+    ↳ 3: statementList                                        statement
+         ↳ 3: statementList statement                         ↳ 5: arithmeticExpression
+                            ↳ 5: arithmeticExpression              ↳ 9: arithmeticExpressionA
+                                 ↳ 9: arithmeticExpressionA •           ↳ 13: MINUS arithmeticExpressionM
+calc.y: warning: reduce/reduce conflict on tokens $end, LPAREN, RPAREN, SIN, COS, TAN, TRUE, FALSE, INTEGER, FLOAT, STRING, PLUS, MINUS, NOT, IDENTIFIER [-Wcounterexamples]
+  Example: IDENTIFIER ASSIGN IDENTIFIER •
+  First reduce derivation
+    assignment
+    ↳ 7: IDENTIFIER ASSIGN arithmeticExpression
+                           ↳ 9: arithmeticExpressionA
+                                ↳ 10: arithmeticExpressionM
+                                      ↳ 15: arithmeticExpressionP
+                                            ↳ 19: arithmeticExpressionX
+                                                  ↳ 24: IDENTIFIER •
+  Second reduce derivation
+    assignment
+    ↳ 8: IDENTIFIER ASSIGN booleanExpression
+                           ↳ 29: booleanExpressionO
+                                 ↳ 30: booleanExpressionA
+                                       ↳ 32: booleanExpressionX
+                                             ↳ 38: IDENTIFIER •
+lex.yy.c:1420:16: warning: ‘input’ defined but not used [-Wunused-function]
+ 1420 |     static int input  (void)
+      |                ^~~~~
+lex.yy.c:1377:17: warning: ‘yyunput’ defined but not used [-Wunused-function]
+ 1377 |     static void yyunput (int c, char * yy_bp )
+      |                 ^~~~~~~
+lex.yy.c:1420:16: warning: ‘input’ defined but not used [-Wunused-function]
+ 1420 |     static int input  (void)
+      |                ^~~~~
+lex.yy.c:1377:17: warning: ‘yyunput’ defined but not used [-Wunused-function]
+ 1377 |     static void yyunput (int c, char * yy_bp )
+      |                 ^~~~~~~
+/usr/bin/ld: /tmp/ccRkC5KW.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1188: multiple definition of `yychar'; /tmp/cco8C12X.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1188: first defined here
+/usr/bin/ld: /tmp/ccRkC5KW.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1191: multiple definition of `yylval'; /tmp/cco8C12X.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1191: first defined here
+/usr/bin/ld: /tmp/ccRkC5KW.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1193: multiple definition of `yynerrs'; /tmp/cco8C12X.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1193: first defined here
+/usr/bin/ld: /tmp/ccRkC5KW.o: in function `yyparse':
+/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1204: multiple definition of `yyparse'; /tmp/cco8C12X.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.tab.c:1204: first defined here
+/usr/bin/ld: /tmp/ccRkC5KW.o: in function `main':
+/home/casa/Documents/University/24-25/CL/calculator/src/calc.y:179: multiple definition of `main'; /tmp/cco8C12X.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.y:179: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:270: multiple definition of `yyleng'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:270: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:330: multiple definition of `yyin'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:330: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:330: multiple definition of `yyout'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:330: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:335: multiple definition of `yylineno'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:335: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:496: multiple definition of `yy_flex_debug'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:496: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:505: multiple definition of `yytext'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:505: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.l:18: multiple definition of `mode'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.l:18: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yylex':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:714: multiple definition of `yylex'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:714: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_create_buffer':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1558: multiple definition of `yy_create_buffer'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1558: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyrealloc':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:2027: multiple definition of `yyrealloc'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:2027: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyrestart':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1496: multiple definition of `yyrestart'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1496: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_switch_to_buffer':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1513: multiple definition of `yy_switch_to_buffer'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1513: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyalloc':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:2022: multiple definition of `yyalloc'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:2022: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_delete_buffer':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1586: multiple definition of `yy_delete_buffer'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1586: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyfree':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:2040: multiple definition of `yyfree'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:2040: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_flush_buffer':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1633: multiple definition of `yy_flush_buffer'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1633: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yypush_buffer_state':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1662: multiple definition of `yypush_buffer_state'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1662: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yypop_buffer_state':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1692: multiple definition of `yypop_buffer_state'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1692: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_scan_buffer':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1760: multiple definition of `yy_scan_buffer'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1760: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_scan_string':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1797: multiple definition of `yy_scan_string'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1797: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yy_scan_bytes':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1810: multiple definition of `yy_scan_bytes'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1810: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyget_lineno':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1872: multiple definition of `yyget_lineno'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1872: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyget_in':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1881: multiple definition of `yyget_in'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1881: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyget_out':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1889: multiple definition of `yyget_out'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1889: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyget_leng':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1897: multiple definition of `yyget_leng'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1897: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyget_text':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1906: multiple definition of `yyget_text'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1906: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyset_lineno':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1915: multiple definition of `yyset_lineno'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1915: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyset_in':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1927: multiple definition of `yyset_in'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1927: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyset_out':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1932: multiple definition of `yyset_out'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1932: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyget_debug':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1937: multiple definition of `yyget_debug'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1937: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyset_debug':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1942: multiple definition of `yyset_debug'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1942: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yylex_destroy':
+/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1976: multiple definition of `yylex_destroy'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/lex.yy.c:1976: first defined here
+/usr/bin/ld: /tmp/ccitpN7S.o: in function `yyerror':
+/home/casa/Documents/University/24-25/CL/calculator/src/calc.l:105: multiple definition of `yyerror'; /tmp/ccCv8twn.o:/home/casa/Documents/University/24-25/CL/calculator/src/calc.l:105: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:35: compiler] Error 1

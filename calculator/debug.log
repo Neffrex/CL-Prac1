@@ -27,3 +27,4 @@
 [INFO] Retrieved value of identifier 's': 'Hola'
 [INFO] Retrieved value of identifier 'i': '5'
 [INFO] Retrieved value of identifier 'x': '1.500'
+[INFO] Retrieved value of identifier 'b': 'false'

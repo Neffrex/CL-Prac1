@@ -9,40 +9,10 @@
 /*                                                                          */
 /****************************************************************************/
 
-
-typedef enum {
-  INTEGER,
-	FLOAT,
-  STRING,
-  BOOLEAN,
-  UNDEFINED_DATA
-} data_type;
-
-typedef enum {
-  DEC,
-  HEX,
-  OCT,
-  BIN
-} format_mode;
-
-typedef struct {
-  data_type type;
-  int ivalue;
-  float fvalue;
-  char *svalue;
-  int bvalue;
-} value_info;
+#include "types.h"
 
 /* The type of the value field of symbol table entries                      */
-typedef struct {
-	char *name;
-  int length;
-  int line;
-	data_type type;
-  value_info value;
-} sym_value_type; 
-
-typedef sym_value_type identifier_t;
+typedef literal sym_value_type; 
 
 /* #define SYM_POINTS_TO_VALUE */ 
 				/*Cada entrada sigui lexema i copia camp en */
