@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "log.h"
+
+#define LOG
 
 #define STR_MAX_LENGTH 256
 #define NULL_STR "<null>"
@@ -11,18 +14,18 @@
 #define BOOLEAN_STR "boolean"
 #define STRING_STR "string"
 #define NEGATE_STR "negate"
-#define PLUS_STR "plus"
-#define MINUS_STR "minus" 
-#define TIMES_STR "times" 
-#define DIVIDE_STR "divide" 
-#define MOD_STR "mod" 
-#define POW_STR "pow" 
-#define EQUALS_STR "equals" 
-#define GREATER_THAN_STR "greater_than" 
-#define GREATER_EQUALS_STR "greater_equals" 
-#define LOWER_THAN_STR "lower_than" 
-#define LOWER_EQUALS_STR "lower_equals" 
-#define NOT_EQUALS_STR "not_equals" 
+#define PLUS_STR "+"
+#define MINUS_STR "-" 
+#define TIMES_STR "*" 
+#define DIVIDE_STR "/" 
+#define MOD_STR "%" 
+#define POW_STR "**" 
+#define EQUALS_STR "==" 
+#define GREATER_THAN_STR ">" 
+#define GREATER_EQUALS_STR ">=" 
+#define LOWER_THAN_STR "<" 
+#define LOWER_EQUALS_STR "<=" 
+#define NOT_EQUALS_STR "<>" 
 #define AND_STR "and" 
 #define OR_STR "or" 
 #define NOT_STR "not"
@@ -77,6 +80,7 @@ typedef struct {
   literal value;
 } identifier;
 
+bool isNullLiteral(literal*);
 bool isInteger(literal*);
 bool isFloat(literal*);
 bool isString(literal*);

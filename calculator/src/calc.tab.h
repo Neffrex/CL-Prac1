@@ -89,7 +89,9 @@ extern int yydebug;
     NOT = 284,                     /* NOT  */
     OR = 285,                      /* OR  */
     AND = 286,                     /* AND  */
-    IDENTIFIER = 287               /* IDENTIFIER  */
+    UNDEFINED_IDENTIFIER = 287,    /* UNDEFINED_IDENTIFIER  */
+    BOOLEAN_IDENTIFIER = 288,      /* BOOLEAN_IDENTIFIER  */
+    ARITHMETIC_IDENTIFIER = 289    /* ARITHMETIC_IDENTIFIER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -106,7 +108,7 @@ union YYSTYPE
   op_type operator;
   void* no_type;
 
-#line 110 "calc.tab.h"
+#line 112 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

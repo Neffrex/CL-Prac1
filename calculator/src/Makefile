@@ -44,7 +44,7 @@ $(LEX_C): $(LEX_FILE) $(BISON_H)
 
 # Regla para ejecutar el programa con el archivo de entrada
 run: $(TARGET)
-	./$(TARGET) < $(INPUT_FILE) 2>$(ERROR_FILE)
+	./$(TARGET) < $(INPUT_FILE) 
 
 # Regla para limpiar archivos generados
 clean:

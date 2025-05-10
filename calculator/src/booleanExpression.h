@@ -3,6 +3,7 @@
 
 literal booleanExpressionToLiteral(bool);
 bool booleanExpressionIdentifier(identifier*);
+bool booleanExpression(bool, op_type, bool);
 bool booleanExpressionOr(bool, bool);
 bool booleanExpressionAnd(bool, bool);
 bool booleanExpressionNot(bool);

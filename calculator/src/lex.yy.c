@@ -517,7 +517,7 @@ char *yytext;
 #include "calc.tab.h"
 #include "compiler.h"
 
-#define TOKEN(X) return X
+#define TOKEN(X) log_message(LOG_INFO, "Token: %s", #X); return X; 
 
 void yyerror(const char *s);
 format_mode mode;
@@ -971,50 +971,61 @@ case 32:
 YY_RULE_SETUP
 #line 79 "calc.l"
 {
+  yylval.literal.type = E_STRING;
   yylval.literal.svalue = strndup(yytext+1, yyleng-2);
   TOKEN(STRING);
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 83 "calc.l"
+#line 84 "calc.l"
 {
-  yylval.identifier.name = strndup(yytext, yyleng);
-  yylval.identifier.lineno = yylineno;
-  TOKEN(IDENTIFIER);
+  identifier id;
+  id.name = strndup(yytext, yyleng);
+  id.lineno = yylineno;
+  literal literal = getIdentifierValue(&id);
+  
+  yylval.identifier = id;
+
+  if(isBoolean(&literal))
+  { TOKEN(BOOLEAN_IDENTIFIER); }
+  else if(isNumber(&literal) || isString(&literal))
+  { TOKEN(ARITHMETIC_IDENTIFIER); }
+  else
+  { TOKEN(UNDEFINED_IDENTIFIER); }
 }
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 89 "calc.l"
+#line 100 "calc.l"
 { yylineno++; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 90 "calc.l"
+#line 101 "calc.l"
 { BEGIN(COMMENT); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 91 "calc.l"
+#line 102 "calc.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 92 "calc.l"
+#line 103 "calc.l"
 { }
 	YY_BREAK
 case 38:
 /* rule 38 can match eol */
 YY_RULE_SETUP
-#line 93 "calc.l"
+#line 104 "calc.l"
 { yylineno++; }
 	YY_BREAK
 case 39:
 /* rule 39 can match eol */
 YY_RULE_SETUP
-#line 95 "calc.l"
+#line 106 "calc.l"
 {
   yylineno++;
   TOKEN(EOL);
@@ -1022,25 +1033,25 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 99 "calc.l"
+#line 110 "calc.l"
 { }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT):
-#line 100 "calc.l"
+#line 111 "calc.l"
 { TOKEN(YYEOF); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 101 "calc.l"
+#line 112 "calc.l"
 { log_message(LOG_ERROR, "lexical error, undefined sequence: %s", yytext); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 103 "calc.l"
+#line 114 "calc.l"
 ECHO;
 	YY_BREAK
-#line 1044 "lex.yy.c"
+#line 1055 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2043,7 +2054,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 103 "calc.l"
+#line 114 "calc.l"
 
 
 void yyerror(const char *msg) {

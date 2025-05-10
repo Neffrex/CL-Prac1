@@ -34,10 +34,14 @@ extern format_mode mode;
 %token <operator> PLUS MINUS TIMES DIVIDE MOD POW
 %token <operator> EQUALS GREATER_THAN GREATER_EQUALS LOWER_THAN LOWER_EQUALS NOT_EQUALS
 %token <operator> NOT OR AND
-%token <identifier> IDENTIFIER
+%token <identifier> UNDEFINED_IDENTIFIER BOOLEAN_IDENTIFIER ARITHMETIC_IDENTIFIER
 
 %type <no_type> statement
+
 %type <identifier> assignment
+%type <identifier> identifier_complete identifier_incomplete
+
+%type <literal> expression
 
 %type <literal> arithmeticExpression
 %type <literal> arithmeticExpressionA
@@ -57,29 +61,47 @@ extern format_mode mode;
 
 %%
 
-program: statementList YYEOF;
+program: 
+  statementList YYEOF
+  { log_message(LOG_INFO, LOG_MSG_END_OF_PROGRAM); }
+;
 
 statementList:
   %empty
-| statementList statement
+| statementList statement EOL
+{ log_message(LOG_INFO, LOG_MSG_END_OF_STATEMENT);}
 ;
 
 statement:
-  assignment[id]
+  %empty
+  | assignment[id]
   { cprint(yyout, mode, "[type:%s] %s := %v\n", type2str($id.value.type), $id.name, &($id.value)); }
-  | arithmeticExpression[e] 
-  { cprint(yyout, mode, "[type:%s] %v\n", type2str($e.type), &$e); }
-  | booleanExpression[e]
+  | expression[e]
   { cprint(yyout, mode, "[type:%s] %v\n", type2str($e.type), &$e); }
 ;
-
 
 assignment:
-  IDENTIFIER[l] ASSIGN arithmeticExpression[r] 
+  identifier_complete[l] ASSIGN expression[r] 
   { $$ = assign(&$l, $r); }
-  | IDENTIFIER[l] ASSIGN booleanExpression[r]
+  | identifier_incomplete[l] ASSIGN expression[r]
   { $$ = assign(&$l, $r); }
 ;
+
+identifier_complete:
+  BOOLEAN_IDENTIFIER[id]
+  { log_message(LOG_INFO, "Boolean Identifier: %s", $id.name); }
+  | ARITHMETIC_IDENTIFIER[id]
+  { log_message(LOG_INFO, "Arithmetic Identifier: %s", $id.name); }
+;
+
+identifier_incomplete:
+  UNDEFINED_IDENTIFIER[id]
+  { log_message(LOG_INFO, "Undefined Identifier: %s", $id.name); }
+;
+
+expression:
+  arithmeticExpression[e]
+  | booleanExpression
 
 arithmeticExpression:
   arithmeticExpressionA 
@@ -117,7 +139,7 @@ arithmeticExpressionX:
   INTEGER
   | FLOAT
   | STRING
-  | IDENTIFIER[x]
+  | ARITHMETIC_IDENTIFIER[x]
   { $$ = arithmeticExpressionIdentifier(&$x); }
   | SIN LPAREN arithmeticExpression[x] RPAREN 
   { $$ = arithmeticExpressionSin(&$x); }
@@ -154,7 +176,7 @@ booleanExpressionX:
   { $$ = booleanExpressionTrue(); }
   | FALSE
   { $$ = booleanExpressionFalse(); }
-  | IDENTIFIER[id]
+  | BOOLEAN_IDENTIFIER[id]
   { $$ = booleanExpressionIdentifier(&$id); }
   | LPAREN booleanExpressionO[e] RPAREN
   { $$ = $e; }

@@ -1,0 +1,222 @@
+[INFO] Token: UNDEFINED_IDENTIFIER
+[INFO] Undefined Identifier: x
+[INFO] Token: ASSIGN
+[INFO] Token: FLOAT
+[INFO] Token: EOL
+[INFO] Assigned float value to identifier x := 1.500
+[INFO] --------------- End of statement ---------------
+[INFO] Token: UNDEFINED_IDENTIFIER
+[INFO] Undefined Identifier: i
+[INFO] Token: ASSIGN
+[INFO] Token: INTEGER
+[INFO] Token: EOL
+[INFO] Assigned integer value to identifier i := 5
+[INFO] --------------- End of statement ---------------
+[INFO] Token: UNDEFINED_IDENTIFIER
+[INFO] Undefined Identifier: z
+[INFO] Token: ASSIGN
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: TIMES
+[INFO] Token: LPAREN
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: PLUS
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: RPAREN
+[INFO] Arithmetic Expression float + integer: '1.500' + '5'
+[INFO] Token: MINUS
+[INFO] Arithmetic Expression integer * float: '5' * '6.500'
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: DIVIDE
+[INFO] Token: FLOAT
+[INFO] Token: EOL
+[INFO] Arithmetic Expression integer / float: '5' / '4.000'
+[INFO] Arithmetic Expression float - float: '32.500' - '1.250'
+[INFO] Assigned float value to identifier z := 31.250
+[INFO] --------------- End of statement ---------------
+[INFO] Token: UNDEFINED_IDENTIFIER
+[INFO] Undefined Identifier: s
+[INFO] Token: ASSIGN
+[INFO] Token: STRING
+[INFO] Token: EOL
+[INFO] Assigned string value to identifier s := Hola
+[INFO] --------------- End of statement ---------------
+[INFO] Token: UNDEFINED_IDENTIFIER
+[INFO] Undefined Identifier: b
+[INFO] Token: ASSIGN
+[INFO] Retrieved float value of identifier z <- 31.250
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier z <- 31.250
+[INFO] Token: GREATER_THAN
+[INFO] Token: INTEGER
+[INFO] Token: OR
+[INFO] Relational Expression float > integer: '31.250' > '3'
+[INFO] ***** End of Relational Expression: true *****
+[INFO] Token: NOT
+[INFO] Token: LPAREN
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: GREATER_THAN
+[INFO] Token: INTEGER
+[INFO] Token: AND
+[INFO] Relational Expression integer > integer: '5' > '0'
+[INFO] ***** End of Relational Expression: true *****
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: LOWER_EQUALS
+[INFO] Token: INTEGER
+[INFO] Token: RPAREN
+[INFO] Relational Expression integer <= integer: '5' <= '10'
+[INFO] ***** End of Relational Expression: true *****
+[INFO] Boolean Expression boolean and boolean: 'true' and 'true'
+[INFO] Boolean Expression boolean not boolean: 'false' not 'true'
+[INFO] Token: OR
+[INFO] Boolean Expression boolean or boolean: 'true' or 'false'
+[INFO] Token: FALSE
+[INFO] Token: EOL
+[INFO] Boolean Expression boolean or boolean: 'true' or 'false'
+[INFO] Assigned boolean value to identifier b := true
+[INFO] --------------- End of statement ---------------
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Token: EOL
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Token: EOL
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved float value of identifier z <- 31.250
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Token: EOL
+[INFO] Retrieved float value of identifier z <- 31.250
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved string value of identifier s <- Hola
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Token: EOL
+[INFO] Retrieved string value of identifier s <- Hola
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved boolean value of identifier b <- true
+[INFO] Token: BOOLEAN_IDENTIFIER
+[INFO] Token: EOL
+[INFO] Retrieved boolean value of identifier b <- true
+[INFO] --------------- End of statement ---------------
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Token: UNDEFINED_IDENTIFIER
+[INFO] Undefined Identifier: y
+[INFO] Token: ASSIGN
+[INFO] Token: FLOAT
+[INFO] Token: EOL
+[INFO] Assigned float value to identifier y := 1.571
+[INFO] --------------- End of statement ---------------
+[INFO] Token: SIN
+[INFO] Token: LPAREN
+[INFO] Retrieved float value of identifier y <- 1.571
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier y <- 1.571
+[INFO] Token: RPAREN
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Token: COS
+[INFO] Token: LPAREN
+[INFO] Retrieved float value of identifier y <- 1.571
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier y <- 1.571
+[INFO] Token: RPAREN
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Token: TAN
+[INFO] Token: LPAREN
+[INFO] Retrieved float value of identifier y <- 1.571
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier y <- 1.571
+[INFO] Token: RPAREN
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Token: PLUS
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: TIMES
+[INFO] Token: INTEGER
+[INFO] Token: EOL
+[INFO] Arithmetic Expression integer * integer: '5' * '2'
+[INFO] Arithmetic Expression integer + integer: '5' + '10'
+[INFO] --------------- End of statement ---------------
+[INFO] Token: MINUS
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: PLUS
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: EOL
+[INFO] Arithmetic Expression integer + float: '-5' + '1.500'
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved string value of identifier s <- Hola
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Token: PLUS
+[INFO] Retrieved string value of identifier s <- Hola
+[INFO] Token: LPAREN
+[INFO] Retrieved string value of identifier s <- Hola
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved string value of identifier s <- Hola
+[INFO] Token: PLUS
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved integer value of identifier i <- 5
+[INFO] Token: RPAREN
+[INFO] Arithmetic Expression string + integer: 'Hola' + '5'
+[INFO] Token: PLUS
+[INFO] Arithmetic Expression string + string: 'Hola' + 'Hola5'
+[INFO] Token: STRING
+[INFO] Token: PLUS
+[INFO] Arithmetic Expression string + string: 'HolaHola5' + '--'
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: ARITHMETIC_IDENTIFIER
+[INFO] Retrieved float value of identifier x <- 1.500
+[INFO] Token: EOL
+[INFO] Arithmetic Expression string + float: 'HolaHola5--' + '1.500'
+[INFO] --------------- End of statement ---------------
+[INFO] Retrieved boolean value of identifier b <- true
+[INFO] Token: BOOLEAN_IDENTIFIER
+[INFO] Token: OR
+[INFO] Retrieved boolean value of identifier b <- true
+[INFO] Token: NOT
+[INFO] Retrieved boolean value of identifier b <- true
+[INFO] Token: BOOLEAN_IDENTIFIER
+[INFO] Retrieved boolean value of identifier b <- true
+[INFO] Boolean Expression boolean not boolean: 'false' not 'true'
+[INFO] Token: EOL
+[INFO] Boolean Expression boolean or boolean: 'true' or 'false'
+[INFO] --------------- End of statement ---------------
+[INFO] Token: EOL
+[INFO] --------------- End of statement ---------------
+[INFO] Token: YYEOF
+[INFO] 
+---------------------------------------------
+*************** End of program ***************
+----------------------------------------------
+
+[INFO] Token: YYEOF

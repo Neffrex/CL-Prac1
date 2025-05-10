@@ -1,5 +1,8 @@
 #include "types.h"
 
+bool isNullLiteral(literal* literal)
+{ return literal->type == E_NULL_TYPE; }
+
 bool isInteger(literal* literal)
 { return literal->type == E_INTEGER; }
 
@@ -26,11 +29,11 @@ void int2bin(char *buffer, size_t size, int value)
 void int2str(char* buffer, size_t size, format_mode mode, int value) {
   switch(mode)
   {
-    case E_HEX:       snprintf(buffer, size, "0c%o", value);
-    case E_OCT:       snprintf(buffer, size, "0x%x", value);
-    case E_BIN:       int2bin(buffer, size, value);
+    case E_HEX:       snprintf(buffer, size, "0c%o", value); break;
+    case E_OCT:       snprintf(buffer, size, "0x%x", value); break;
+    case E_BIN:       int2bin(buffer, size, value); break;
     case E_DEC | E_NULL_MODE:
-    default:          snprintf(buffer, size, "%d", value);
+    default:          snprintf(buffer, size, "%d", value); break;
   }
 }
 
@@ -38,10 +41,10 @@ void val2str(char* buffer, size_t size, format_mode mode, literal* literal)
 {
   switch(literal->type)
   {
-    case E_INTEGER:   int2str(buffer, size, mode, literal->ivalue);
+    case E_INTEGER:   int2str(buffer, size, mode, literal->ivalue); break;
     case E_FLOAT:     snprintf(buffer, size, "%.3f", literal->fvalue); break;
-    case E_STRING:    snprintf(buffer, size, "%s", literal->bvalue ? "true" : "false"); break;
-    case E_BOOLEAN:   snprintf(buffer, size, "%s", literal->svalue ? literal->svalue : NULL_STR); break;
+    case E_STRING:    snprintf(buffer, size, "%s", literal->svalue ? literal->svalue : NULL_STR); break;
+    case E_BOOLEAN:   snprintf(buffer, size, "%s", literal->bvalue ? "true" : "false"); break;
     case E_NULL_TYPE: snprintf(buffer, size, NULL_STR); break;
     default:          snprintf(buffer, size, UNDEFINED_STR);
   }

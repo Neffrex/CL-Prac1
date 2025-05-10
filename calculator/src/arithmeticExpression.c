@@ -2,6 +2,17 @@
 
 literal arithmeticExpression(literal* loperand, op_type op, literal* roperand)
 {
+#ifdef LOG
+  char lvalue[STR_MAX_LENGTH];
+  val2str(lvalue, sizeof(lvalue), E_DEC, loperand);
+  char rvalue[STR_MAX_LENGTH];
+  val2str(rvalue, sizeof(rvalue), E_DEC, roperand);
+
+  log_message(LOG_INFO, LOG_MSG_ARITHMETIC_EXPRESSION,
+    type2str(loperand->type), op2str(op), type2str(roperand->type),
+    lvalue, op2str(op), rvalue);
+#endif
+
   literal result = createEmptyLiteral();
 
   if(isInteger(loperand) && isInteger(roperand))
@@ -58,7 +69,11 @@ literal arithmeticExpression(literal* loperand, op_type op, literal* roperand)
 }
 
 literal arithmeticExpressionIdentifier(identifier* id)
-{ return getIdentifierValue(id); }
+{ literal result = getIdentifierValue(id);
+  if(isNullLiteral(&result))
+  { log_message(LOG_ERROR, ERR_MSG_IDENTIFIER_NOT_DECLARED, id->name, id->lineno); }
+  return result; 
+}
 
 literal arithmeticExpressionConcat(literal* loperand, literal* roperand)
 {

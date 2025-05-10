@@ -12,7 +12,7 @@
 #include "calc.tab.h"
 #include "compiler.h"
 
-#define TOKEN(X) return X
+#define TOKEN(X) log_message(LOG_INFO, "Token: %s", #X); return X; 
 
 void yyerror(const char *s);
 format_mode mode;
@@ -77,13 +77,24 @@ EOL [\n]
   TOKEN(FLOAT); 
 }
 {STRING} {
+  yylval.literal.type = E_STRING;
   yylval.literal.svalue = strndup(yytext+1, yyleng-2);
   TOKEN(STRING);
 }
 {IDENTIFIER} {
-  yylval.identifier.name = strndup(yytext, yyleng);
-  yylval.identifier.lineno = yylineno;
-  TOKEN(IDENTIFIER);
+  identifier id;
+  id.name = strndup(yytext, yyleng);
+  id.lineno = yylineno;
+  literal literal = getIdentifierValue(&id);
+  
+  yylval.identifier = id;
+
+  if(isBoolean(&literal))
+  { TOKEN(BOOLEAN_IDENTIFIER); }
+  else if(isNumber(&literal) || isString(&literal))
+  { TOKEN(ARITHMETIC_IDENTIFIER); }
+  else
+  { TOKEN(UNDEFINED_IDENTIFIER); }
 }
 
 {SINGLE_LINE_COMMENT} { yylineno++; }
