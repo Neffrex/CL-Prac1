@@ -27,7 +27,7 @@ $(TARGET): $(AST_C) $(LEXER_C) $(PARSER_C) $(SYMTAB_C)
 
 # Regla para generar el archivo .c y .h de Bison
 $(PARSER_C) $(PARSER_H): $(PARSER_SOURCE)
-	bison -dg -Wcounterexamples $(PARSER_SOURCE)
+	bison -d -Wcounterexamples $(PARSER_SOURCE)
 	mv $(notdir $(PARSER_C)) $(PARSER_C)
 	mv $(notdir $(PARSER_H)) $(PARSER_H)
 
