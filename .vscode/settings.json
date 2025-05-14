@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "booleanexpression.h": "c",
+        "identifier.h": "c",
+        "base.h": "c",
+        "io.h": "c",
+        "log.h": "c",
+        "types.h": "c",
+        "symtab.h": "c"
+    }
+}
