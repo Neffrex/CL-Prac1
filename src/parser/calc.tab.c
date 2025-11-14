@@ -1487,7 +1487,7 @@ yyreduce:
 
   case 6: /* statement: assignment  */
 #line 79 "src/parser/calc.y"
-  { cprint(yyout, mode, "[type:%s] %s := %v\n", type2str((yyvsp[0].identifier).value.type), (yyvsp[0].identifier).name, &((yyvsp[0].identifier).value)); }
+  { cprint(yyout, mode, "%s :%s= %v\n", (yyvsp[0].identifier).name, type2str((yyvsp[0].identifier).value.type), &((yyvsp[0].identifier).value)); }
 #line 1492 "calc.tab.c"
     break;
 

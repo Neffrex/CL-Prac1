@@ -76,7 +76,7 @@ statementList:
 statement:
   %empty
   | assignment[id]
-  { cprint(yyout, mode, "[type:%s] %s := %v\n", type2str($id.value.type), $id.name, &($id.value)); }
+  { cprint(yyout, mode, "%s :%s= %v\n", $id.name, type2str($id.value.type), &($id.value)); }
   | expression[e]
   { cprint(yyout, mode, "[type:%s] %v\n", type2str($e.type), &$e); }
 ;

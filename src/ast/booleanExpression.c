@@ -13,20 +13,41 @@ bool booleanExpressionIdentifier(identifier* id)
 bool booleanExpression(bool loperand, op_type op, bool roperand)
 { 
 #ifdef LOG
-  log_message(LOG_INFO, LOG_MSG_BOOLEAN_EXPRESSION,
-    type2str(E_BOOLEAN), op2str(op), type2str(E_BOOLEAN),
-    loperand? "true":"false", op2str(op), roperand?"true":"false");
+  if(op == E_NOT) 
+  {
+    log_message(LOG_INFO, LOG_MSG_BOOLEAN_UNARY_EXPRESSION, 
+      op2str(op), BOOLEAN_STR, 
+      op2str(op), bool2str(roperand)
+    );
+  } else 
+  {
+    log_message(LOG_INFO, LOG_MSG_BOOLEAN_BINARY_EXPRESSION,
+      BOOLEAN_STR, op2str(op), BOOLEAN_STR, 
+      bool2str(loperand), op2str(op), bool2str(roperand)
+    ); 
+  }
 #endif
+
+  bool result = false;
   
   switch(op)
   {
-    case E_OR:    return loperand || roperand;
-    case E_AND:   return loperand && roperand;
-    case E_NOT:   return !roperand;
-    default:
-        log_message(LOG_ERROR, ERR_MSG_UNSUPPORTED_OPERATION, type2str(E_BOOLEAN), op2str(op), type2str(E_BOOLEAN));
-        return false;
+    case E_OR:    result = loperand || roperand; break;
+    case E_AND:   result = loperand && roperand; break;
+    case E_NOT:   result = !roperand; break;
+    default: 
+    {
+      log_message(LOG_ERROR, ERR_MSG_UNSUPPORTED_OPERATION, 
+        type2str(E_BOOLEAN), op2str(op), type2str(E_BOOLEAN)
+      );
+    }
   }
+
+#ifdef LOG
+  log_message(LOG_INFO, LOG_MSG_END_OF_BOOLEAN_EXPRESSION, bool2str(result));
+#endif
+
+  return result;
 }
 
 bool booleanExpressionOr(bool loperand, bool roperand) 
@@ -53,9 +74,11 @@ bool relationalExpression(literal* loperand, op_type op, literal* roperand)
   val2str(lvalue, sizeof(lvalue), mode, loperand);
   char rvalue[STR_MAX_LENGTH];
   val2str(rvalue, sizeof(rvalue), mode, roperand);
+  
   log_message(LOG_INFO, LOG_MSG_RELATIONAL_EXPRESSION,
     type2str(loperand->type), op2str(op), type2str(roperand->type),
-    lvalue, op2str(op), rvalue);
+    lvalue, op2str(op), rvalue
+  );
 #endif
 
   bool result = false;
@@ -71,19 +94,24 @@ bool relationalExpression(literal* loperand, op_type op, literal* roperand)
       case E_LOWER_THAN:      result = lvalue <  rvalue; break;
       case E_LOWER_EQUALS:    result = lvalue <= rvalue; break;
       case E_NOT_EQUALS:      result = lvalue != rvalue; break;
-      default: 
+      default: {
         log_message(LOG_ERROR, ERR_MSG_UNSUPPORTED_OPERATION,
-          type2str(loperand->type), op2str(op), type2str(roperand->type));
+          type2str(loperand->type), op2str(op), type2str(roperand->type)
+        );
+      }
     }
   }
   else
   {
     log_message(LOG_ERROR, ERR_MSG_INVALID_OPERAND_TYPES,
-      type2str(loperand->type), op2str(op), type2str(loperand->type));
+      type2str(loperand->type), op2str(op), type2str(loperand->type)
+    );
   }
+
 #ifdef LOG
-  log_message(LOG_INFO, "***** End of Relational Expression: %s *****", result? "true": "false");
+  log_message(LOG_INFO, LOG_MSG_END_OF_RELATIONAL_EXPRESSION, result? "true": "false");
 #endif
+
   return result;
 }
 

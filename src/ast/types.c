@@ -100,3 +100,9 @@ const char* functid2str(funct_id funct_id)
     default:                return NULL_STR;
   }
 }
+
+
+const char* bool2str(bool value) 
+{
+  return value ? "true" : "false";
+}

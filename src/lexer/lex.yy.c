@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -536,10 +536,10 @@ char *yytext;
 void yyerror(const char *s);
 format_mode mode;
 
-#line 540 "lex.yy.c"
+#line 539 "lex.yy.c"
 
 /* DEFINITIONS */
-#line 543 "lex.yy.c"
+#line 542 "lex.yy.c"
 
 #define INITIAL 0
 #define COMMENT 1
@@ -760,7 +760,7 @@ YY_DECL
 #line 46 "src/lexer/calc.l"
 
 
-#line 764 "lex.yy.c"
+#line 763 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1087,7 +1087,7 @@ YY_RULE_SETUP
 #line 132 "src/lexer/calc.l"
 ECHO;
 	YY_BREAK
-#line 1091 "lex.yy.c"
+#line 1090 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{

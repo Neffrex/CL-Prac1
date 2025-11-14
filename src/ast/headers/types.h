@@ -106,4 +106,4 @@ void val2str(char*, size_t, format_mode, literal*);
 const char* type2str(data_type);
 const char* op2str(op_type);
 const char* functid2str(funct_id);
-
+const char* bool2str(bool value);
