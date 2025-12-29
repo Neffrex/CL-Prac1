@@ -4,105 +4,98 @@
 #include <stdbool.h>
 #include "log.h"
 
-#define LOG
-
 #define STR_MAX_LENGTH 256
-#define NULL_STR "<null>"
-#define UNDEFINED_STR "<undefined>"
-#define INTEGER_STR "integer"
-#define FLOAT_STR "float"
-#define BOOLEAN_STR "boolean"
-#define STRING_STR "string"
-#define NEGATE_STR "negate"
-#define PLUS_STR "+"
-#define MINUS_STR "-" 
-#define TIMES_STR "*" 
-#define DIVIDE_STR "/" 
-#define MOD_STR "%" 
-#define POW_STR "**" 
-#define EQUALS_STR "==" 
-#define GREATER_THAN_STR ">" 
-#define GREATER_EQUALS_STR ">=" 
-#define LOWER_THAN_STR "<" 
-#define LOWER_EQUALS_STR "<=" 
-#define NOT_EQUALS_STR "<>" 
-#define AND_STR "and" 
-#define OR_STR "or" 
-#define NOT_STR "not"
-#define SIN_STR "sin"
-#define COS_STR "cos"
-#define TAN_STR "tan"
-#define LEN_STR "len"
-#define SUBSTR_STR "substr"
+
+// EMPTY VALUES
+#define S_UNDEFINED "UNDEFINED"
+#define S_NULL "NULL"
+#define S_NAN "NaN"
+
+// TYPES
+#define S_INTEGER "integer"
+#define S_FLOAT "float"
+#define S_BOOLEAN "boolean"
+#define S_STRING "string"
+
+// OPERATORS
+#define S_NEGATE "negate"
+#define S_PLUS "+"
+#define S_MINUS "-"
+#define S_TIMES "*"
+#define S_DIVIDE "/"
+#define S_MOD "%"
+#define S_POW "**"
+#define S_EQUALS "=="
+#define S_GREATER_THAN ">"
+#define S_GREATER_EQUALS ">="
+#define S_LOWER_THAN "<"
+#define S_LOWER_EQUALS "<="
+#define S_NOT_EQUALS "<>"
+#define S_AND "and"
+#define S_OR "or"
+#define S_NOT "not"
+#define S_SIN "sin"
+#define S_COS "cos"
+#define S_TAN "tan"
+#define S_LEN "len"
+#define S_SUBSTR "substr"
 
 
 typedef enum {
-  E_NULL_TYPE,
-  E_INTEGER,
-  E_FLOAT,
-  E_STRING,
-  E_BOOLEAN
-} data_type;
+  TYPE_INTEGER,
+  TYPE_FLOAT,
+  TYPE_STRING,
+  TYPE_BOOLEAN
+} type_t;
 
 typedef enum {
-  E_NULL_MODE,
-  E_DEC,
-  E_HEX,
-  E_OCT,
-  E_BIN
-} format_mode;
-
-typedef enum {
-  E_NULL_OP,
-  E_NEGATE,
-  E_PLUS,
-  E_MINUS,
-  E_TIMES,
-  E_DIVIDE,
-  E_MOD,
-  E_POW,
-  E_EQUALS,
-  E_GREATER_THAN,
-  E_GREATER_EQUALS,
-  E_LOWER_THAN,
-  E_LOWER_EQUALS,
-  E_NOT_EQUALS,
-  E_AND,
-  E_OR,
-  E_NOT,
+  OP_UNDEFINED,
+  OP_NEGATE,
+  OP_PLUS,
+  OP_MINUS,
+  OP_TIMES,
+  OP_DIVIDE,
+  OP_MOD,
+  OP_POW,
+  OP_EQUALS,
+  OP_GREATER_THAN,
+  OP_GREATER_EQUALS,
+  OP_LOWER_THAN,
+  OP_LOWER_EQUALS,
+  OP_NOT_EQUALS,
+  OP_AND,
+  OP_OR,
+  OP_NOT,
 } op_type;
 
+// FIXME: Change "Function" system to an adequate one
 typedef enum {
-  E_SIN,
-  E_COS,
-  E_TAN,
-  E_LEN,
-  E_SUBSTR
+  FUNC_SIN,
+  FUNC_COS,
+  FUNC_TAN,
+  FUNC_LEN,
+  FUNC_SUBSTR
 } funct_id;
 
+
 typedef struct {
-  data_type type;
-  int ivalue;
-  float fvalue;
-  char* svalue;
-  int bvalue;
+  type_t type;
+	union {
+		int ivalue;
+		float fvalue;
+		char* svalue;
+		bool bvalue;
+	};	
 } literal;
 
 typedef struct {
-  char* name;
-  int lineno;
-  literal value;
+	char* name;
+	type_t type;
+	literal value;
+	int lineno;
 } identifier;
 
-bool isNullLiteral(literal*);
-bool isInteger(literal*);
-bool isFloat(literal*);
-bool isString(literal*);
-bool isBoolean(literal*);
-bool isNumber(literal*);
-void int2bin(char*, size_t, int);
-void int2str(char*, size_t, format_mode, int);
-void val2str(char*, size_t, format_mode, literal*);
+void literal2str(char*, size_t, literal*);
 const char* type2str(data_type);
 const char* op2str(op_type);
 const char* functid2str(funct_id);

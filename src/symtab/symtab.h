@@ -12,7 +12,7 @@
 #include "../ast/headers/types.h"
 
 /* The type of the value field of symbol table entries                      */
-typedef literal sym_value_type; 
+typedef identifier sym_value_type; 
 
 /* #define SYM_POINTS_TO_VALUE */ 
 				/*Cada entrada sigui lexema i copia camp en */

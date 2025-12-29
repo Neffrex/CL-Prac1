@@ -1,65 +1,26 @@
 #include "headers/types.h"
 
-bool isNullLiteral(literal* literal)
-{ return literal->type == E_NULL_TYPE; }
-
-bool isInteger(literal* literal)
-{ return literal->type == E_INTEGER; }
-
-bool isFloat(literal* literal)
-{ return literal->type == E_FLOAT; }
-
-bool isString(literal* literal)
-{ return literal->type == E_STRING; }
-
-bool isBoolean(literal* literal)
-{ return literal->type == E_BOOLEAN; }
-
-bool isNumber(literal* literal)
-{ return literal->type == E_INTEGER || literal->type == E_FLOAT; }
-
-void int2bin(char *buffer, size_t size, int value)
-{
-  if(size == 0) return;
-  for(size_t i = 0; i < size-1; i++)
-    buffer[i] = (value & (1U << (size-2-i))) ? '1' : '0';
-  buffer[size-1] = '\0';
-}
-
-void int2str(char* buffer, size_t size, format_mode mode, int value) {
-  switch(mode)
-  {
-    case E_HEX:       snprintf(buffer, size, "0c%o", value); break;
-    case E_OCT:       snprintf(buffer, size, "0x%x", value); break;
-    case E_BIN:       int2bin(buffer, size, value); break;
-    case E_DEC | E_NULL_MODE:
-    default:          snprintf(buffer, size, "%d", value); break;
-  }
-}
-
-void val2str(char* buffer, size_t size, format_mode mode, literal* literal)
+void literal2str(char* buffer, size_t size, literal* literal)
 {
   switch(literal->type)
   {
-    case E_INTEGER:   int2str(buffer, size, mode, literal->ivalue); break;
-    case E_FLOAT:     snprintf(buffer, size, "%.3f", literal->fvalue); break;
-    case E_STRING:    snprintf(buffer, size, "%s", literal->svalue ? literal->svalue : NULL_STR); break;
-    case E_BOOLEAN:   snprintf(buffer, size, "%s", literal->bvalue ? "true" : "false"); break;
-    case E_NULL_TYPE: snprintf(buffer, size, NULL_STR); break;
-    default:          snprintf(buffer, size, UNDEFINED_STR);
+    case TYPE_INTEGER:   snprintf(buffer, size, "%d", literal->ivalue); break;
+    case TYPE_FLOAT:     snprintf(buffer, size, "%.3f", literal->fvalue); break;
+    case TYPE_STRING:    snprintf(buffer, size, "%s", literal->svalue ? literal->svalue : S_NULL); break;
+    case TYPE_BOOLEAN:   snprintf(buffer, size, "%s", literal->bvalue ? "true" : "false"); break;
+    default: snprintf(buffer, size, S_UNDEFINED);
   }
 }
 
-const char* type2str(data_type type) 
+const char* type2str(type_t type) 
 {
   switch(type)
   {
-    case E_INTEGER:   return INTEGER_STR;
-    case E_FLOAT:     return FLOAT_STR;
-    case E_STRING:    return STRING_STR;
-    case E_BOOLEAN:   return BOOLEAN_STR;
-    case E_NULL_TYPE: return NULL_STR;
-    default:          return UNDEFINED_STR;
+    case TYPE_INTEGER:   return S_INTEGER;
+    case TYPE_FLOAT:     return S_FLOAT;
+    case TYPE_STRING:    return S_STRING;
+    case TYPE_BOOLEAN:   return S_BOOLEAN;
+    default: return S_UNDEFINED;
   }
 }
 
@@ -67,37 +28,36 @@ const char* op2str(op_type op)
 {
   switch(op) 
   {
-    case E_NEGATE:          return NEGATE_STR;
-    case E_PLUS:            return PLUS_STR;
-    case E_MINUS:           return MINUS_STR;
-    case E_TIMES:           return TIMES_STR;
-    case E_DIVIDE:          return DIVIDE_STR;
-    case E_MOD:             return MOD_STR;
-    case E_POW:             return POW_STR;
-    case E_EQUALS:          return EQUALS_STR;
-    case E_GREATER_THAN:    return GREATER_THAN_STR;
-    case E_GREATER_EQUALS:  return GREATER_EQUALS_STR;
-    case E_LOWER_THAN:      return LOWER_THAN_STR;
-    case E_LOWER_EQUALS:    return LOWER_EQUALS_STR;
-    case E_NOT_EQUALS:      return NOT_EQUALS_STR;
-    case E_OR:              return OR_STR;
-    case E_NOT:             return NOT_STR;
-    case E_AND:             return AND_STR;
-    default:                return NULL_STR;
+    case OP_NEGATE:          return S_NEGATE;
+    case OP_PLUS:            return S_PLUS;
+    case OP_MINUS:           return S_MINUS;
+    case OP_TIMES:           return S_TIMES;
+    case OP_DIVIDE:          return S_DIVIDE;
+    case OP_MOD:             return S_MOD;
+    case OP_POW:             return S_POW;
+    case OP_EQUALS:          return S_EQUALS;
+    case OP_GREATER_THAN:    return S_GREATER_THAN;
+    case OP_GREATER_EQUALS:  return S_GREATER_EQUALS;
+    case OP_LOWER_THAN:      return S_LOWER_THAN;
+    case OP_LOWER_EQUALS:    return S_LOWER_EQUALS;
+    case OP_NOT_EQUALS:      return S_NOT_EQUALS;
+    case OP_OR:              return S_OR;
+    case OP_NOT:             return S_NOT;
+    case OP_AND:             return S_AND;
+    default: return S_NULL;
   }
 }
-
 
 const char* functid2str(funct_id funct_id)
 {
   switch(funct_id) 
   {
-    case E_SIN:             return SIN_STR;
-    case E_COS:             return COS_STR;
-    case E_TAN:             return TAN_STR;
-    case E_LEN:             return LEN_STR;
-    case E_SUBSTR:          return SUBSTR_STR;
-    default:                return NULL_STR;
+    case FUNC_SIN:    return S_SIN;
+    case FUNC_COS:    return S_COS;
+    case FUNC_TAN:    return S_TAN;
+    case FUNC_LEN:    return S_LEN;
+    case FUNC_SUBSTR: return S_SUBSTR;
+    default: return S_NULL;
   }
 }
 

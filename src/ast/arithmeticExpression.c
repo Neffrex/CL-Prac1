@@ -4,9 +4,9 @@ literal arithmeticExpression(literal* loperand, op_type op, literal* roperand)
 {
 #ifdef LOG
   char lvalue[STR_MAX_LENGTH];
-  val2str(lvalue, sizeof(lvalue), E_DEC, loperand);
+  literal2str(lvalue, sizeof(lvalue), loperand);
   char rvalue[STR_MAX_LENGTH];
-  val2str(rvalue, sizeof(rvalue), E_DEC, roperand);
+  literal2str(rvalue, sizeof(rvalue), roperand);
 
   log_message(LOG_INFO, LOG_MSG_ARITHMETIC_EXPRESSION,
     type2str(loperand->type), op2str(op), type2str(roperand->type),
@@ -72,10 +72,12 @@ literal arithmeticExpression(literal* loperand, op_type op, literal* roperand)
 }
 
 literal arithmeticExpressionIdentifier(identifier* id)
-{ literal result = getIdentifierValue(id);
-  if(isNullLiteral(&result))
+{ 
+	if(id->type == E_NULL_TYPE)
   { log_message(LOG_ERROR, ERR_MSG_IDENTIFIER_NOT_DECLARED, id->name, id->lineno); }
-  return result; 
+	else if(id->type != E_INTEGER || id->type != E_FLOAT)
+	{ log_message(LOG_ERROR, ERR_MSG_INVALID_IDENTIFIER_TYPE, id->type, id->lineno); }
+  return getIdentifierValue(id);
 }
 
 literal arithmeticExpressionConcat(literal* loperand, literal* roperand)
@@ -84,9 +86,9 @@ literal arithmeticExpressionConcat(literal* loperand, literal* roperand)
   result.type = E_STRING;
 
   char lvalue[STR_MAX_LENGTH];
-  val2str(lvalue, sizeof(lvalue), mode, loperand);
+  literal2str(lvalue, sizeof(lvalue), loperand);
   char rvalue[STR_MAX_LENGTH];
-  val2str(rvalue, sizeof(rvalue), mode, roperand);
+  literal2str(rvalue, sizeof(rvalue), roperand);
 
   size_t len = strlen(lvalue) + strlen(rvalue) + 1;
   result.svalue = malloc(len);

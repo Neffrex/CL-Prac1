@@ -1,6 +1,6 @@
 #include "headers/io.h"
 
-int cprint(FILE* stream, format_mode mode, const char* format, ...)
+int cprint(FILE* stream, const char* format, ...)
 {
   va_list args;
   va_start(args, format);
@@ -14,7 +14,7 @@ int cprint(FILE* stream, format_mode mode, const char* format, ...)
     { // Custom '%v' format specifier
       literal* value = va_arg(args, literal*);
       char buffer[STR_MAX_LENGTH];
-      val2str(buffer, sizeof(buffer), mode, value);
+      literal2str(buffer, sizeof(buffer), value);
       fprintf(stream, "%s", buffer);
       cursor+=2;
     }

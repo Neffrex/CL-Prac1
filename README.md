@@ -4,47 +4,70 @@
 · Hacer el log (Es un requisito funcional)
 
 # Requisitos funcionales
-Literales y comentarios:
+
+## Literales
+
 [+] Literales enteros
+
 [+] Literales reales
+
 [+] Cadenas de caracteres, limitadas por comillas dobles y de una sola linea.
+
 [+] Booleanos
+
+## Comentarios
+
 [+] Comentarios simples con `//` y `#`
+
 [+] Comentarios multilinea comenzados con `/*` y terminados en `*/`
 
-Identificadores y expresiones:
-[+] Tipos de identificadores:
-  [+] entero
-  [+] real
-  [+] cadena
-  [+] booleano
-[-] Expresiones aritmeticas formadas por:
-  [-] enteros
-  [-] literales
-  [-] reales
-  [-] cadenas de caracteres
-  [-] identificadores (no booleanos)
-  [-] parentesis
-  [-] operador de concatenacion de cadenas: `+`
-  [-] operadores aritmeticos unarios (`+`,`-`)
-  [-] operadores aritmeticos binarios (`+`,`-`,`*`,`/`,`%`,`**`)
+## Tipos de identificadores:
 
-[-] Niveles de precedencia de los operadores aritmeticos:
-- Binarios
-  01. `**`
-  02. `*`,`/`,`%`
-  03. `+`,`-`
-- Unarios
-  03. `-`
+  [+] entero
+
+  [+] real
+
+  [+] cadena
+
+  [+] booleano
+
+## Expresiones aritmeticas formadas por
+
+  [-] enteros
+
+  [-] literales
+
+  [-] reales
+
+  [-] cadenas de caracteres
+
+  [-] identificadores (no booleanos)
+
+  [-] parentesis
+
+  [-] operador de concatenacion de cadenas: `+`
+
+  [-] operadores aritmeticos unarios (`+`,`-`)
+
+  [-] operadores aritmeticos binarios (`+`,`-`,`*`,`/`,`%`m `**`)
+
+## Niveles de precedencia de los operadores aritmeticos:
+
+  [-] `_**_` > `_*_`,`_/_`,`_%_` > `_+_`,`_-_`,`-_`
+
+	
+## Expresiones booleanas
 
 [-] Expresiones booleanas (`>`,`>=`,`<`,`<=`,`=`,`<>`) sobre expresiones aritmeticas
-[-] Expresiones booleanas (`not`,`and`,`or`) sobre expresiones booleanas
-[-] Niveles de precedencia de los operadores booleanos:
-  01. `not`
-  02. `and`
-  03. `or`
 
-Sentencias
+[-] Expresiones booleanas (`not`,`and`,`or`) sobre expresiones booleanas
+
+### Niveles de precedencia de los operadores booleanos:
+
+  [-] `not` > `and` > `or`
+
+## Sentencias
+
 [-] Pueden ser: (todas ocupan una sola linea)
   [-] expresiones aritmeticas
   [-] expresiones booleanas
@@ -55,7 +78,7 @@ Sentencias
 [-] Si se opera un entero con una cadena el resultado es una cadena
 [-] Hace falta inicializar los identificadores antes de utilizarlos (para conocer el tipo)
 
-Funcionalidades
+## Funcionalidades
 [-] funciones trigonometricas:
   [-] sin
   [-] cos

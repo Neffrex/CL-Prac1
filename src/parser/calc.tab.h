@@ -63,37 +63,43 @@ extern int yydebug;
     EOL = 258,                     /* EOL  */
     LPAREN = 259,                  /* LPAREN  */
     RPAREN = 260,                  /* RPAREN  */
-    ASSIGN = 261,                  /* ASSIGN  */
-    COMMA = 262,                   /* COMMA  */
-    TRUE = 263,                    /* TRUE  */
-    FALSE = 264,                   /* FALSE  */
-    SIN = 265,                     /* SIN  */
-    COS = 266,                     /* COS  */
-    TAN = 267,                     /* TAN  */
-    LEN = 268,                     /* LEN  */
-    SUBSTR = 269,                  /* SUBSTR  */
-    INTEGER = 270,                 /* INTEGER  */
-    FLOAT = 271,                   /* FLOAT  */
-    STRING = 272,                  /* STRING  */
-    CONSTANT = 273,                /* CONSTANT  */
-    PLUS = 274,                    /* PLUS  */
-    MINUS = 275,                   /* MINUS  */
-    TIMES = 276,                   /* TIMES  */
-    DIVIDE = 277,                  /* DIVIDE  */
-    MOD = 278,                     /* MOD  */
-    POW = 279,                     /* POW  */
-    EQUALS = 280,                  /* EQUALS  */
-    GREATER_THAN = 281,            /* GREATER_THAN  */
-    GREATER_EQUALS = 282,          /* GREATER_EQUALS  */
-    LOWER_THAN = 283,              /* LOWER_THAN  */
-    LOWER_EQUALS = 284,            /* LOWER_EQUALS  */
-    NOT_EQUALS = 285,              /* NOT_EQUALS  */
-    NOT = 286,                     /* NOT  */
-    OR = 287,                      /* OR  */
-    AND = 288,                     /* AND  */
-    UNDEFINED_IDENTIFIER = 289,    /* UNDEFINED_IDENTIFIER  */
-    BOOLEAN_IDENTIFIER = 290,      /* BOOLEAN_IDENTIFIER  */
-    ARITHMETIC_IDENTIFIER = 291    /* ARITHMETIC_IDENTIFIER  */
+    LBRACKET = 261,                /* LBRACKET  */
+    RBRACKET = 262,                /* RBRACKET  */
+    ASSIGN = 263,                  /* ASSIGN  */
+    COMMA = 264,                   /* COMMA  */
+    TRUE = 265,                    /* TRUE  */
+    FALSE = 266,                   /* FALSE  */
+    SIN = 267,                     /* SIN  */
+    COS = 268,                     /* COS  */
+    TAN = 269,                     /* TAN  */
+    LEN = 270,                     /* LEN  */
+    SUBSTR = 271,                  /* SUBSTR  */
+    STRUCT = 272,                  /* STRUCT  */
+    TYPE_INTEGER = 273,            /* TYPE_INTEGER  */
+    TYPE_FLOAT = 274,              /* TYPE_FLOAT  */
+    TYPE_STRING = 275,             /* TYPE_STRING  */
+    INTEGER = 276,                 /* INTEGER  */
+    FLOAT = 277,                   /* FLOAT  */
+    STRING = 278,                  /* STRING  */
+    CONSTANT = 279,                /* CONSTANT  */
+    PLUS = 280,                    /* PLUS  */
+    MINUS = 281,                   /* MINUS  */
+    TIMES = 282,                   /* TIMES  */
+    DIVIDE = 283,                  /* DIVIDE  */
+    MOD = 284,                     /* MOD  */
+    POW = 285,                     /* POW  */
+    EQUALS = 286,                  /* EQUALS  */
+    GREATER_THAN = 287,            /* GREATER_THAN  */
+    GREATER_EQUALS = 288,          /* GREATER_EQUALS  */
+    LOWER_THAN = 289,              /* LOWER_THAN  */
+    LOWER_EQUALS = 290,            /* LOWER_EQUALS  */
+    NOT_EQUALS = 291,              /* NOT_EQUALS  */
+    NOT = 292,                     /* NOT  */
+    OR = 293,                      /* OR  */
+    AND = 294,                     /* AND  */
+    UNDEFINED_IDENTIFIER = 295,    /* UNDEFINED_IDENTIFIER  */
+    BOOLEAN_IDENTIFIER = 296,      /* BOOLEAN_IDENTIFIER  */
+    ARITHMETIC_IDENTIFIER = 297    /* ARITHMETIC_IDENTIFIER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -110,7 +116,7 @@ union YYSTYPE
   op_type operator;
   void* no_type;
 
-#line 114 "calc.tab.h"
+#line 120 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -12,10 +12,9 @@
 #include "../parser/calc.tab.h"
 #include "../ast/headers/compiler.h"
 
-#define TOKEN(X) log_message(LOG_INFO, "Token: %s", #X); return X; 
+#define TOKEN(X) log_message(LOG_INFO, "Token: %s", #X); return X
 
 void yyerror(const char *s);
-format_mode mode;
 
 %}
 
@@ -25,7 +24,7 @@ format_mode mode;
 /* DEFINITIONS */
 DIGIT [0-9]
 INTEGER {DIGIT}+
-REAL {DIGIT}+"."{DIGIT}+
+FLOAT {DIGIT}+"."{DIGIT}+
 STRING \"[^\"]*\"
 IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]*
 SIN "sin"
@@ -35,62 +34,84 @@ SUBSTR "substr"
 LEN "len"
 TRUE "TRUE"|"true"
 FALSE "FALSE"|"false"
-DEC "DEC"|"dec"
-OCT "OCT"|"oct"
-HEX "HEX"|"hex"
-BIN "BIN"|"bin"
+
+STRUCT "struct"
+TYPE_INTEGER "int"
+TYPE_FLOAT "float"
+TYPE_STRING "string"
+TYPE_BOOLEAN "boolean"
+
 WHITESPACE [ \t]
 SINGLE_LINE_COMMENT "#".*[\n]|"//".*[\n]
 EOL [\n]
 
 %%
 
-"("         { TOKEN(LPAREN);  }
-")"         { TOKEN(RPAREN);  }
-":="        { TOKEN(ASSIGN);  }
-"+"         {	TOKEN(PLUS);    }
-"-"         {	TOKEN(MINUS);   }
-"*"         { TOKEN(TIMES);   }
-"/"         { TOKEN(DIVIDE);  }
-"%"         { TOKEN(MOD);     }
-"**"        { TOKEN(POW);  }
-"="         {	TOKEN(EQUALS);  }
-">"         { TOKEN(GREATER_THAN);    }
-">="        {	TOKEN(GREATER_EQUALS);  }
-"<"         { TOKEN(LOWER_THAN);      }
-"<="        { TOKEN(LOWER_EQUALS);    }
-"<>"        { TOKEN(NOT_EQUALS);   }
-"not"       { TOKEN(NOT);          }
-"or"        { TOKEN(OR);  }
-"and"       { TOKEN(AND); }
-","         { TOKEN(COMMA); }
-"PI"        {
+"("          { TOKEN(LPAREN); }
+")"          { TOKEN(RPAREN); }
+"{"          { TOKEN(LBRACKET); }
+"}"          { TOKEN(RBRACKET); }
+
+":="         { TOKEN(ASSIGN); }
+"+"          { TOKEN(PLUS); }
+"-"          { TOKEN(MINUS); }
+"*"          { TOKEN(TIMES); }
+"/"          { TOKEN(DIVIDE); }
+"%"          { TOKEN(MOD); }
+"**"         { TOKEN(POW); }
+"="          { TOKEN(EQUALS); }
+">"          { TOKEN(GREATER_THAN); }
+">="         { TOKEN(GREATER_EQUALS); }
+"<"          { TOKEN(LOWER_THAN); }
+"<="         { TOKEN(LOWER_EQUALS); }
+"<>"         { TOKEN(NOT_EQUALS); }
+"not"        { TOKEN(NOT); }
+"or"         { TOKEN(OR); }
+"and"        { TOKEN(AND); }
+","          { TOKEN(COMMA); }
+
+"PI"         {
   yylval.literal.type = E_FLOAT;
   yylval.literal.fvalue = M_PI;
   TOKEN(CONSTANT);
 }
-"E"         {
+"E"          {
   yylval.literal.type = E_FLOAT;
   yylval.literal.fvalue = M_E;
   TOKEN(CONSTANT);
 }
-{DEC}       { mode = E_DEC; }
-{OCT}       { mode = E_OCT; }
-{HEX}       { mode = E_HEX; }
-{BIN}       { mode = E_BIN; }
-{LEN}       { TOKEN(LEN); }
-{SUBSTR}    { TOKEN(SUBSTR); }
-{SIN}       { TOKEN(SIN); }
-{COS}       { TOKEN(COS); }
-{TAN}       { TOKEN(TAN); }
-{TRUE}      { TOKEN(TRUE); }
-{FALSE}     { TOKEN(FALSE); }
+{TRUE}       { TOKEN(TRUE); }
+{FALSE}      { TOKEN(FALSE); }
+
+{LEN}        { TOKEN(LEN); }
+{SUBSTR}     { TOKEN(SUBSTR); }
+{SIN}        { TOKEN(SIN); }
+{COS}        { TOKEN(COS); }
+{TAN}        { TOKEN(TAN); }
+
+
+{STRUCT}     { TOKEN(STRUCT); }
+
+{TYPE_INTEGER} {
+	yylval.data_type = E_INTEGER;
+	TOKEN(TYPE);
+}
+{TYPE_FLOAT}   { 
+	yylval.data_type = E_FLOAT;
+	TOKEN(TYPE); 
+}
+{TYPE_STRING}  { 
+	yylval.data_type = E_STRING;
+	TOKEN(TYPE); 
+}
+{TYPE_BOOLEAN} { TOKEN(TYPE); }
+
 {INTEGER} {
   yylval.literal.type = E_INTEGER;
   yylval.literal.ivalue = atoi(yytext);
   TOKEN(INTEGER);
 }
-{REAL} {
+{FLOAT} {
   yylval.literal.type = E_FLOAT;
   yylval.literal.fvalue = atof(yytext);
   TOKEN(FLOAT);
@@ -100,19 +121,14 @@ EOL [\n]
   yylval.literal.svalue = strndup(yytext+1, yyleng-2);
   TOKEN(STRING);
 }
+
 {IDENTIFIER} {
   identifier id;
   id.name = strndup(yytext, yyleng);
   id.lineno = yylineno;
-  literal literal = getIdentifierValue(&id);
   yylval.identifier = id;
 
-  if(isBoolean(&literal))
-  { TOKEN(BOOLEAN_IDENTIFIER); }
-  else if(isNumber(&literal) || isString(&literal))
-  { TOKEN(ARITHMETIC_IDENTIFIER); }
-  else
-  { TOKEN(UNDEFINED_IDENTIFIER); }
+	TOKEN(IDENTIFIER);
 }
 
 {SINGLE_LINE_COMMENT} { yylineno++; }

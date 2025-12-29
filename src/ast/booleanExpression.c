@@ -71,9 +71,9 @@ bool relationalExpression(literal* loperand, op_type op, literal* roperand)
 
 #ifdef LOG
   char lvalue[STR_MAX_LENGTH];
-  val2str(lvalue, sizeof(lvalue), mode, loperand);
+  literal2str(lvalue, sizeof(lvalue), loperand);
   char rvalue[STR_MAX_LENGTH];
-  val2str(rvalue, sizeof(rvalue), mode, roperand);
+  literal2str(rvalue, sizeof(rvalue), roperand);
   
   log_message(LOG_INFO, LOG_MSG_RELATIONAL_EXPRESSION,
     type2str(loperand->type), op2str(op), type2str(roperand->type),

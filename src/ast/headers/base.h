@@ -6,10 +6,6 @@
 #include "../../symtab/symtab.h"
 #include "messages.h"
 
-extern format_mode mode;
-
-literal getIdentifierValue(identifier*);
-literal createEmptyLiteral(void);
 literal createIntegerLiteral(int);
 literal createFloatLiteral(float);
 literal createStringLiteral(char*, int);

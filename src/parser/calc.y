@@ -9,7 +9,6 @@ extern char *yytext;
 extern int yylineno;
 extern int yylex(void);
 extern void yyerror(const char *s);
-extern format_mode mode;
 
 %}
 
@@ -22,24 +21,27 @@ extern format_mode mode;
   literal literal;
   identifier identifier;
   op_type operator;
+	data_type type;
   void* no_type;
 }
 
-%token <no_type> EOL LPAREN RPAREN ASSIGN COMMA
+%token <no_type> EOL LPAREN RPAREN LBRACKET RBRACKET ASSIGN COMMA
 %token <no_type> TRUE FALSE 
 %token <no_type> SIN COS TAN LEN SUBSTR
-
+%token <no_type> STRUCT
+%token <type> TYPE
 
 %token <literal> INTEGER FLOAT STRING CONSTANT
 %token <operator> PLUS MINUS TIMES DIVIDE MOD POW
 %token <operator> EQUALS GREATER_THAN GREATER_EQUALS LOWER_THAN LOWER_EQUALS NOT_EQUALS
 %token <operator> NOT OR AND
-%token <identifier> UNDEFINED_IDENTIFIER BOOLEAN_IDENTIFIER ARITHMETIC_IDENTIFIER
 
+%token <identifier> IDENTIFIER
 %type <no_type> statement
 
+
 %type <identifier> assignment
-%type <identifier> identifier_complete identifier_incomplete
+%type <identifier> declaration
 
 %type <literal> expression
 
@@ -75,29 +77,23 @@ statementList:
 
 statement:
   %empty
+	| declaration[id]
+	{ cprint(yyout, "%s:%s", $id.name, type2str($id->type)) }
   | assignment[id]
-  { cprint(yyout, mode, "%s :%s= %v\n", $id.name, type2str($id.value.type), &($id.value)); }
+  { cprint(yyout, "%s:%s = %v\n", $id.name, type2str($id.type), &($id.value)); }
   | expression[e]
-  { cprint(yyout, mode, "[type:%s] %v\n", type2str($e.type), &$e); }
+  { cprint(yyout, "%v:%s\n", type2str(&$e, $e.type)); }
 ;
+
+declaration:
+	TYPE[t] IDENTIFIER[id]
+	{ $$ = declare($id, $t); }
+	| declaration[d] COMMA IDENTIFIER[id]
+	{ $$ = declare($id, $d.type) }
 
 assignment:
-  identifier_complete[l] ASSIGN expression[r] 
+  IDENTIFIER[l] ASSIGN expression[r]
   { $$ = assign(&$l, $r); }
-  | identifier_incomplete[l] ASSIGN expression[r]
-  { $$ = assign(&$l, $r); }
-;
-
-identifier_complete:
-  BOOLEAN_IDENTIFIER[id]
-  { log_message(LOG_INFO, "Boolean Identifier: %s", $id.name); }
-  | ARITHMETIC_IDENTIFIER[id]
-  { log_message(LOG_INFO, "Arithmetic Identifier: %s", $id.name); }
-;
-
-identifier_incomplete:
-  UNDEFINED_IDENTIFIER[id]
-  { log_message(LOG_INFO, "Undefined Identifier: %s", $id.name); }
 ;
 
 expression:
@@ -142,7 +138,7 @@ arithmeticExpressionX:
   | STRING
   | CONSTANT
   | arithmeticFunction
-  | ARITHMETIC_IDENTIFIER[x]
+  | IDENTIFIER[x]
   { $$ = arithmeticExpressionIdentifier(&$x); }
   | LPAREN arithmeticExpression RPAREN 
   { $$ = $2; }
@@ -210,7 +206,6 @@ relationalExpression:
 
 int main(int argc, char** argv) {
   init_log("debug.log");
-  mode = E_DEC;
   yyparse();
   close_log();
   return 0;
