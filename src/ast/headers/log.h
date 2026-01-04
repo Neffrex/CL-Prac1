@@ -18,6 +18,7 @@ typedef enum {
 void init_log(const char *filename);
 void close_log(void);
 void log_message(LogLevel level, const char *format, ...);
+void halt(const char *format, ...);
 
 #endif
 

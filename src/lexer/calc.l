@@ -39,7 +39,7 @@ STRUCT "struct"
 TYPE_INTEGER "int"
 TYPE_FLOAT "float"
 TYPE_STRING "string"
-TYPE_BOOLEAN "boolean"
+TYPE_BOOLEAN "bool"
 
 WHITESPACE [ \t]
 SINGLE_LINE_COMMENT "#".*[\n]|"//".*[\n]
@@ -71,12 +71,12 @@ EOL [\n]
 ","          { TOKEN(COMMA); }
 
 "PI"         {
-  yylval.literal.type = E_FLOAT;
+  yylval.literal.type = TYPE_FLOAT;
   yylval.literal.fvalue = M_PI;
   TOKEN(CONSTANT);
 }
 "E"          {
-  yylval.literal.type = E_FLOAT;
+  yylval.literal.type = TYPE_FLOAT;
   yylval.literal.fvalue = M_E;
   TOKEN(CONSTANT);
 }
@@ -93,49 +93,59 @@ EOL [\n]
 {STRUCT}     { TOKEN(STRUCT); }
 
 {TYPE_INTEGER} {
-	yylval.data_type = E_INTEGER;
+	yylval.type = TYPE_INTEGER;
 	TOKEN(TYPE);
 }
 {TYPE_FLOAT}   { 
-	yylval.data_type = E_FLOAT;
+	yylval.type = TYPE_FLOAT;
 	TOKEN(TYPE); 
 }
 {TYPE_STRING}  { 
-	yylval.data_type = E_STRING;
+	yylval.type = TYPE_STRING;
 	TOKEN(TYPE); 
 }
-{TYPE_BOOLEAN} { TOKEN(TYPE); }
+{TYPE_BOOLEAN} { 
+  yylval.type = TYPE_BOOLEAN;
+  TOKEN(TYPE);
+}
 
 {INTEGER} {
-  yylval.literal.type = E_INTEGER;
+  yylval.literal.type = TYPE_INTEGER;
   yylval.literal.ivalue = atoi(yytext);
   TOKEN(INTEGER);
 }
 {FLOAT} {
-  yylval.literal.type = E_FLOAT;
+  yylval.literal.type = TYPE_FLOAT;
   yylval.literal.fvalue = atof(yytext);
   TOKEN(FLOAT);
 }
 {STRING} {
-  yylval.literal.type = E_STRING;
+  yylval.literal.type = TYPE_STRING;
   yylval.literal.svalue = strndup(yytext+1, yyleng-2);
   TOKEN(STRING);
 }
 
 {IDENTIFIER} {
-  identifier id;
-  id.name = strndup(yytext, yyleng);
-  id.lineno = yylineno;
+
+  identifier id = getIdentifier(yytext);
+  id.name = strndup(yytext, yyleng); // For uninitialized identifiers
   yylval.identifier = id;
 
-	TOKEN(IDENTIFIER);
+  if(id.type == TYPE_BOOLEAN)
+  { TOKEN(BOOLEAN_IDENTIFIER); }
+  else if(id.type == TYPE_INTEGER || id.type == TYPE_FLOAT || id.type == TYPE_STRING)
+  { TOKEN(ARITHMETIC_IDENTIFIER); }
+  else
+  { id.lineno = yylineno;
+    TOKEN(UNTYPED_IDENTIFIER);
+  }
 }
 
 {SINGLE_LINE_COMMENT} { yylineno++; }
 "/*"                  { BEGIN(COMMENT); }
 <COMMENT>"*/"         { BEGIN(INITIAL); }
 <COMMENT>.            { }
-<COMMENT>\n           { yylineno++; }
+<COMMENT>{EOL}        { yylineno++; }
 
 {EOL} {
   yylineno++;

@@ -5,7 +5,9 @@
 #include "types.h"
 #include "../../symtab/symtab.h"
 #include "messages.h"
+#include "identifier.h"
 
+literal createEmptyLiteral();
 literal createIntegerLiteral(int);
 literal createFloatLiteral(float);
 literal createStringLiteral(char*, int);

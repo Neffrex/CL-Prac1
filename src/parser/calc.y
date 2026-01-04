@@ -20,8 +20,9 @@ extern void yyerror(const char *s);
   bool boolean;
   literal literal;
   identifier identifier;
+  identifier_node* p_identifier_node;
   op_type operator;
-	data_type type;
+	type_t type;
   void* no_type;
 }
 
@@ -36,14 +37,15 @@ extern void yyerror(const char *s);
 %token <operator> EQUALS GREATER_THAN GREATER_EQUALS LOWER_THAN LOWER_EQUALS NOT_EQUALS
 %token <operator> NOT OR AND
 
-%token <identifier> IDENTIFIER
+%token <identifier> ARITHMETIC_IDENTIFIER BOOLEAN_IDENTIFIER UNTYPED_IDENTIFIER
 %type <no_type> statement
 
 
 %type <identifier> assignment
-%type <identifier> declaration
-
+%type <p_identifier_node> declaration
 %type <literal> expression
+
+%type <p_identifier_node> identifierList
 
 %type <literal> arithmeticExpression
 %type <literal> arithmeticExpressionA
@@ -76,23 +78,39 @@ statementList:
 ;
 
 statement:
-  %empty
+	%empty
 	| declaration[id]
-	{ cprint(yyout, "%s:%s", $id.name, type2str($id->type)) }
+	{ 
+    for (identifier_node* current = $id; current != NULL; current = current->next) {
+      cprint(yyout, "%s:%s", current->id.name, type2str(current->id.type));
+      if (current->next != NULL) 
+			{ cprint(yyout, ", "); }
+			else
+			{ cprint(yyout, "\n"); }
+    }
+  }
   | assignment[id]
   { cprint(yyout, "%s:%s = %v\n", $id.name, type2str($id.type), &($id.value)); }
   | expression[e]
-  { cprint(yyout, "%v:%s\n", type2str(&$e, $e.type)); }
+  { cprint(yyout, "%v:%s\n", &$e, type2str($e.type)); }
 ;
 
 declaration:
-	TYPE[t] IDENTIFIER[id]
-	{ $$ = declare($id, $t); }
-	| declaration[d] COMMA IDENTIFIER[id]
-	{ $$ = declare($id, $d.type) }
+	TYPE[t] identifierList[node]
+	{ $$ = declare($node, $t); }
+;
+
+identifierList:
+  UNTYPED_IDENTIFIER[id]
+  { $$ = createIdentifierNode(NULL, &$id, TYPE_UNDEFINED); }
+  | identifierList COMMA UNTYPED_IDENTIFIER[id]
+  { $$ = createIdentifierNode($1, &$id, TYPE_UNDEFINED); }
+;
 
 assignment:
-  IDENTIFIER[l] ASSIGN expression[r]
+  ARITHMETIC_IDENTIFIER[l] ASSIGN arithmeticExpression[r]
+  { $$ = assign(&$l, $r); }
+  | BOOLEAN_IDENTIFIER[l] ASSIGN booleanExpression[r]
   { $$ = assign(&$l, $r); }
 ;
 
@@ -138,23 +156,23 @@ arithmeticExpressionX:
   | STRING
   | CONSTANT
   | arithmeticFunction
-  | IDENTIFIER[x]
-  { $$ = arithmeticExpressionIdentifier(&$x); }
+  | ARITHMETIC_IDENTIFIER[x]
+  { $$ = $x.value; }
   | LPAREN arithmeticExpression RPAREN 
   { $$ = $2; }
 ;
 
 arithmeticFunction:
   SIN[id] LPAREN arithmeticExpression[x] RPAREN 
-  { $$ = arithmeticExpressionFunction(E_SIN, &$x); }
+  { $$ = arithmeticExpressionFunction(FUNC_SIN, &$x); }
   | COS[id] LPAREN arithmeticExpression[x] RPAREN 
-  { $$ = arithmeticExpressionFunction(E_COS, &$x); }
+  { $$ = arithmeticExpressionFunction(FUNC_COS, &$x); }
   | TAN[id] LPAREN arithmeticExpression[x] RPAREN 
-  { $$ = arithmeticExpressionFunction(E_TAN, &$x); }
-  | LEN[id] LPAREN arithmeticExpression[string] RPAREN
-  { $$ = arithmeticExpressionFunction(E_LEN, &$string); }
-  | SUBSTR[id] LPAREN arithmeticExpression[string] COMMA arithmeticExpression[start] COMMA arithmeticExpression[length] RPAREN
-  { $$ = arithmeticExpressionFunction(E_SUBSTR, &$string, &$start, &$length); }
+  { $$ = arithmeticExpressionFunction(FUNC_TAN, &$x); }
+  | LEN[id] LPAREN arithmeticExpression[x] RPAREN
+  { $$ = arithmeticExpressionFunction(FUNC_LEN, &$x); }
+  | SUBSTR[id] LPAREN arithmeticExpression[x] COMMA arithmeticExpression[start] COMMA arithmeticExpression[length] RPAREN
+  { $$ = arithmeticExpressionFunction(FUNC_SUBSTR, &$x, &$start, &$length); }
 ;
 
 booleanExpression:
@@ -183,7 +201,7 @@ booleanExpressionX:
   | FALSE
   { $$ = booleanExpressionFalse(); }
   | BOOLEAN_IDENTIFIER[id]
-  { $$ = booleanExpressionIdentifier(&$id); }
+  { $$ = $id.value.bvalue; }
   | LPAREN booleanExpressionO[e] RPAREN
   { $$ = $e; }
 ;

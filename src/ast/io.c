@@ -13,9 +13,10 @@ int cprint(FILE* stream, const char* format, ...)
     if(*cursor == '%' && *(cursor+1) == 'v')
     { // Custom '%v' format specifier
       literal* value = va_arg(args, literal*);
-      char buffer[STR_MAX_LENGTH];
-      literal2str(buffer, sizeof(buffer), value);
+      char *buffer = literal2str(value);
       fprintf(stream, "%s", buffer);
+      written += strlen(buffer);
+      free(buffer);
       cursor+=2;
     }
     else if(*cursor == '%')

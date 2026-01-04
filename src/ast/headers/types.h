@@ -5,6 +5,7 @@
 #include "log.h"
 
 #define STR_MAX_LENGTH 256
+#define MAX_VERBOSE_SIZE 64
 
 // EMPTY VALUES
 #define S_UNDEFINED "UNDEFINED"
@@ -16,6 +17,10 @@
 #define S_FLOAT "float"
 #define S_BOOLEAN "boolean"
 #define S_STRING "string"
+
+// BOOLEAN VALUES
+#define S_TRUE "true"
+#define S_FALSE "false"
 
 // OPERATORS
 #define S_NEGATE "negate"
@@ -42,6 +47,7 @@
 
 
 typedef enum {
+  TYPE_UNDEFINED,
   TYPE_INTEGER,
   TYPE_FLOAT,
   TYPE_STRING,
@@ -95,8 +101,19 @@ typedef struct {
 	int lineno;
 } identifier;
 
-void literal2str(char*, size_t, literal*);
-const char* type2str(data_type);
+typedef struct identifier_node {
+  identifier id;
+  struct identifier_node* next;
+} identifier_node;
+
+bool isNullLiteral(literal*);
+bool isInteger(literal*);
+bool isFloat(literal*);
+bool isString(literal*);
+bool isBoolean(literal*);
+bool isNumber(literal*);
+char* literal2str(literal*);
+const char* type2str(type_t);
 const char* op2str(op_type);
 const char* functid2str(funct_id);
 const char* bool2str(bool value);

@@ -40,6 +40,9 @@ $(LEXER_C): $(LEXER_SOURCE) $(PARSER_H)
 run: $(TARGET)
 	./$(TARGET) < $(INPUT_FILE)
 
+debug: ${TARGET}
+	gdb ./$(TARGET)
+
 # Regla para limpiar archivos generados
 clean:
 	rm -f $(TARGET) $(PARSER_C) $(PARSER_H) $(LEXER_C)

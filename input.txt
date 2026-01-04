@@ -1,35 +1,21 @@
+//Declaracions
+float x
+int i,j
+string s
+bool b
+float z
 // assignacions
 x := 1.5
 i := 5
 z := i * (x + i) - i / 4.0
 s := "Hola"
 b := z > 3 or not (i > 0 and i <= 10) or false
-
-struct {
-	
-}
-
 // expressions bàsiques
 x
 i
 z
 s
 b
-
-y := 1.5708
-"sin(y)"
-sin(y)
-"cos(y)"
-cos(y)
-"tan(y)"
-tan(y)
-
-"len(s)"
-len(s)
-
-"substr(s, 1, 3)"
-substr(s, 1, 3)
-
 /*
 * expressions
 */
@@ -37,4 +23,3 @@ i + i * 2
 -i + x
 s + (s + i) + "--" + x
 b or not b
-

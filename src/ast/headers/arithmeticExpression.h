@@ -1,9 +1,15 @@
 #pragma once
 #include "base.h"
 
+void logArithmeticExpressionEntry(literal*, op_type, literal*);
+void logArithmeticExpressionExit(literal*, op_type, literal*, literal);
+
+literal handleFloatArithmetic(literal*, op_type, literal*);
+literal handleIntegerArithmetic(literal*, op_type, literal*);
+literal handleStringArithmetic(literal*, op_type, literal*);
+literal handleStringConcat(literal*, literal*);
+
 literal arithmeticExpression(literal*, op_type, literal*);
-literal arithmeticExpressionIdentifier(identifier*);
-literal arithmeticExpressionConcat(literal*, literal*);
 literal arithmeticExpressionPlus(literal*, literal*);
 literal arithmeticExpressionMinus(literal*, literal*);
 literal arithmeticExpressionTimes(literal*, literal*);

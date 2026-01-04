@@ -45,7 +45,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 16 "src/parser/calc.y"
+#line 15 "src/parser/calc.y"
 
   #include "../ast/headers/compiler.h"
 
@@ -75,31 +75,29 @@ extern int yydebug;
     LEN = 270,                     /* LEN  */
     SUBSTR = 271,                  /* SUBSTR  */
     STRUCT = 272,                  /* STRUCT  */
-    TYPE_INTEGER = 273,            /* TYPE_INTEGER  */
-    TYPE_FLOAT = 274,              /* TYPE_FLOAT  */
-    TYPE_STRING = 275,             /* TYPE_STRING  */
-    INTEGER = 276,                 /* INTEGER  */
-    FLOAT = 277,                   /* FLOAT  */
-    STRING = 278,                  /* STRING  */
-    CONSTANT = 279,                /* CONSTANT  */
-    PLUS = 280,                    /* PLUS  */
-    MINUS = 281,                   /* MINUS  */
-    TIMES = 282,                   /* TIMES  */
-    DIVIDE = 283,                  /* DIVIDE  */
-    MOD = 284,                     /* MOD  */
-    POW = 285,                     /* POW  */
-    EQUALS = 286,                  /* EQUALS  */
-    GREATER_THAN = 287,            /* GREATER_THAN  */
-    GREATER_EQUALS = 288,          /* GREATER_EQUALS  */
-    LOWER_THAN = 289,              /* LOWER_THAN  */
-    LOWER_EQUALS = 290,            /* LOWER_EQUALS  */
-    NOT_EQUALS = 291,              /* NOT_EQUALS  */
-    NOT = 292,                     /* NOT  */
-    OR = 293,                      /* OR  */
-    AND = 294,                     /* AND  */
-    UNDEFINED_IDENTIFIER = 295,    /* UNDEFINED_IDENTIFIER  */
-    BOOLEAN_IDENTIFIER = 296,      /* BOOLEAN_IDENTIFIER  */
-    ARITHMETIC_IDENTIFIER = 297    /* ARITHMETIC_IDENTIFIER  */
+    TYPE = 273,                    /* TYPE  */
+    INTEGER = 274,                 /* INTEGER  */
+    FLOAT = 275,                   /* FLOAT  */
+    STRING = 276,                  /* STRING  */
+    CONSTANT = 277,                /* CONSTANT  */
+    PLUS = 278,                    /* PLUS  */
+    MINUS = 279,                   /* MINUS  */
+    TIMES = 280,                   /* TIMES  */
+    DIVIDE = 281,                  /* DIVIDE  */
+    MOD = 282,                     /* MOD  */
+    POW = 283,                     /* POW  */
+    EQUALS = 284,                  /* EQUALS  */
+    GREATER_THAN = 285,            /* GREATER_THAN  */
+    GREATER_EQUALS = 286,          /* GREATER_EQUALS  */
+    LOWER_THAN = 287,              /* LOWER_THAN  */
+    LOWER_EQUALS = 288,            /* LOWER_EQUALS  */
+    NOT_EQUALS = 289,              /* NOT_EQUALS  */
+    NOT = 290,                     /* NOT  */
+    OR = 291,                      /* OR  */
+    AND = 292,                     /* AND  */
+    ARITHMETIC_IDENTIFIER = 293,   /* ARITHMETIC_IDENTIFIER  */
+    BOOLEAN_IDENTIFIER = 294,      /* BOOLEAN_IDENTIFIER  */
+    UNTYPED_IDENTIFIER = 295       /* UNTYPED_IDENTIFIER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -108,12 +106,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 20 "src/parser/calc.y"
+#line 19 "src/parser/calc.y"
 
   bool boolean;
   literal literal;
   identifier identifier;
+  identifier_node* p_identifier_node;
   op_type operator;
+	type_t type;
   void* no_type;
 
 #line 120 "calc.tab.h"

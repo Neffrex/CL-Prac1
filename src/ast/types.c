@@ -1,15 +1,38 @@
 #include "headers/types.h"
 
-void literal2str(char* buffer, size_t size, literal* literal)
+bool isNullLiteral(literal* literal)
+{ return literal->type == TYPE_UNDEFINED; }
+
+bool isInteger(literal* literal)
+{ return literal->type == TYPE_INTEGER; }
+
+bool isFloat(literal* literal)
+{ return literal->type == TYPE_FLOAT; }
+
+bool isString(literal* literal)
+{ return literal->type == TYPE_STRING; }
+
+bool isBoolean(literal* literal)
+{ return literal->type == TYPE_BOOLEAN; }
+
+bool isNumber(literal* literal)
+{ return literal->type == TYPE_INTEGER || literal->type == TYPE_FLOAT; }
+
+char* literal2str(literal* literal)
 {
+  char* buffer = malloc(STR_MAX_LENGTH);
+  size_t size = STR_MAX_LENGTH;
+
   switch(literal->type)
   {
     case TYPE_INTEGER:   snprintf(buffer, size, "%d", literal->ivalue); break;
     case TYPE_FLOAT:     snprintf(buffer, size, "%.3f", literal->fvalue); break;
     case TYPE_STRING:    snprintf(buffer, size, "%s", literal->svalue ? literal->svalue : S_NULL); break;
-    case TYPE_BOOLEAN:   snprintf(buffer, size, "%s", literal->bvalue ? "true" : "false"); break;
+    case TYPE_BOOLEAN:   snprintf(buffer, size, "%s", literal->bvalue ? S_TRUE : S_FALSE); break;
     default: snprintf(buffer, size, S_UNDEFINED);
   }
+
+  return buffer;
 }
 
 const char* type2str(type_t type) 
@@ -64,5 +87,5 @@ const char* functid2str(funct_id funct_id)
 
 const char* bool2str(bool value) 
 {
-  return value ? "true" : "false";
+  return value ? S_TRUE : S_FALSE;
 }
