@@ -1,2 +1,3 @@
 *.swp
 *.txt
+!example_output.txt

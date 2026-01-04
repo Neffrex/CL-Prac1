@@ -1,0 +1,96 @@
+<#############################>:string
+<##       DECLARATIONS      ##>:string
+<#############################>:string
+j:integer, i:integer
+y:float, x:float
+t:string, s:string
+b2:boolean, b1:boolean
+<#############################>:string
+<##    BASIC ASSIGNMENTS    ##>:string
+<#############################>:string
+i:integer = <5>:integer
+j:integer = <2>:integer
+x:float = <1.500>:float
+y:float = <2.000>:float
+s:string = <Hola>:string
+t:string = < mundo!>:string
+b1:boolean = <true>:boolean
+b2:boolean = <false>:boolean
+<#############################>:string
+<## ARITHMETIC EXPRESSIONS  ##>:string
+<#############################>:string
+<7>:integer
+<3>:integer
+<10>:integer
+<2>:integer
+<1>:integer
+<25>:integer
+<-1.500>:float
+<-7>:integer
+<#############################>:string
+<##   MIXED NUMERIC TYPES   ##>:string
+<#############################>:string
+<6.500>:float
+<3.000>:float
+<10.500>:float
+<0.750>:float
+<1.333>:float
+<#############################>:string
+<##   OPERATOR PRECEDENCE   ##>:string
+<#############################>:string
+<11>:integer
+<21>:integer
+<23>:integer
+<63>:integer
+<#############################>:string
+<##   STRING EXPRESSIONS    ##>:string
+<#############################>:string
+<Hola>:string
+< mundo!>:string
+<Hola mundo!>:string
+<Hola!5>:string
+<Result: 7>:string
+<HolaHola5--1.500>:string
+<#############################>:string
+<##   BOOLEAN EXPRESSIONS   ##>:string
+<#############################>:string
+<true>:boolean
+<true>:boolean
+<false>:boolean
+<false>:boolean
+<false>:boolean
+<true>:boolean
+<false>:boolean
+<false>:boolean
+<true>:boolean
+<true>:boolean
+<true>:boolean
+<#############################>:string
+<##   BOOLEAN ASSIGNMENTS   ##>:string
+<#############################>:string
+b1:boolean = <true>:boolean
+b2:boolean = <false>:boolean
+<true>:boolean
+<false>:boolean
+<#############################>:string
+<##  COMBINED EXPRESSIONS   ##>:string
+<#############################>:string
+<24.500>:float
+<true>:boolean
+<true>:boolean
+<#############################>:string
+<## TRIGONOMETRIC FUNCTIONS ##>:string
+<#############################>:string
+<0.997>:float
+<0.071>:float
+<14.101>:float
+<#############################>:string
+<##   STRING MANIPULATION   ##>:string
+<#############################>:string
+<4>:integer
+<Hol>:string
+<#############################>:string
+<##     CONSTANT VALUES     ##>:string
+<#############################>:string
+x:float = <3.142>:float
+y:float = <2.718>:float
