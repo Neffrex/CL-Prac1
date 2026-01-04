@@ -932,4 +932,9 @@
 [INFO] │ ► Token: ASSIGN
 [INFO] │ ► Token: CONSTANT
 [INFO] | ◄ Parsed literal <2.718>:float
+[INFO] │ ► Token: EOL
 [INFO] ├─── Assigned identifier y ← <2.718>:float
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 234: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 235: End of program ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+

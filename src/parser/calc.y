@@ -78,8 +78,7 @@ statementList:
 ;
 
 statement:
-  %empty
-	| declaration[id]
+  declaration[id]
 	{ 
     for (identifier_node* current = $id; current != NULL; current = current->next) {
       cprint(yyout, "%s:%s", current->id.name, type2str(current->id.type));
