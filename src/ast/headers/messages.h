@@ -1,19 +1,19 @@
 #pragma once
 
 
-#define ERR_MSG_INVALID_ARGUMENT_TYPE "[Syntax Error] invalid argument type %s for argument #%d on %s, expected %s\n"
-#define ERR_MSG_INVALID_FUNCTION_IDENTIFIER "[Syntax Error] invalid function identifier %d\n"
+#define ERR_MSG_INVALID_ARGUMENT_TYPE "[Semantic Error] Invalid argument type %s for argument #%d on %s, expected %s\n"
+#define ERR_MSG_INVALID_FUNCTION_IDENTIFIER "[Semantic Error] Invalid function identifier %d\n"
 
-#define ERR_MSG_IDENTIFIER_NOT_DECLARED "[Syntax Error], cannot find declaration of identifier '%s', first use in line %d\n"
+#define ERR_MSG_IDENTIFIER_NOT_DECLARED "[Semantic Error] Cannot find declaration of identifier '%s', first use in line %d\n"
 #define ERR_MSG_INVALID_OPERATION "[Semantic Error] Invalid Operation: %s %s %s\n"
-#define ERR_MSG_INVALID_OPERAND_TYPES "[Syntax Error] Invalid operand types for: %s %s %s\n"
-#define ERR_MSG_INVALID_OPERAND_TYPE "[Syntax Error] Invalid operand type %s for operation %s\n"
+#define ERR_MSG_INVALID_OPERAND_TYPES "[Semantic Error] Invalid operand types for: %s %s %s\n"
+#define ERR_MSG_INVALID_OPERAND_TYPE "[Semantic Error] Invalid operand type %s for operation %s\n"
 
-#define ERR_MSG_INVALID_IDENTIFIER_TYPE "error, invalid identifier type <%s> for operation <%s>"
-#define ERR_MSG_IDENTIFIER_ALREADY_DECLARED "Identifier already declared: Identifier <%s> was already declared in line <%d>"
-#define ERR_MSG_TYPE_MISMATCH "Type mismatch: Cannot assign value <%s> with type <%s> to identifier <%s> with type <%s>\n"
+#define ERR_MSG_INVALID_IDENTIFIER_TYPE "[Semantic Error] Invalid identifier type <%s> for operation <%s>"
+#define ERR_MSG_IDENTIFIER_ALREADY_DECLARED "[Semantic Error] Identifier already declared: Identifier <%s> was already declared in line <%d>"
+#define ERR_MSG_TYPE_MISMATCH "[Semantic Error] Type mismatch: Cannot assign value <%s> with type <%s> to identifier <%s> with type <%s>\n"
 
-#define ERR_MSG_MEMORY_ALLOCATION_FAILED "fatal error, memory allocation failed\n"
+#define ERR_MSG_MEMORY_ALLOCATION_FAILED "[Fatal Error] Memory allocation failed\n"
 #define ERR_MSG_UNDEFINED_SEQUENCE "[Lexical Error] undefined sequence: %s\n"
 
 // LITERALS
