@@ -33,9 +33,12 @@ identifier_node* createIdentifierNode(identifier_node* head, identifier* id, typ
 identifier assign(identifier* id, literal value)
 {
   char *svalue = literal2str(&value);
-  log_message(LOG_INFO, LOG_MSG_IDENTIFIER_ASSIGNED, type2str(value.type), id->name, svalue);
+  log_message(LOG_INFO, LOG_MSG_IDENTIFIER_ASSIGNED, id->name, svalue, type2str(value.type));
+  free(svalue);
 
-	//TODO: Check if id->type == value.type
+  if(id->type != value.type)
+  { halt(ERR_MSG_TYPE_MISMATCH, literal2str(&value), type2str(value.type), id->name, type2str(id->type)); }
+
   id->value = value;
   sym_enter(id->name, id);
   return *id;
@@ -47,7 +50,7 @@ identifier getIdentifier(char* name)
   if(sym_lookup(name, id) != SYMTAB_NOT_FOUND)
   { 
     char *svalue = literal2str(&id->value);
-    log_message(LOG_INFO, LOG_MSG_IDENTIFIER_RETRIEVED, type2str(id->type), id->name, svalue);
+    log_message(LOG_INFO, LOG_MSG_IDENTIFIER_RETRIEVED, id->name, svalue, type2str(id->type));
     free(svalue);
   } 
   identifier result = *id;

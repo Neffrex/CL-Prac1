@@ -1,25 +1,234 @@
-//Declaracions
-float x
-int i,j
-string s
-bool b
-float z
-// assignacions
-x := 1.5
-i := 5
-z := i * (x + i) - i / 4.0
-s := "Hola"
-b := z > 3 or not (i > 0 and i <= 10) or false
-// expressions bàsiques
-x
-i
-z
-s
-b
 /*
-* expressions
-*/
-i + i * 2
--i + x
+ * COMPILERS - TASK 1: CALCULATOR
+ * This is a testing input file for the calculator
+ * Author: Jose Luis Pueyo Viltres
+ */
+
+"#############################"
+"##       DECLARATIONS      ##"
+"#############################"
+
+int i, j
+### Expected: j:integer, i:integer
+
+float x, y
+### Expected: y:float, x:float
+
+string s, t
+### Expected: t:string, s:string
+
+bool b1, b2
+### Expected: b2:boolean, b1:boolean
+
+"#############################"
+"##    BASIC ASSIGNMENTS    ##"
+"#############################"
+
+i := 5
+### Expected: i:integer = <5>:integer
+
+j := +2
+### Expected: j:integer = <2>:integer
+
+x := -(-1.5)
+### Expected: x:float = <1.500>:float
+
+y := 2.0
+### Expected: y:float = <2.000>:float
+
+s := "Hola"
+### Expected: s:string = <Hola>:string
+
+t := " mundo!"
+### Expected: t:string = < mundo!>:string
+
+b1 := true
+### Expected: b1:boolean = <true>:boolean
+
+b2 := false
+### Expected: b2:boolean = <false>:boolean
+
+"#############################"
+"## ARITHMETIC EXPRESSIONS  ##"
+"#############################"
+
+i + j
+### Expected: <7>:integer
+
+i - j
+### Expected: <3>:integer
+
+i * j
+### Expected: <10>:integer
+
+i / j
+### Expected: <2>:integer
+
+i % j
+### Expected: <1>:integer
+
+i ** j
+### Expected: <25>:integer
+
+-x
+### Expected: <-1.500>:float
+
+-(i + j)
+### Expected: <-7>:integer
+
+"#############################"
+"##   MIXED NUMERIC TYPES   ##"
+"#############################"
+
+i + x
+### Expected: <6.500>:float
+
+x * j
+### Expected: <3.000>:float
+
+(i + j) * x
+### Expected: <10.500>:float
+
+x / 2
+### Expected: <0.750>:float
+
+2 / x
+### Expected: <1.333>:float
+
+"#############################"
+"##   OPERATOR PRECEDENCE   ##"
+"#############################"
+
+i + j * 3
+### Expected: <11>:integer
+
+(i + j) * 3
+### Expected: <21>:integer
+
+i + j * 3 ** 2
+### Expected: <23>:integer
+
+(i + j) * (3 ** 2)
+### Expected: <63>:integer
+
+
+"#############################"
+"##   STRING EXPRESSIONS    ##"
+"#############################"
+
+s
+### Expected: <Hola>:string
+
+t
+### Expected: < mundo!>:string
+
+s + t
+### Expected: <Hola mundo!>:string
+
+s + "!" + i
+### Expected: <Hola!5>:string
+
+"Result: " + (i + j)
+### Expected: <Result: 7>:string
+
 s + (s + i) + "--" + x
-b or not b
+### Expected: <HolaHola5--1.500>:string
+
+"#############################"
+"##   BOOLEAN EXPRESSIONS   ##"
+"#############################"
+
+i > j
+### Expected: <true>:boolean
+
+i >= j
+### Expected: <true>:boolean
+
+i < j
+### Expected: <false>:boolean
+
+i <= j
+### Expected: <false>:boolean
+
+i = j
+### Expected: <false>:boolean
+
+i <> j
+### Expected: <true>:boolean
+
+not b1
+### Expected: <false>:boolean
+
+b1 and b2
+### Expected: <false>:boolean
+
+b1 or b2
+### Expected: <true>:boolean
+
+not (i > j and j < 0)
+### Expected: <true>:boolean
+
+(i > j) or (j > i and b2)
+### Expected: <true>:boolean
+
+"#############################"
+"##   BOOLEAN ASSIGNMENTS   ##"
+"#############################"
+
+b1 := i > 3
+### Expected: b1:boolean = <true>:boolean
+
+b2 := not (i > 0 and i <= 10)
+### Expected: b2:boolean = <false>:boolean
+
+b1
+### Expected: <true>:boolean
+
+b2
+### Expected: <false>:boolean
+
+"#############################"
+"##  COMBINED EXPRESSIONS   ##"
+"#############################"
+
+(i + j) * (x + y)
+### Expected: <24.500>:float
+
+(i > j) and (x > y or y >= 2.0) 
+### Expected: <true>:boolean
+
+not ((i + j) > 10) 
+### Expected: <true>:boolean
+
+"#############################"
+"## TRIGONOMETRIC FUNCTIONS ##"
+"#############################"
+
+sin(x)
+### Expected: <0.997>:float
+
+COS(x)
+### Expected: <0.071>:float
+
+tan(x)
+### Expected: <14.101>:float
+
+"#############################"
+"##   STRING MANIPULATION   ##"
+"#############################"
+
+len(s)
+### Expected: <4>:integer
+
+SUBSTR(s, 0, 3)
+### Expected: <Hol>:string
+
+"#############################"
+"##     CONSTANT VALUES     ##"
+"#############################"
+
+x := PI
+### Expected: x:float = <3.142>:float 
+
+### Expected: y:float = <2.718>:float
+y := E

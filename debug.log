@@ -1,235 +1,935 @@
-[INFO] Token: TYPE
-[INFO] Token: UNTYPED_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Declared identifier x with type float
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 7: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: TYPE
-[INFO] Token: UNTYPED_IDENTIFIER
-[INFO] Token: COMMA
-[INFO] Token: UNTYPED_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Declared identifier j with type integer
-[INFO] Declared identifier i with type integer
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##       DECLARATIONS      ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 8: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: TYPE
-[INFO] Token: UNTYPED_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Declared identifier s with type string
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 9: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: TYPE
-[INFO] Token: UNTYPED_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Declared identifier b with type boolean
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: TYPE
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: COMMA
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ├─── Declared identifier j:integer
+[INFO] ├─── Declared identifier i:integer
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 11: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: TYPE
-[INFO] Token: UNTYPED_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Declared identifier z with type float
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: TYPE
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: COMMA
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ├─── Declared identifier y:float
+[INFO] ├─── Declared identifier x:float
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 14: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved float value of identifier x <- UNDEFINED
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: ASSIGN
-[INFO] Token: FLOAT
-[INFO] Token: EOL
-[INFO] Assigned float value to identifier x := 1.500
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: TYPE
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: COMMA
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ├─── Declared identifier t:string
+[INFO] ├─── Declared identifier s:string
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 17: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved integer value of identifier i <- UNDEFINED
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: ASSIGN
-[INFO] Token: INTEGER
-[INFO] Token: EOL
-[INFO] Assigned integer value to identifier i := 5
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: TYPE
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: COMMA
+[INFO] │ ► Token: UNTYPED_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ├─── Declared identifier b2:boolean
+[INFO] ├─── Declared identifier b1:boolean
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 20: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved float value of identifier z <- UNDEFINED
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: ASSIGN
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: TIMES
-[INFO] Token: LPAREN
-[INFO] Retrieved float value of identifier x <- 1.500
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: PLUS
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: RPAREN
-[INFO] Arithmetic Expression float + integer: '1.500' + '5'
-[INFO] Arithmetic Expression float + integer: '1.500' + '5' = float '6.500'
-[INFO] Token: MINUS
-[INFO] Arithmetic Expression integer * float: '5' * '6.500'
-[INFO] Arithmetic Expression integer * float: '5' * '6.500' = float '32.500'
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: DIVIDE
-[INFO] Token: FLOAT
-[INFO] Token: EOL
-[INFO] Arithmetic Expression integer / float: '5' / '4.000'
-[INFO] Arithmetic Expression integer / float: '5' / '4.000' = float '1.250'
-[INFO] Arithmetic Expression float - float: '32.500' - '1.250'
-[INFO] Arithmetic Expression float - float: '32.500' - '1.250' = float '31.250'
-[INFO] Assigned float value to identifier z := 31.250
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 23: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved string value of identifier s <- UNDEFINED
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: ASSIGN
-[INFO] Token: STRING
-[INFO] Token: EOL
-[INFO] Assigned string value to identifier s := Hola
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##    BASIC ASSIGNMENTS    ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 24: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved boolean value of identifier b <- UNDEFINED
-[INFO] Token: BOOLEAN_IDENTIFIER
-[INFO] Token: ASSIGN
-[INFO] Retrieved float value of identifier z <- 31.250
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: GREATER_THAN
-[INFO] Token: INTEGER
-[INFO] Token: OR
-[INFO] Relational Expression float > integer: '31.250' > '3'
-[INFO] ----- End of Relational Expression: true -----
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 25: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: NOT
-[INFO] Token: LPAREN
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: GREATER_THAN
-[INFO] Token: INTEGER
-[INFO] Token: AND
-[INFO] Relational Expression integer > integer: '5' > '0'
-[INFO] ----- End of Relational Expression: true -----
+[INFO] | ◄ Retrieved identifier i = <UNDEFINED>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <5>:integer
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier i ← <5>:integer
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 27: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: LOWER_EQUALS
-[INFO] Token: INTEGER
-[INFO] Token: RPAREN
-[INFO] Relational Expression integer <= integer: '5' <= '10'
-[INFO] ----- End of Relational Expression: true -----
+[INFO] | ◄ Retrieved identifier j = <UNDEFINED>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: PLUS
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <2>:integer
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier j ← <2>:integer
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 30: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Boolean Expression boolean and boolean: 'true' and 'true'
-[INFO] ----- End of Boolean Expression: true -----
+[INFO] | ◄ Retrieved identifier x = <UNDEFINED>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: MINUS
+[INFO] │ ► Token: LPAREN
+[INFO] │ ► Token: MINUS
+[INFO] │ ► Token: FLOAT
+[INFO] | ◄ Parsed literal <1.500>:float
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier x ← <1.500>:float
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 33: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Boolean Unary Expression not boolean: not 'true'
-[INFO] ----- End of Boolean Expression: false -----
+[INFO] | ◄ Retrieved identifier y = <UNDEFINED>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: FLOAT
+[INFO] | ◄ Parsed literal <2.000>:float
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier y ← <2.000>:float
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 36: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: OR
-[INFO] Boolean Expression boolean or boolean: 'true' or 'false'
-[INFO] ----- End of Boolean Expression: true -----
+[INFO] | ◄ Retrieved identifier s = <UNDEFINED>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <Hola>:string
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier s ← <Hola>:string
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 39: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: FALSE
-[INFO] Token: EOL
-[INFO] Boolean Expression boolean or boolean: 'true' or 'false'
-[INFO] ----- End of Boolean Expression: true -----
+[INFO] | ◄ Retrieved identifier t = <UNDEFINED>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal < mundo!>:string
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier t ← < mundo!>:string
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 42: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Assigned boolean value to identifier b := true
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier b1 = <UNDEFINED>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: TRUE
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier b1 ← <true>:boolean
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 45: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved float value of identifier x <- 1.500
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: EOL
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier b2 = <UNDEFINED>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: FALSE
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier b2 ← <false>:boolean
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 48: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: EOL
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 51: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved float value of identifier z <- 31.250
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: EOL
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <## ARITHMETIC EXPRESSIONS  ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 52: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved string value of identifier s <- Hola
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: EOL
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 53: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved boolean value of identifier b <- true
-[INFO] Token: BOOLEAN_IDENTIFIER
-[INFO] Token: EOL
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 55: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: EOL
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: MINUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <5>:integer - <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <3>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 58: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: PLUS
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: TIMES
-[INFO] Token: INTEGER
-[INFO] Token: EOL
-[INFO] Arithmetic Expression integer * integer: '5' * '2'
-[INFO] Arithmetic Expression integer * integer: '5' * '2' = integer '10'
-[INFO] Arithmetic Expression integer + integer: '5' + '10'
-[INFO] Arithmetic Expression integer + integer: '5' + '10' = integer '15'
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: TIMES
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <5>:integer * <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <10>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 61: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: MINUS
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: PLUS
-[INFO] Retrieved float value of identifier x <- 1.500
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Arithmetic Expression integer + float: '-5' + '1.500'
-[INFO] Arithmetic Expression integer + float: '-5' + '1.500' = float '-3.500'
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: DIVIDE
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <5>:integer / <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <2>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 64: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved string value of identifier s <- Hola
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: PLUS
-[INFO] Token: LPAREN
-[INFO] Retrieved string value of identifier s <- Hola
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: PLUS
-[INFO] Retrieved integer value of identifier i <- 5
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: RPAREN
-[INFO] Arithmetic Expression string + integer: 'Hola' + '5'
-[INFO] Arithmetic Expression string + integer: 'Hola' + '5' = string 'Hola5'
-[INFO] Token: PLUS
-[INFO] Arithmetic Expression string + string: 'Hola' + 'Hola5'
-[INFO] Arithmetic Expression string + string: 'Hola' + 'Hola5' = string 'HolaHola5'
-[INFO] Token: STRING
-[INFO] Token: PLUS
-[INFO] Arithmetic Expression string + string: 'HolaHola5' + '--'
-[INFO] Arithmetic Expression string + string: 'HolaHola5' + '--' = string 'HolaHola5--'
-[INFO] Retrieved float value of identifier x <- 1.500
-[INFO] Token: ARITHMETIC_IDENTIFIER
-[INFO] Token: EOL
-[INFO] Arithmetic Expression string + float: 'HolaHola5--' + '1.500'
-[INFO] Arithmetic Expression string + float: 'HolaHola5--' + '1.500' = string 'HolaHola5--1.500'
-[INFO] --------------- End of statement ---------------
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: MOD
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <5>:integer % <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <1>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 67: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Retrieved boolean value of identifier b <- true
-[INFO] Token: BOOLEAN_IDENTIFIER
-[INFO] Token: OR
-[INFO] Token: NOT
-[INFO] Retrieved boolean value of identifier b <- true
-[INFO] Token: BOOLEAN_IDENTIFIER
-[INFO] Boolean Unary Expression not boolean: not 'true'
-[INFO] ----- End of Boolean Expression: false -----
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: POW
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] | ■ Arithmetic Expression → <5>:integer ** <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <25>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 70: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: EOL
-[INFO] Boolean Expression boolean or boolean: 'true' or 'false'
-[INFO] ----- End of Boolean Expression: true -----
+[INFO] │ ► Token: MINUS
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 73: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] --------------- End of statement ---------------
+[INFO] │ ► Token: MINUS
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 76: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: YYEOF
-[INFO] 
----------------------------------------------
-*************** End of program ***************
-----------------------------------------------
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 79: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
 
-[INFO] Token: YYEOF
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##   MIXED NUMERIC TYPES   ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 80: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 81: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <5>:integer + <1.500>:float
+[INFO] │ ╰─ End of Arithmetic Expression: <6.500>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 83: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: TIMES
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <1.500>:float * <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <3.000>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 86: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: TIMES
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <7>:integer * <1.500>:float
+[INFO] │ ╰─ End of Arithmetic Expression: <10.500>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 89: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: DIVIDE
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <2>:integer
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <1.500>:float / <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <0.750>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 92: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <2>:integer
+[INFO] │ ► Token: DIVIDE
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <2>:integer / <1.500>:float
+[INFO] │ ╰─ End of Arithmetic Expression: <1.333>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 95: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 98: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##   OPERATOR PRECEDENCE   ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 99: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 100: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: TIMES
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <3>:integer
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <2>:integer * <3>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <6>
+[INFO] | ■ Arithmetic Expression → <5>:integer + <6>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <11>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 102: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: TIMES
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <3>:integer
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <7>:integer * <3>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <21>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 105: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: TIMES
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <3>:integer
+[INFO] │ ► Token: POW
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <2>:integer
+[INFO] | ■ Arithmetic Expression → <3>:integer ** <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <9>
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <2>:integer * <9>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <18>
+[INFO] | ■ Arithmetic Expression → <5>:integer + <18>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <23>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 108: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: TIMES
+[INFO] │ ► Token: LPAREN
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <3>:integer
+[INFO] │ ► Token: POW
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <2>:integer
+[INFO] | ■ Arithmetic Expression → <3>:integer ** <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <9>
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <7>:integer * <9>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <63>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 111: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 115: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##   STRING EXPRESSIONS    ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 116: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 117: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 119: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier t = < mundo!>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 122: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier t = < mundo!>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <Hola>:string + < mundo!>:string
+[INFO] │ ╰─ End of Arithmetic Expression: <Hola mundo!>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 125: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <!>:string
+[INFO] │ ► Token: PLUS
+[INFO] | ■ Arithmetic Expression → <Hola>:string + <!>:string
+[INFO] │ ╰─ End of Arithmetic Expression: <Hola!>
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <Hola!>:string + <5>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <Hola!5>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 128: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <Result: >:string
+[INFO] │ ► Token: PLUS
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <Result: >:string + <7>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <Result: 7>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 131: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <Hola>:string + <5>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <Hola5>
+[INFO] │ ► Token: PLUS
+[INFO] | ■ Arithmetic Expression → <Hola>:string + <Hola5>:string
+[INFO] │ ╰─ End of Arithmetic Expression: <HolaHola5>
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <-->:string
+[INFO] │ ► Token: PLUS
+[INFO] | ■ Arithmetic Expression → <HolaHola5>:string + <-->:string
+[INFO] │ ╰─ End of Arithmetic Expression: <HolaHola5-->
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <HolaHola5-->:string + <1.500>:float
+[INFO] │ ╰─ End of Arithmetic Expression: <HolaHola5--1.500>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 134: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 137: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##   BOOLEAN EXPRESSIONS   ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 138: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 139: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer > <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 141: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_EQUALS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer >= <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 144: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: LOWER_THAN
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer < <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 147: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: LOWER_EQUALS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer <= <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 150: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EQUALS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer == <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 153: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: NOT_EQUALS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer <> <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 156: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: NOT
+[INFO] | ◄ Retrieved identifier b1 = <true>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ■ Boolean Expression → not <true>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <false>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 159: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier b1 = <true>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: AND
+[INFO] | ◄ Retrieved identifier b2 = <false>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ■ Boolean Expression → <true>:boolean and <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <false>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 162: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier b1 = <true>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: OR
+[INFO] | ◄ Retrieved identifier b2 = <false>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] │ ■ Boolean Expression → <true>:boolean or <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 165: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: NOT
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: AND
+[INFO] | Relational Expression | <5>:integer > <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: LOWER_THAN
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <0>:integer
+[INFO] │ ► Token: RPAREN
+[INFO] | Relational Expression | <2>:integer < <0>:integer
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] │ ■ Boolean Expression → <true>:boolean and <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <false>
+[INFO] │ ■ Boolean Expression → not <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 168: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | Relational Expression | <5>:integer > <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] │ ► Token: OR
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: AND
+[INFO] | Relational Expression | <2>:integer > <5>:integer
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] | ◄ Retrieved identifier b2 = <false>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ■ Boolean Expression → <false>:boolean and <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <false>
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] │ ■ Boolean Expression → <true>:boolean or <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 171: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 174: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##   BOOLEAN ASSIGNMENTS   ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 175: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 176: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier b1 = <true>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <3>:integer
+[INFO] │ ► Token: EOL
+[INFO] | Relational Expression | <5>:integer > <3>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] ├─── Assigned identifier b1 ← <true>:boolean
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 178: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier b2 = <false>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: NOT
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <0>:integer
+[INFO] │ ► Token: AND
+[INFO] | Relational Expression | <5>:integer > <0>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: LOWER_EQUALS
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <10>:integer
+[INFO] │ ► Token: RPAREN
+[INFO] | Relational Expression | <5>:integer <= <10>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] │ ■ Boolean Expression → <true>:boolean and <true>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] │ ■ Boolean Expression → not <true>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <false>
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier b2 ← <false>:boolean
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 181: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier b1 = <true>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 184: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier b2 = <false>:boolean
+[INFO] │ ► Token: BOOLEAN_IDENTIFIER
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 187: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 190: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##  COMBINED EXPRESSIONS   ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 191: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 192: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: TIMES
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier y = <2.000>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <1.500>:float + <2.000>:float
+[INFO] │ ╰─ End of Arithmetic Expression: <3.500>
+[INFO] │ ► Token: EOL
+[INFO] | ■ Arithmetic Expression → <7>:integer * <3.500>:float
+[INFO] │ ╰─ End of Arithmetic Expression: <24.500>
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 194: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | Relational Expression | <5>:integer > <2>:integer
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] │ ► Token: AND
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_THAN
+[INFO] | ◄ Retrieved identifier y = <2.000>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: OR
+[INFO] | Relational Expression | <1.500>:float > <2.000>:float
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] | ◄ Retrieved identifier y = <2.000>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: GREATER_EQUALS
+[INFO] │ ► Token: FLOAT
+[INFO] | ◄ Parsed literal <2.000>:float
+[INFO] │ ► Token: RPAREN
+[INFO] | Relational Expression | <2.000>:float >= <2.000>:float
+[INFO] │ ╰─ End of Relational Expression: <true>
+
+[INFO] │ ■ Boolean Expression → <false>:boolean or <true>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] │ ■ Boolean Expression → <true>:boolean and <true>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 197: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: NOT
+[INFO] │ ► Token: LPAREN
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier i = <5>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: PLUS
+[INFO] | ◄ Retrieved identifier j = <2>:integer
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] | ■ Arithmetic Expression → <5>:integer + <2>:integer
+[INFO] │ ╰─ End of Arithmetic Expression: <7>
+[INFO] │ ► Token: GREATER_THAN
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <10>:integer
+[INFO] │ ► Token: RPAREN
+[INFO] | Relational Expression | <7>:integer > <10>:integer
+[INFO] │ ╰─ End of Relational Expression: <false>
+
+[INFO] │ ■ Boolean Expression → not <false>:boolean
+[INFO] │ ╰─ End of Boolean Expression: <true>
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 200: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 203: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <## TRIGONOMETRIC FUNCTIONS ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 204: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 205: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: SIN
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 207: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: COS
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 210: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: TAN
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 213: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 216: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##   STRING MANIPULATION   ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 217: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 218: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: LEN
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 220: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: SUBSTR
+[INFO] │ ► Token: LPAREN
+[INFO] | ◄ Retrieved identifier s = <Hola>:string
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: COMMA
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <0>:integer
+[INFO] │ ► Token: COMMA
+[INFO] │ ► Token: INTEGER
+[INFO] | ◄ Parsed literal <3>:integer
+[INFO] │ ► Token: RPAREN
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 223: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 226: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <##     CONSTANT VALUES     ##>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 227: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] │ ► Token: STRING
+[INFO] | ◄ Parsed literal <#############################>:string
+[INFO] │ ► Token: EOL
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 228: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier x = <1.500>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: CONSTANT
+[INFO] | ◄ Parsed literal <3.142>:float
+[INFO] │ ► Token: EOL
+[INFO] ├─── Assigned identifier x ← <3.142>:float
+[INFO] ╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line 230: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉
+
+[INFO] | ◄ Retrieved identifier y = <2.000>:float
+[INFO] │ ► Token: ARITHMETIC_IDENTIFIER
+[INFO] │ ► Token: ASSIGN
+[INFO] │ ► Token: CONSTANT
+[INFO] | ◄ Parsed literal <2.718>:float
+[INFO] ├─── Assigned identifier y ← <2.718>:float

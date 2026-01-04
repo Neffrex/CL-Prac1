@@ -29,10 +29,13 @@ make run INPUT_FILE=foo
 make clean
 ```
 
+# Implementation notes
+· Al dividir por cero resulta en <inf>:float
+
 # TODO:
-· Al dividir por cero imprime un numero (erroneo) cuando no deberia imprimir nada
-· Cambiar los fprintf(stderr, ...) por yyerror() cuando sea necesario
-· Hacer el log (Es un requisito funcional)
+· Implementar la struct (A ser posible)
+· Acabar la documentación
+· Cambiar los logs error con halt
 
 # Requisitos funcionales
 

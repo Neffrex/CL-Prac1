@@ -12,7 +12,7 @@
 #include "../parser/calc.tab.h"
 #include "../ast/headers/compiler.h"
 
-#define TOKEN(X) log_message(LOG_INFO, "Token: %s", #X); return X
+#define TOKEN(X) log_message(LOG_INFO, "│ ► Token: %s", #X); return X
 
 void yyerror(const char *s);
 
@@ -27,11 +27,11 @@ INTEGER {DIGIT}+
 FLOAT {DIGIT}+"."{DIGIT}+
 STRING \"[^\"]*\"
 IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]*
-SIN "sin"
-COS "cos"
-TAN "tan"
-SUBSTR "substr"
-LEN "len"
+SIN "sin"|"SIN"
+COS "cos"|"COS"
+TAN "tan"|"TAN"
+SUBSTR "substr"|"SUBSTR"
+LEN "len"|"LEN"
 TRUE "TRUE"|"true"
 FALSE "FALSE"|"false"
 
@@ -42,7 +42,8 @@ TYPE_STRING "string"
 TYPE_BOOLEAN "bool"
 
 WHITESPACE [ \t]
-SINGLE_LINE_COMMENT "#".*[\n]|"//".*[\n]
+SINGLE_LINE_COMMENT "#"[^\n]*|"//"[^\n]*
+EMPTY_LINE ^[ \t]*[\n]
 EOL [\n]
 
 %%
@@ -136,29 +137,33 @@ EOL [\n]
   else if(id.type == TYPE_INTEGER || id.type == TYPE_FLOAT || id.type == TYPE_STRING)
   { TOKEN(ARITHMETIC_IDENTIFIER); }
   else
-  { id.lineno = yylineno;
+  { id.lineno = yylineno-1;
     TOKEN(UNTYPED_IDENTIFIER);
   }
 }
 
-{SINGLE_LINE_COMMENT} { yylineno++; }
+{SINGLE_LINE_COMMENT} { }
+{SINGLE_LINE_COMMENT}{EOL} { yylineno++; }
 "/*"                  { BEGIN(COMMENT); }
+<COMMENT>"*/\n"       { yylineno++; BEGIN(INITIAL); }
 <COMMENT>"*/"         { BEGIN(INITIAL); }
 <COMMENT>.            { }
 <COMMENT>{EOL}        { yylineno++; }
+
+{EMPTY_LINE} { yylineno++; }
 
 {EOL} {
   yylineno++;
   TOKEN(EOL);
 }
 {WHITESPACE}  { }
-<<EOF>>       { TOKEN(YYEOF); }
-.             { log_message(LOG_ERROR, "lexical error, undefined sequence: %s", yytext); }
+<<EOF>>       { return 0; }
+.             { halt(ERR_MSG_UNDEFINED_SEQUENCE, yytext); }
 
 %%
 
 void yyerror(const char *msg) {
-	fprintf(stderr, "\033[31mERROR:%d:\033[0m %s\n", yylineno, msg);
+	fprintf(stderr, "\033[31mERROR:%d:\033[0m %s\n", yylineno-1, msg);
   exit(EXIT_FAILURE);
 }
 

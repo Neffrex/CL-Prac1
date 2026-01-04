@@ -1,32 +1,41 @@
 #pragma once
 
 
-#define ERR_MSG_INVALID_ARGUMENT_TYPE "syntax error, invalid argument type %s for argument #%d on %s, expected %s\n"
-#define ERR_MSG_INVALID_FUNCTION_IDENTIFIER "syntax error, invalid function identifier %d\n"
+#define ERR_MSG_INVALID_ARGUMENT_TYPE "[Syntax Error] invalid argument type %s for argument #%d on %s, expected %s\n"
+#define ERR_MSG_INVALID_FUNCTION_IDENTIFIER "[Syntax Error] invalid function identifier %d\n"
 
-#define ERR_MSG_IDENTIFIER_NOT_DECLARED "syntax error, cannot find declaration of identifier '%s', first use in line %d\n"
-#define ERR_MSG_UNSUPPORTED_OPERATION "syntax error, unsupported operation: %s %s %s:\n"
-#define ERR_MSG_INVALID_OPERAND_TYPES "syntax error, invalid operand types for: %s %s %s\n"
-#define ERR_MSG_INVALID_OPERAND_TYPE "syntax error, invalid operand type %s for operation %s\n"
+#define ERR_MSG_IDENTIFIER_NOT_DECLARED "[Syntax Error], cannot find declaration of identifier '%s', first use in line %d\n"
+#define ERR_MSG_INVALID_OPERATION "[Semantic Error] Invalid Operation: %s %s %s\n"
+#define ERR_MSG_INVALID_OPERAND_TYPES "[Syntax Error] Invalid operand types for: %s %s %s\n"
+#define ERR_MSG_INVALID_OPERAND_TYPE "[Syntax Error] Invalid operand type %s for operation %s\n"
 
-#define ERR_MSG_INVALID_IDENTIFIER_TYPE "error, invalid identifier type %s for operation %s"
-#define ERR_MSG_IDENTIFIER_ALREADY_DECLARED "error, identifier %s was already declared in line %d"
+#define ERR_MSG_INVALID_IDENTIFIER_TYPE "error, invalid identifier type <%s> for operation <%s>"
+#define ERR_MSG_IDENTIFIER_ALREADY_DECLARED "Identifier already declared: Identifier <%s> was already declared in line <%d>"
+#define ERR_MSG_TYPE_MISMATCH "Type mismatch: Cannot assign value <%s> with type <%s> to identifier <%s> with type <%s>\n"
 
 #define ERR_MSG_MEMORY_ALLOCATION_FAILED "fatal error, memory allocation failed\n"
+#define ERR_MSG_UNDEFINED_SEQUENCE "[Lexical Error] undefined sequence: %s\n"
 
-#define LOG_MSG_IDENTIFIER_DECLARED "Declared identifier %s with type %s"
-#define LOG_MSG_IDENTIFIER_ASSIGNED "Assigned %s value to identifier %s := %s"
-#define LOG_MSG_IDENTIFIER_RETRIEVED "Retrieved %s value of identifier %s <- %s"
+// LITERALS
+#define LOG_MSG_LITERAL_VALUE "| ◄ Parsed literal <%s>:%s"
 
-#define LOG_MSG_ARITHMETIC_EXPRESSION "Arithmetic Expression %s %s %s: '%s' %s '%s'"
-#define LOG_MSG_ARITHMETIC_EXPRESSION_RESULT "Arithmetic Expression %s %s %s: '%s' %s '%s' = %s '%s'"
+// IDENTIFIERS
+#define LOG_MSG_IDENTIFIER_RETRIEVED "| ◄ Retrieved identifier %s = <%s>:%s"
+#define LOG_MSG_IDENTIFIER_DECLARED "├─── Declared identifier %s:%s"
+#define LOG_MSG_IDENTIFIER_ASSIGNED "├─── Assigned identifier %s ← <%s>:%s"
 
-#define LOG_MSG_BOOLEAN_UNARY_EXPRESSION "Boolean Unary Expression %s %s: %s '%s'"
-#define LOG_MSG_BOOLEAN_BINARY_EXPRESSION "Boolean Expression %s %s %s: '%s' %s '%s'"
+// ARITHMETIC EXPRESSIONS
+#define LOG_MSG_ARITHMETIC_EXPRESSION "| ■ Arithmetic Expression → <%s>:%s %s <%s>:%s"
+#define LOG_MSG_END_OF_ARITHMETIC_EXPRESSION "│ ╰─ End of Arithmetic Expression: <%s>"
 
-#define LOG_MSG_RELATIONAL_EXPRESSION "Relational Expression %s %s %s: '%s' %s '%s'"
+// BOOLEAN EXPRESSIONS
+#define LOG_MSG_BOOLEAN_UNARY_EXPRESSION "│ ■ Boolean Expression → %s <%s>:%s"
+#define LOG_MSG_BOOLEAN_BINARY_EXPRESSION "│ ■ Boolean Expression → <%s>:%s %s <%s>:%s"
+#define LOG_MSG_END_OF_BOOLEAN_EXPRESSION "│ ╰─ End of Boolean Expression: <%s>"
 
-#define LOG_MSG_END_OF_BOOLEAN_EXPRESSION "----- End of Boolean Expression: %s -----\n"
-#define LOG_MSG_END_OF_RELATIONAL_EXPRESSION "----- End of Relational Expression: %s -----\n"
-#define LOG_MSG_END_OF_STATEMENT "--------------- End of statement ---------------\n"
-#define LOG_MSG_END_OF_PROGRAM "\n---------------------------------------------\n*************** End of program ***************\n----------------------------------------------\n"
+// RELATIONAL EXPRESSIONS
+#define LOG_MSG_RELATIONAL_EXPRESSION "| Relational Expression | <%s>:%s %s <%s>:%s"
+#define LOG_MSG_END_OF_RELATIONAL_EXPRESSION "│ ╰─ End of Relational Expression: <%s>\n"
+// END OF STATEMENTS/PROGRAM
+#define LOG_MSG_END_OF_STATEMENT "╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line %d: End of statement ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉\n"
+#define LOG_MSG_END_OF_PROGRAM "╰┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉ Line %d: End of program ┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉\n"

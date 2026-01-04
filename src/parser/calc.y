@@ -26,8 +26,8 @@ extern void yyerror(const char *s);
   void* no_type;
 }
 
-%token <no_type> EOL LPAREN RPAREN LBRACKET RBRACKET ASSIGN COMMA
-%token <no_type> TRUE FALSE 
+%token <no_type> EOL YYEOF LPAREN RPAREN LBRACKET RBRACKET ASSIGN COMMA
+%token <no_type> TRUE FALSE
 %token <no_type> SIN COS TAN LEN SUBSTR
 %token <no_type> STRUCT
 %token <type> TYPE
@@ -68,17 +68,17 @@ extern void yyerror(const char *s);
 
 program: 
   statementList YYEOF
-  { log_message(LOG_INFO, LOG_MSG_END_OF_PROGRAM); }
+  { log_message(LOG_INFO, LOG_MSG_END_OF_PROGRAM, yylineno); }
 ;
 
 statementList:
   %empty
 | statementList statement EOL
-{ log_message(LOG_INFO, LOG_MSG_END_OF_STATEMENT);}
+{ log_message(LOG_INFO, LOG_MSG_END_OF_STATEMENT, yylineno-1);}
 ;
 
 statement:
-	%empty
+  %empty
 	| declaration[id]
 	{ 
     for (identifier_node* current = $id; current != NULL; current = current->next) {
@@ -90,9 +90,9 @@ statement:
     }
   }
   | assignment[id]
-  { cprint(yyout, "%s:%s = %v\n", $id.name, type2str($id.type), &($id.value)); }
+  { cprint(yyout, "%s:%s = <%v>:%s\n", $id.name, type2str($id.type), &($id.value), type2str($id.value.type)); }
   | expression[e]
-  { cprint(yyout, "%v:%s\n", &$e, type2str($e.type)); }
+  { cprint(yyout, "<%v>:%s\n", &$e, type2str($e.type)); }
 ;
 
 declaration:
@@ -151,15 +151,20 @@ arithmeticExpressionP:
 ;
 
 arithmeticExpressionX:
-  INTEGER
-  | FLOAT
-  | STRING
-  | CONSTANT
-  | arithmeticFunction
+  INTEGER[x]
+  { $$ = arithmeticExpressionLiteral(&$x); }
+  | FLOAT[x]
+  { $$ = arithmeticExpressionLiteral(&$x); }
+  | STRING[x]
+  { $$ = arithmeticExpressionLiteral(&$x); }
+  | CONSTANT[x]
+  { $$ = arithmeticExpressionLiteral(&$x); }
   | ARITHMETIC_IDENTIFIER[x]
   { $$ = $x.value; }
-  | LPAREN arithmeticExpression RPAREN 
-  { $$ = $2; }
+  | LPAREN arithmeticExpression[x] RPAREN
+  { $$ = $x; }
+  | arithmeticFunction[x]
+  { $$ = $x; }
 ;
 
 arithmeticFunction:

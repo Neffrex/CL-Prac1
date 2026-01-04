@@ -1,22 +1,25 @@
 #include "headers/arithmeticExpression.h"
 
+literal arithmeticExpressionLiteral(literal* value) {
+  log_message(LOG_INFO, LOG_MSG_LITERAL_VALUE, literal2str(value), type2str(value->type));
+  return *value;
+}
+
 void logArithmeticExpressionEntry(literal* loperand, op_type op, literal* roperand) 
 {
   char* lvalue = literal2str(loperand);
   char* rvalue = literal2str(roperand);
 
-  log_message(LOG_INFO, LOG_MSG_ARITHMETIC_EXPRESSION, type2str(loperand->type), op2str(op), type2str(roperand->type), lvalue, op2str(op), rvalue);
+  log_message(LOG_INFO, LOG_MSG_ARITHMETIC_EXPRESSION, lvalue, type2str(loperand->type), op2str(op), rvalue, type2str(roperand->type));
   free(lvalue); free(rvalue);  
 }
 
-void logArithmeticExpressionExit(literal* loperand, op_type op, literal* roperand, literal result) 
+void logArithmeticExpressionExit(literal result) 
 {
-  char* lvalue = literal2str(loperand);
-  char* rvalue = literal2str(roperand);
-  char* resvalue = literal2str(&result);
+  char* sresult = literal2str(&result);
 
-  log_message(LOG_INFO, LOG_MSG_ARITHMETIC_EXPRESSION_RESULT, type2str(loperand->type), op2str(op), type2str(roperand->type), lvalue, op2str(op), rvalue, type2str(result.type), resvalue);
-  free(lvalue); free(rvalue); free(resvalue); 
+  log_message(LOG_INFO, LOG_MSG_END_OF_ARITHMETIC_EXPRESSION, sresult);
+  free(sresult); 
 }
 
 literal arithmeticExpression(literal* loperand, op_type op, literal* roperand)
@@ -26,23 +29,23 @@ literal arithmeticExpression(literal* loperand, op_type op, literal* roperand)
 
   result = handleIntegerArithmetic(loperand, op, roperand);
   if(!isNullLiteral(&result)) {
-    logArithmeticExpressionExit(loperand, op, roperand, result);
+    logArithmeticExpressionExit(result);
     return result;
   }
 
   result = handleFloatArithmetic(loperand, op, roperand);
   if(!isNullLiteral(&result)) {
-    logArithmeticExpressionExit(loperand, op, roperand, result);
+    logArithmeticExpressionExit(result);
     return result;
   }
 
   result = handleStringArithmetic(loperand, op, roperand);
   if(!isNullLiteral(&result)) {
-    logArithmeticExpressionExit(loperand, op, roperand, result);
+    logArithmeticExpressionExit(result);
     return result;
   }
 
-  halt(ERR_MSG_UNSUPPORTED_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type));
+  halt(ERR_MSG_INVALID_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type));
   return result;
 }
 
@@ -63,7 +66,7 @@ literal handleFloatArithmetic(literal* loperand, op_type op, literal* roperand)
 			case OP_DIVIDE:  result.fvalue = (float)(lvalue / rvalue); break;
 			case OP_POW:     result.fvalue = (float)(pow(lvalue, rvalue)); break;
 			default:
-				log_message(LOG_ERROR, ERR_MSG_UNSUPPORTED_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type));
+				halt(ERR_MSG_INVALID_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type));
 		}
 	}
   return result;
@@ -84,7 +87,7 @@ literal handleIntegerArithmetic(literal* loperand, op_type op, literal* roperand
 			case OP_MOD:     result.ivalue = loperand->ivalue % roperand->ivalue; break;
 			case OP_POW:     result.ivalue = (int)(pow(loperand->ivalue, roperand->ivalue)+0.5); break;
 			default:
-				log_message(LOG_ERROR, ERR_MSG_UNSUPPORTED_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type));
+				halt(ERR_MSG_INVALID_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type));
 		}
 	}
 
@@ -96,7 +99,7 @@ literal handleStringArithmetic(literal* loperand, op_type op, literal* roperand)
 	literal result = createEmptyLiteral();
 
   if(op != OP_PLUS)
-  { log_message(LOG_ERROR, ERR_MSG_UNSUPPORTED_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type)); }
+  { halt(ERR_MSG_INVALID_OPERATION, type2str(loperand->type), op2str(op), type2str(roperand->type)); }
 	else if(isString(loperand) || isString(roperand)) 
 	{ result = handleStringConcat(loperand, roperand); }
 
@@ -150,7 +153,7 @@ literal arithmeticExpressionNegate(literal* operand)
   { result = createFloatLiteral(-operand->fvalue); }
   else
   { // TYPE ERROR
-    log_message(LOG_ERROR, ERR_MSG_INVALID_OPERAND_TYPE,
+    halt(ERR_MSG_INVALID_OPERAND_TYPE,
       op2str(OP_NEGATE), type2str(operand->type));
   }
   return result;
@@ -181,7 +184,7 @@ literal arithmeticExpressionFunction(funct_id funct_id, ...)
       literal *arg3substr = va_arg(args, literal*);
       result = arithmeticExpressionSubstr(arg1substr, arg2substr, arg3substr);
       break;
-    default: log_message(LOG_ERROR, ERR_MSG_INVALID_FUNCTION_IDENTIFIER, funct_id);
+    default: halt(ERR_MSG_INVALID_FUNCTION_IDENTIFIER, funct_id);
   }
 
   va_end(args);
@@ -196,7 +199,7 @@ literal arithmeticExpressionTrigonometry(funct_id funct_id, literal* operand)
     case FUNC_SIN: return createFloatLiteral(sin(fvalue));
     case FUNC_COS: return createFloatLiteral(cos(fvalue));
     case FUNC_TAN: return createFloatLiteral(tan(fvalue));
-    default: log_message(LOG_ERROR, ERR_MSG_INVALID_FUNCTION_IDENTIFIER, funct_id);
+    default: halt(ERR_MSG_INVALID_FUNCTION_IDENTIFIER, funct_id);
   }
   return createEmptyLiteral();
 }
@@ -206,7 +209,7 @@ literal arithmeticExpressionLen(literal* string)
   literal result = createEmptyLiteral();
   
   if(!isString(string))
-  { log_message(LOG_ERROR, ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(string->type), 1, "len"); }
+  { halt(ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(string->type), 1, "len"); }
   else 
   { result = createIntegerLiteral(strlen(string->svalue)); }
 
@@ -216,10 +219,10 @@ literal arithmeticExpressionLen(literal* string)
 literal arithmeticExpressionSubstr(literal* string, literal* start, literal* len)
 {  
   if(!isString(string))
-  { log_message(LOG_ERROR, ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(string->type), 1, "substr", type2str(TYPE_STRING)); }
+  { halt(ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(string->type), 1, "substr", type2str(TYPE_STRING)); }
   else if(!isInteger(start))
-  { log_message(LOG_ERROR, ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(start->type), 2, "substr", type2str(TYPE_INTEGER)); }
+  { halt(ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(start->type), 2, "substr", type2str(TYPE_INTEGER)); }
   else if(!isInteger(len))
-  { log_message(LOG_ERROR, ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(len->type), 3, "substr", type2str(TYPE_INTEGER)); }
+  { halt(ERR_MSG_INVALID_ARGUMENT_TYPE, type2str(len->type), 3, "substr", type2str(TYPE_INTEGER)); }
   return createStringLiteral(strndup(string->svalue + start->ivalue, len->ivalue), len->ivalue);
 }
