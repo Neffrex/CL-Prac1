@@ -131,6 +131,16 @@ make
 make run
 ```
 
+Se ejecuta el codigo proveniente del fichero `input.txt`.
+
+En caso de querer utilizar otro fichero se puede llamar al make de la siguiente manera:
+```
+make run INPUT_FILE=<input_file>
+```
+donde `<input_file>` es el nombre del fichero de entrada que se quiere utilizar.
+
+En `example_output.txt` se ha dejado el resultado de la ejecución con el fichero `input.txt` por defecto  
+
 ### Limpieza
 ```
 make clean
